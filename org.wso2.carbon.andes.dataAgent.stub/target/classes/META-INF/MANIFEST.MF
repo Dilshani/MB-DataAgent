@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Export-Package: org.wso2.carbon.andes.dataAgent.stub;version="4.2.0"
+Built-By: nipuna
+Tool: Bnd-1.43.0
+Bundle-Name: org.wso2.carbon.andes.dataAgent.stub
+Created-By: Apache Maven Bundle Plugin
+DynamicImport-Package: *
+Build-Jdk: 1.6.0_45
+Bundle-Version: 4.3.0.SNAPSHOT
+Bnd-LastModified: 1406137385256
+Bundle-ManifestVersion: 2
+Bundle-Description: Carbonized Andes
+Bundle-SymbolicName: org.wso2.carbon.andes.dataAgent.stub
+

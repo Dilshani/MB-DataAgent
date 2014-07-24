@@ -1,0 +1,1034 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://publisher.dataAgent.andes.carbon.wso2.org" xmlns:ax217="http://configure.dataAgent.andes.carbon.wso2.org/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ax219="http://net.java/xsd" xmlns:ax215="http://security.java/xsd" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ax213="http://io.java/xsd" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:ax211="http://sax.xml.org/xsd" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://publisher.dataAgent.andes.carbon.wso2.org">
+    <wsdl:documentation>Publisher</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema xmlns:ax214="http://io.java/xsd" xmlns:ax216="http://security.java/xsd" xmlns:ax221="http://net.java/xsd" xmlns:ax212="http://sax.xml.org/xsd" xmlns:ax218="http://configure.dataAgent.andes.carbon.wso2.org/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://publisher.dataAgent.andes.carbon.wso2.org">
+            <xs:import namespace="http://sax.xml.org/xsd"></xs:import>
+            <xs:import namespace="http://io.java/xsd"></xs:import>
+            <xs:import namespace="http://security.java/xsd"></xs:import>
+            <xs:import namespace="http://configure.dataAgent.andes.carbon.wso2.org/xsd"></xs:import>
+            <xs:import namespace="http://net.java/xsd"></xs:import>
+            <xs:element name="PublisherParserConfigurationException">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="ParserConfigurationException" nillable="true" type="xs:anyType"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="PublisherTransformerException">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="TransformerException" nillable="true" type="xs:anyType"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="PublisherSAXException">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SAXException" nillable="true" type="ax212:SAXException"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="PublisherIOException">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="IOException" nillable="true" type="ax214:IOException"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="PublisherInvalidKeyException">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="InvalidKeyException" nillable="true" type="ax216:InvalidKeyException"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="PublisherNoSuchAlgorithmException">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="NoSuchAlgorithmException" nillable="true" type="ax216:NoSuchAlgorithmException"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="PublisherNoSuchPaddingException">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="NoSuchPaddingException" nillable="true" type="xs:anyType"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="PublisherIllegalBlockSizeException">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="IllegalBlockSizeException" nillable="true" type="xs:anyType"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="PublisherBadPaddingException">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="BadPaddingException" nillable="true" type="xs:anyType"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="setConfig">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="enable" nillable="true" type="xs:string"></xs:element>
+                        <xs:element minOccurs="0" name="publisher_name" nillable="true" type="xs:string"></xs:element>
+                        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"></xs:element>
+                        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string"></xs:element>
+                        <xs:element minOccurs="0" name="ip" nillable="true" type="xs:string"></xs:element>
+                        <xs:element minOccurs="0" name="port" nillable="true" type="xs:string"></xs:element>
+                        <xs:element minOccurs="0" name="message_stat" nillable="true" type="xs:string"></xs:element>
+                        <xs:element minOccurs="0" name="system_stat" nillable="true" type="xs:string"></xs:element>
+                        <xs:element minOccurs="0" name="MB_stat" nillable="true" type="xs:string"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="setConfigResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="publisherSelector">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="publisher" nillable="true" type="xs:string"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="publisherSelectorResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax217:Dataoutput"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getsystemStatConfig">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="publisher" nillable="true" type="xs:string"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getsystemStatConfigResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getUsername">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="publisher" nillable="true" type="xs:string"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getUsernameResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="PublisherUnknownHostException">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="UnknownHostException" nillable="true" type="ax219:UnknownHostException"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getURLValidation">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="IP" nillable="true" type="xs:string"></xs:element>
+                        <xs:element minOccurs="0" name="port" type="xs:int"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getURLValidationResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getPort">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="publisher" nillable="true" type="xs:string"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getPortResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getPassword">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="publisher" nillable="true" type="xs:string"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getPasswordResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getMessageStatConfig">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="publisher" nillable="true" type="xs:string"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getMessageStatConfigResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getMBStatConfig">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="publisher" nillable="true" type="xs:string"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getMBStatConfigResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getIP">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="publisher" nillable="true" type="xs:string"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getIPResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEnable">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="publisher" nillable="true" type="xs:string"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEnableResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns:ax220="http://io.java/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://net.java/xsd">
+            <xs:import namespace="http://io.java/xsd"></xs:import>
+            <xs:complexType name="UnknownHostException">
+                <xs:complexContent>
+                    <xs:extension base="ax220:IOException">
+                        <xs:sequence></xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://configure.dataAgent.andes.carbon.wso2.org/xsd">
+            <xs:complexType name="Dataoutput">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="MBStatConfig" type="xs:boolean"></xs:element>
+                    <xs:element minOccurs="0" name="enable" type="xs:boolean"></xs:element>
+                    <xs:element minOccurs="0" name="ip" nillable="true" type="xs:string"></xs:element>
+                    <xs:element minOccurs="0" name="messageStatConfig" type="xs:boolean"></xs:element>
+                    <xs:element minOccurs="0" name="password" nillable="true" type="xs:string"></xs:element>
+                    <xs:element minOccurs="0" name="port" nillable="true" type="xs:string"></xs:element>
+                    <xs:element minOccurs="0" name="systemStatConfig" type="xs:boolean"></xs:element>
+                    <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"></xs:element>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://io.java/xsd">
+            <xs:complexType name="IOException">
+                <xs:sequence></xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://sax.xml.org/xsd">
+            <xs:complexType name="SAXException">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="cause" nillable="true" type="xs:anyType"></xs:element>
+                    <xs:element minOccurs="0" name="exception" nillable="true"></xs:element>
+                    <xs:element minOccurs="0" name="message" nillable="true" type="xs:string"></xs:element>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://security.java/xsd">
+            <xs:complexType name="GeneralSecurityException">
+                <xs:sequence></xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="KeyException">
+                <xs:complexContent>
+                    <xs:extension base="ax215:GeneralSecurityException">
+                        <xs:sequence></xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="InvalidKeyException">
+                <xs:complexContent>
+                    <xs:extension base="ax215:KeyException">
+                        <xs:sequence></xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="NoSuchAlgorithmException">
+                <xs:complexContent>
+                    <xs:extension base="ax215:GeneralSecurityException">
+                        <xs:sequence></xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="getUsernameRequest">
+        <wsdl:part name="parameters" element="ns:getUsername"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getUsernameResponse">
+        <wsdl:part name="parameters" element="ns:getUsernameResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="PublisherParserConfigurationException">
+        <wsdl:part name="parameters" element="ns:PublisherParserConfigurationException"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="PublisherSAXException">
+        <wsdl:part name="parameters" element="ns:PublisherSAXException"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="PublisherIOException">
+        <wsdl:part name="parameters" element="ns:PublisherIOException"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getsystemStatConfigRequest">
+        <wsdl:part name="parameters" element="ns:getsystemStatConfig"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getsystemStatConfigResponse">
+        <wsdl:part name="parameters" element="ns:getsystemStatConfigResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getIPRequest">
+        <wsdl:part name="parameters" element="ns:getIP"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getIPResponse">
+        <wsdl:part name="parameters" element="ns:getIPResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getMessageStatConfigRequest">
+        <wsdl:part name="parameters" element="ns:getMessageStatConfig"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getMessageStatConfigResponse">
+        <wsdl:part name="parameters" element="ns:getMessageStatConfigResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getMBStatConfigRequest">
+        <wsdl:part name="parameters" element="ns:getMBStatConfig"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getMBStatConfigResponse">
+        <wsdl:part name="parameters" element="ns:getMBStatConfigResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getURLValidationRequest">
+        <wsdl:part name="parameters" element="ns:getURLValidation"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getURLValidationResponse">
+        <wsdl:part name="parameters" element="ns:getURLValidationResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="PublisherUnknownHostException">
+        <wsdl:part name="parameters" element="ns:PublisherUnknownHostException"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getPasswordRequest">
+        <wsdl:part name="parameters" element="ns:getPassword"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getPasswordResponse">
+        <wsdl:part name="parameters" element="ns:getPasswordResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getPortRequest">
+        <wsdl:part name="parameters" element="ns:getPort"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getPortResponse">
+        <wsdl:part name="parameters" element="ns:getPortResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getEnableRequest">
+        <wsdl:part name="parameters" element="ns:getEnable"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getEnableResponse">
+        <wsdl:part name="parameters" element="ns:getEnableResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="setConfigRequest">
+        <wsdl:part name="parameters" element="ns:setConfig"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="setConfigResponse">
+        <wsdl:part name="parameters" element="ns:setConfigResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="PublisherTransformerException">
+        <wsdl:part name="parameters" element="ns:PublisherTransformerException"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="PublisherInvalidKeyException">
+        <wsdl:part name="parameters" element="ns:PublisherInvalidKeyException"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="PublisherNoSuchAlgorithmException">
+        <wsdl:part name="parameters" element="ns:PublisherNoSuchAlgorithmException"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="PublisherNoSuchPaddingException">
+        <wsdl:part name="parameters" element="ns:PublisherNoSuchPaddingException"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="PublisherIllegalBlockSizeException">
+        <wsdl:part name="parameters" element="ns:PublisherIllegalBlockSizeException"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="PublisherBadPaddingException">
+        <wsdl:part name="parameters" element="ns:PublisherBadPaddingException"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="publisherSelectorRequest">
+        <wsdl:part name="parameters" element="ns:publisherSelector"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="publisherSelectorResponse">
+        <wsdl:part name="parameters" element="ns:publisherSelectorResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="PublisherPortType">
+        <wsdl:operation name="getUsername">
+            <wsdl:input message="ns:getUsernameRequest" wsaw:Action="urn:getUsername"></wsdl:input>
+            <wsdl:output message="ns:getUsernameResponse" wsaw:Action="urn:getUsernameResponse"></wsdl:output>
+            <wsdl:fault message="ns:PublisherParserConfigurationException" name="PublisherParserConfigurationException" wsaw:Action="urn:getUsernamePublisherParserConfigurationException"></wsdl:fault>
+            <wsdl:fault message="ns:PublisherSAXException" name="PublisherSAXException" wsaw:Action="urn:getUsernamePublisherSAXException"></wsdl:fault>
+            <wsdl:fault message="ns:PublisherIOException" name="PublisherIOException" wsaw:Action="urn:getUsernamePublisherIOException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getsystemStatConfig">
+            <wsdl:input message="ns:getsystemStatConfigRequest" wsaw:Action="urn:getsystemStatConfig"></wsdl:input>
+            <wsdl:output message="ns:getsystemStatConfigResponse" wsaw:Action="urn:getsystemStatConfigResponse"></wsdl:output>
+            <wsdl:fault message="ns:PublisherParserConfigurationException" name="PublisherParserConfigurationException" wsaw:Action="urn:getsystemStatConfigPublisherParserConfigurationException"></wsdl:fault>
+            <wsdl:fault message="ns:PublisherSAXException" name="PublisherSAXException" wsaw:Action="urn:getsystemStatConfigPublisherSAXException"></wsdl:fault>
+            <wsdl:fault message="ns:PublisherIOException" name="PublisherIOException" wsaw:Action="urn:getsystemStatConfigPublisherIOException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getIP">
+            <wsdl:input message="ns:getIPRequest" wsaw:Action="urn:getIP"></wsdl:input>
+            <wsdl:output message="ns:getIPResponse" wsaw:Action="urn:getIPResponse"></wsdl:output>
+            <wsdl:fault message="ns:PublisherParserConfigurationException" name="PublisherParserConfigurationException" wsaw:Action="urn:getIPPublisherParserConfigurationException"></wsdl:fault>
+            <wsdl:fault message="ns:PublisherSAXException" name="PublisherSAXException" wsaw:Action="urn:getIPPublisherSAXException"></wsdl:fault>
+            <wsdl:fault message="ns:PublisherIOException" name="PublisherIOException" wsaw:Action="urn:getIPPublisherIOException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getMessageStatConfig">
+            <wsdl:input message="ns:getMessageStatConfigRequest" wsaw:Action="urn:getMessageStatConfig"></wsdl:input>
+            <wsdl:output message="ns:getMessageStatConfigResponse" wsaw:Action="urn:getMessageStatConfigResponse"></wsdl:output>
+            <wsdl:fault message="ns:PublisherParserConfigurationException" name="PublisherParserConfigurationException" wsaw:Action="urn:getMessageStatConfigPublisherParserConfigurationException"></wsdl:fault>
+            <wsdl:fault message="ns:PublisherSAXException" name="PublisherSAXException" wsaw:Action="urn:getMessageStatConfigPublisherSAXException"></wsdl:fault>
+            <wsdl:fault message="ns:PublisherIOException" name="PublisherIOException" wsaw:Action="urn:getMessageStatConfigPublisherIOException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getMBStatConfig">
+            <wsdl:input message="ns:getMBStatConfigRequest" wsaw:Action="urn:getMBStatConfig"></wsdl:input>
+            <wsdl:output message="ns:getMBStatConfigResponse" wsaw:Action="urn:getMBStatConfigResponse"></wsdl:output>
+            <wsdl:fault message="ns:PublisherParserConfigurationException" name="PublisherParserConfigurationException" wsaw:Action="urn:getMBStatConfigPublisherParserConfigurationException"></wsdl:fault>
+            <wsdl:fault message="ns:PublisherSAXException" name="PublisherSAXException" wsaw:Action="urn:getMBStatConfigPublisherSAXException"></wsdl:fault>
+            <wsdl:fault message="ns:PublisherIOException" name="PublisherIOException" wsaw:Action="urn:getMBStatConfigPublisherIOException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getURLValidation">
+            <wsdl:input message="ns:getURLValidationRequest" wsaw:Action="urn:getURLValidation"></wsdl:input>
+            <wsdl:output message="ns:getURLValidationResponse" wsaw:Action="urn:getURLValidationResponse"></wsdl:output>
+            <wsdl:fault message="ns:PublisherUnknownHostException" name="PublisherUnknownHostException" wsaw:Action="urn:getURLValidationPublisherUnknownHostException"></wsdl:fault>
+            <wsdl:fault message="ns:PublisherIOException" name="PublisherIOException" wsaw:Action="urn:getURLValidationPublisherIOException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getPassword">
+            <wsdl:input message="ns:getPasswordRequest" wsaw:Action="urn:getPassword"></wsdl:input>
+            <wsdl:output message="ns:getPasswordResponse" wsaw:Action="urn:getPasswordResponse"></wsdl:output>
+            <wsdl:fault message="ns:PublisherParserConfigurationException" name="PublisherParserConfigurationException" wsaw:Action="urn:getPasswordPublisherParserConfigurationException"></wsdl:fault>
+            <wsdl:fault message="ns:PublisherSAXException" name="PublisherSAXException" wsaw:Action="urn:getPasswordPublisherSAXException"></wsdl:fault>
+            <wsdl:fault message="ns:PublisherIOException" name="PublisherIOException" wsaw:Action="urn:getPasswordPublisherIOException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getPort">
+            <wsdl:input message="ns:getPortRequest" wsaw:Action="urn:getPort"></wsdl:input>
+            <wsdl:output message="ns:getPortResponse" wsaw:Action="urn:getPortResponse"></wsdl:output>
+            <wsdl:fault message="ns:PublisherParserConfigurationException" name="PublisherParserConfigurationException" wsaw:Action="urn:getPortPublisherParserConfigurationException"></wsdl:fault>
+            <wsdl:fault message="ns:PublisherSAXException" name="PublisherSAXException" wsaw:Action="urn:getPortPublisherSAXException"></wsdl:fault>
+            <wsdl:fault message="ns:PublisherIOException" name="PublisherIOException" wsaw:Action="urn:getPortPublisherIOException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getEnable">
+            <wsdl:input message="ns:getEnableRequest" wsaw:Action="urn:getEnable"></wsdl:input>
+            <wsdl:output message="ns:getEnableResponse" wsaw:Action="urn:getEnableResponse"></wsdl:output>
+            <wsdl:fault message="ns:PublisherParserConfigurationException" name="PublisherParserConfigurationException" wsaw:Action="urn:getEnablePublisherParserConfigurationException"></wsdl:fault>
+            <wsdl:fault message="ns:PublisherSAXException" name="PublisherSAXException" wsaw:Action="urn:getEnablePublisherSAXException"></wsdl:fault>
+            <wsdl:fault message="ns:PublisherIOException" name="PublisherIOException" wsaw:Action="urn:getEnablePublisherIOException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="setConfig">
+            <wsdl:input message="ns:setConfigRequest" wsaw:Action="urn:setConfig"></wsdl:input>
+            <wsdl:output message="ns:setConfigResponse" wsaw:Action="urn:setConfigResponse"></wsdl:output>
+            <wsdl:fault message="ns:PublisherParserConfigurationException" name="PublisherParserConfigurationException" wsaw:Action="urn:setConfigPublisherParserConfigurationException"></wsdl:fault>
+            <wsdl:fault message="ns:PublisherTransformerException" name="PublisherTransformerException" wsaw:Action="urn:setConfigPublisherTransformerException"></wsdl:fault>
+            <wsdl:fault message="ns:PublisherSAXException" name="PublisherSAXException" wsaw:Action="urn:setConfigPublisherSAXException"></wsdl:fault>
+            <wsdl:fault message="ns:PublisherIOException" name="PublisherIOException" wsaw:Action="urn:setConfigPublisherIOException"></wsdl:fault>
+            <wsdl:fault message="ns:PublisherInvalidKeyException" name="PublisherInvalidKeyException" wsaw:Action="urn:setConfigPublisherInvalidKeyException"></wsdl:fault>
+            <wsdl:fault message="ns:PublisherNoSuchAlgorithmException" name="PublisherNoSuchAlgorithmException" wsaw:Action="urn:setConfigPublisherNoSuchAlgorithmException"></wsdl:fault>
+            <wsdl:fault message="ns:PublisherNoSuchPaddingException" name="PublisherNoSuchPaddingException" wsaw:Action="urn:setConfigPublisherNoSuchPaddingException"></wsdl:fault>
+            <wsdl:fault message="ns:PublisherIllegalBlockSizeException" name="PublisherIllegalBlockSizeException" wsaw:Action="urn:setConfigPublisherIllegalBlockSizeException"></wsdl:fault>
+            <wsdl:fault message="ns:PublisherBadPaddingException" name="PublisherBadPaddingException" wsaw:Action="urn:setConfigPublisherBadPaddingException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="publisherSelector">
+            <wsdl:input message="ns:publisherSelectorRequest" wsaw:Action="urn:publisherSelector"></wsdl:input>
+            <wsdl:output message="ns:publisherSelectorResponse" wsaw:Action="urn:publisherSelectorResponse"></wsdl:output>
+            <wsdl:fault message="ns:PublisherParserConfigurationException" name="PublisherParserConfigurationException" wsaw:Action="urn:publisherSelectorPublisherParserConfigurationException"></wsdl:fault>
+            <wsdl:fault message="ns:PublisherSAXException" name="PublisherSAXException" wsaw:Action="urn:publisherSelectorPublisherSAXException"></wsdl:fault>
+            <wsdl:fault message="ns:PublisherIOException" name="PublisherIOException" wsaw:Action="urn:publisherSelectorPublisherIOException"></wsdl:fault>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="PublisherSoap11Binding" type="ns:PublisherPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"></soap:binding>
+        <wsdl:operation name="getsystemStatConfig">
+            <soap:operation soapAction="urn:getsystemStatConfig" style="document"></soap:operation>
+            <wsdl:input>
+                <soap:body use="literal"></soap:body>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"></soap:body>
+            </wsdl:output>
+            <wsdl:fault name="PublisherIOException">
+                <soap:fault use="literal" name="PublisherIOException"></soap:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherSAXException">
+                <soap:fault use="literal" name="PublisherSAXException"></soap:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherParserConfigurationException">
+                <soap:fault use="literal" name="PublisherParserConfigurationException"></soap:fault>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getUsername">
+            <soap:operation soapAction="urn:getUsername" style="document"></soap:operation>
+            <wsdl:input>
+                <soap:body use="literal"></soap:body>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"></soap:body>
+            </wsdl:output>
+            <wsdl:fault name="PublisherIOException">
+                <soap:fault use="literal" name="PublisherIOException"></soap:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherSAXException">
+                <soap:fault use="literal" name="PublisherSAXException"></soap:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherParserConfigurationException">
+                <soap:fault use="literal" name="PublisherParserConfigurationException"></soap:fault>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getIP">
+            <soap:operation soapAction="urn:getIP" style="document"></soap:operation>
+            <wsdl:input>
+                <soap:body use="literal"></soap:body>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"></soap:body>
+            </wsdl:output>
+            <wsdl:fault name="PublisherIOException">
+                <soap:fault use="literal" name="PublisherIOException"></soap:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherSAXException">
+                <soap:fault use="literal" name="PublisherSAXException"></soap:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherParserConfigurationException">
+                <soap:fault use="literal" name="PublisherParserConfigurationException"></soap:fault>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getMessageStatConfig">
+            <soap:operation soapAction="urn:getMessageStatConfig" style="document"></soap:operation>
+            <wsdl:input>
+                <soap:body use="literal"></soap:body>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"></soap:body>
+            </wsdl:output>
+            <wsdl:fault name="PublisherIOException">
+                <soap:fault use="literal" name="PublisherIOException"></soap:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherSAXException">
+                <soap:fault use="literal" name="PublisherSAXException"></soap:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherParserConfigurationException">
+                <soap:fault use="literal" name="PublisherParserConfigurationException"></soap:fault>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getMBStatConfig">
+            <soap:operation soapAction="urn:getMBStatConfig" style="document"></soap:operation>
+            <wsdl:input>
+                <soap:body use="literal"></soap:body>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"></soap:body>
+            </wsdl:output>
+            <wsdl:fault name="PublisherIOException">
+                <soap:fault use="literal" name="PublisherIOException"></soap:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherSAXException">
+                <soap:fault use="literal" name="PublisherSAXException"></soap:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherParserConfigurationException">
+                <soap:fault use="literal" name="PublisherParserConfigurationException"></soap:fault>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getURLValidation">
+            <soap:operation soapAction="urn:getURLValidation" style="document"></soap:operation>
+            <wsdl:input>
+                <soap:body use="literal"></soap:body>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"></soap:body>
+            </wsdl:output>
+            <wsdl:fault name="PublisherUnknownHostException">
+                <soap:fault use="literal" name="PublisherUnknownHostException"></soap:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherIOException">
+                <soap:fault use="literal" name="PublisherIOException"></soap:fault>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getPort">
+            <soap:operation soapAction="urn:getPort" style="document"></soap:operation>
+            <wsdl:input>
+                <soap:body use="literal"></soap:body>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"></soap:body>
+            </wsdl:output>
+            <wsdl:fault name="PublisherIOException">
+                <soap:fault use="literal" name="PublisherIOException"></soap:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherSAXException">
+                <soap:fault use="literal" name="PublisherSAXException"></soap:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherParserConfigurationException">
+                <soap:fault use="literal" name="PublisherParserConfigurationException"></soap:fault>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getPassword">
+            <soap:operation soapAction="urn:getPassword" style="document"></soap:operation>
+            <wsdl:input>
+                <soap:body use="literal"></soap:body>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"></soap:body>
+            </wsdl:output>
+            <wsdl:fault name="PublisherIOException">
+                <soap:fault use="literal" name="PublisherIOException"></soap:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherSAXException">
+                <soap:fault use="literal" name="PublisherSAXException"></soap:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherParserConfigurationException">
+                <soap:fault use="literal" name="PublisherParserConfigurationException"></soap:fault>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getEnable">
+            <soap:operation soapAction="urn:getEnable" style="document"></soap:operation>
+            <wsdl:input>
+                <soap:body use="literal"></soap:body>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"></soap:body>
+            </wsdl:output>
+            <wsdl:fault name="PublisherIOException">
+                <soap:fault use="literal" name="PublisherIOException"></soap:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherSAXException">
+                <soap:fault use="literal" name="PublisherSAXException"></soap:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherParserConfigurationException">
+                <soap:fault use="literal" name="PublisherParserConfigurationException"></soap:fault>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="setConfig">
+            <soap:operation soapAction="urn:setConfig" style="document"></soap:operation>
+            <wsdl:input>
+                <soap:body use="literal"></soap:body>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"></soap:body>
+            </wsdl:output>
+            <wsdl:fault name="PublisherBadPaddingException">
+                <soap:fault use="literal" name="PublisherBadPaddingException"></soap:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherNoSuchPaddingException">
+                <soap:fault use="literal" name="PublisherNoSuchPaddingException"></soap:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherNoSuchAlgorithmException">
+                <soap:fault use="literal" name="PublisherNoSuchAlgorithmException"></soap:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherIOException">
+                <soap:fault use="literal" name="PublisherIOException"></soap:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherTransformerException">
+                <soap:fault use="literal" name="PublisherTransformerException"></soap:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherSAXException">
+                <soap:fault use="literal" name="PublisherSAXException"></soap:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherIllegalBlockSizeException">
+                <soap:fault use="literal" name="PublisherIllegalBlockSizeException"></soap:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherParserConfigurationException">
+                <soap:fault use="literal" name="PublisherParserConfigurationException"></soap:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherInvalidKeyException">
+                <soap:fault use="literal" name="PublisherInvalidKeyException"></soap:fault>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="publisherSelector">
+            <soap:operation soapAction="urn:publisherSelector" style="document"></soap:operation>
+            <wsdl:input>
+                <soap:body use="literal"></soap:body>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"></soap:body>
+            </wsdl:output>
+            <wsdl:fault name="PublisherIOException">
+                <soap:fault use="literal" name="PublisherIOException"></soap:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherSAXException">
+                <soap:fault use="literal" name="PublisherSAXException"></soap:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherParserConfigurationException">
+                <soap:fault use="literal" name="PublisherParserConfigurationException"></soap:fault>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="PublisherSoap12Binding" type="ns:PublisherPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"></soap12:binding>
+        <wsdl:operation name="getsystemStatConfig">
+            <soap12:operation soapAction="urn:getsystemStatConfig" style="document"></soap12:operation>
+            <wsdl:input>
+                <soap12:body use="literal"></soap12:body>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"></soap12:body>
+            </wsdl:output>
+            <wsdl:fault name="PublisherIOException">
+                <soap12:fault use="literal" name="PublisherIOException"></soap12:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherSAXException">
+                <soap12:fault use="literal" name="PublisherSAXException"></soap12:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherParserConfigurationException">
+                <soap12:fault use="literal" name="PublisherParserConfigurationException"></soap12:fault>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getUsername">
+            <soap12:operation soapAction="urn:getUsername" style="document"></soap12:operation>
+            <wsdl:input>
+                <soap12:body use="literal"></soap12:body>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"></soap12:body>
+            </wsdl:output>
+            <wsdl:fault name="PublisherIOException">
+                <soap12:fault use="literal" name="PublisherIOException"></soap12:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherSAXException">
+                <soap12:fault use="literal" name="PublisherSAXException"></soap12:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherParserConfigurationException">
+                <soap12:fault use="literal" name="PublisherParserConfigurationException"></soap12:fault>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getIP">
+            <soap12:operation soapAction="urn:getIP" style="document"></soap12:operation>
+            <wsdl:input>
+                <soap12:body use="literal"></soap12:body>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"></soap12:body>
+            </wsdl:output>
+            <wsdl:fault name="PublisherIOException">
+                <soap12:fault use="literal" name="PublisherIOException"></soap12:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherSAXException">
+                <soap12:fault use="literal" name="PublisherSAXException"></soap12:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherParserConfigurationException">
+                <soap12:fault use="literal" name="PublisherParserConfigurationException"></soap12:fault>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getMessageStatConfig">
+            <soap12:operation soapAction="urn:getMessageStatConfig" style="document"></soap12:operation>
+            <wsdl:input>
+                <soap12:body use="literal"></soap12:body>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"></soap12:body>
+            </wsdl:output>
+            <wsdl:fault name="PublisherIOException">
+                <soap12:fault use="literal" name="PublisherIOException"></soap12:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherSAXException">
+                <soap12:fault use="literal" name="PublisherSAXException"></soap12:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherParserConfigurationException">
+                <soap12:fault use="literal" name="PublisherParserConfigurationException"></soap12:fault>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getMBStatConfig">
+            <soap12:operation soapAction="urn:getMBStatConfig" style="document"></soap12:operation>
+            <wsdl:input>
+                <soap12:body use="literal"></soap12:body>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"></soap12:body>
+            </wsdl:output>
+            <wsdl:fault name="PublisherIOException">
+                <soap12:fault use="literal" name="PublisherIOException"></soap12:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherSAXException">
+                <soap12:fault use="literal" name="PublisherSAXException"></soap12:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherParserConfigurationException">
+                <soap12:fault use="literal" name="PublisherParserConfigurationException"></soap12:fault>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getURLValidation">
+            <soap12:operation soapAction="urn:getURLValidation" style="document"></soap12:operation>
+            <wsdl:input>
+                <soap12:body use="literal"></soap12:body>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"></soap12:body>
+            </wsdl:output>
+            <wsdl:fault name="PublisherUnknownHostException">
+                <soap12:fault use="literal" name="PublisherUnknownHostException"></soap12:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherIOException">
+                <soap12:fault use="literal" name="PublisherIOException"></soap12:fault>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getPort">
+            <soap12:operation soapAction="urn:getPort" style="document"></soap12:operation>
+            <wsdl:input>
+                <soap12:body use="literal"></soap12:body>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"></soap12:body>
+            </wsdl:output>
+            <wsdl:fault name="PublisherIOException">
+                <soap12:fault use="literal" name="PublisherIOException"></soap12:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherSAXException">
+                <soap12:fault use="literal" name="PublisherSAXException"></soap12:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherParserConfigurationException">
+                <soap12:fault use="literal" name="PublisherParserConfigurationException"></soap12:fault>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getPassword">
+            <soap12:operation soapAction="urn:getPassword" style="document"></soap12:operation>
+            <wsdl:input>
+                <soap12:body use="literal"></soap12:body>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"></soap12:body>
+            </wsdl:output>
+            <wsdl:fault name="PublisherIOException">
+                <soap12:fault use="literal" name="PublisherIOException"></soap12:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherSAXException">
+                <soap12:fault use="literal" name="PublisherSAXException"></soap12:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherParserConfigurationException">
+                <soap12:fault use="literal" name="PublisherParserConfigurationException"></soap12:fault>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getEnable">
+            <soap12:operation soapAction="urn:getEnable" style="document"></soap12:operation>
+            <wsdl:input>
+                <soap12:body use="literal"></soap12:body>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"></soap12:body>
+            </wsdl:output>
+            <wsdl:fault name="PublisherIOException">
+                <soap12:fault use="literal" name="PublisherIOException"></soap12:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherSAXException">
+                <soap12:fault use="literal" name="PublisherSAXException"></soap12:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherParserConfigurationException">
+                <soap12:fault use="literal" name="PublisherParserConfigurationException"></soap12:fault>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="setConfig">
+            <soap12:operation soapAction="urn:setConfig" style="document"></soap12:operation>
+            <wsdl:input>
+                <soap12:body use="literal"></soap12:body>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"></soap12:body>
+            </wsdl:output>
+            <wsdl:fault name="PublisherBadPaddingException">
+                <soap12:fault use="literal" name="PublisherBadPaddingException"></soap12:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherNoSuchPaddingException">
+                <soap12:fault use="literal" name="PublisherNoSuchPaddingException"></soap12:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherNoSuchAlgorithmException">
+                <soap12:fault use="literal" name="PublisherNoSuchAlgorithmException"></soap12:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherIOException">
+                <soap12:fault use="literal" name="PublisherIOException"></soap12:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherTransformerException">
+                <soap12:fault use="literal" name="PublisherTransformerException"></soap12:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherSAXException">
+                <soap12:fault use="literal" name="PublisherSAXException"></soap12:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherIllegalBlockSizeException">
+                <soap12:fault use="literal" name="PublisherIllegalBlockSizeException"></soap12:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherParserConfigurationException">
+                <soap12:fault use="literal" name="PublisherParserConfigurationException"></soap12:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherInvalidKeyException">
+                <soap12:fault use="literal" name="PublisherInvalidKeyException"></soap12:fault>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="publisherSelector">
+            <soap12:operation soapAction="urn:publisherSelector" style="document"></soap12:operation>
+            <wsdl:input>
+                <soap12:body use="literal"></soap12:body>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"></soap12:body>
+            </wsdl:output>
+            <wsdl:fault name="PublisherIOException">
+                <soap12:fault use="literal" name="PublisherIOException"></soap12:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherSAXException">
+                <soap12:fault use="literal" name="PublisherSAXException"></soap12:fault>
+            </wsdl:fault>
+            <wsdl:fault name="PublisherParserConfigurationException">
+                <soap12:fault use="literal" name="PublisherParserConfigurationException"></soap12:fault>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="PublisherHttpBinding" type="ns:PublisherPortType">
+        <http:binding verb="POST"></http:binding>
+        <wsdl:operation name="getsystemStatConfig">
+            <http:operation location="getsystemStatConfig"></http:operation>
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters"></mime:content>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters"></mime:content>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getUsername">
+            <http:operation location="getUsername"></http:operation>
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters"></mime:content>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters"></mime:content>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getIP">
+            <http:operation location="getIP"></http:operation>
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters"></mime:content>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters"></mime:content>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getMessageStatConfig">
+            <http:operation location="getMessageStatConfig"></http:operation>
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters"></mime:content>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters"></mime:content>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getMBStatConfig">
+            <http:operation location="getMBStatConfig"></http:operation>
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters"></mime:content>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters"></mime:content>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getURLValidation">
+            <http:operation location="getURLValidation"></http:operation>
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters"></mime:content>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters"></mime:content>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getPort">
+            <http:operation location="getPort"></http:operation>
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters"></mime:content>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters"></mime:content>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getPassword">
+            <http:operation location="getPassword"></http:operation>
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters"></mime:content>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters"></mime:content>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getEnable">
+            <http:operation location="getEnable"></http:operation>
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters"></mime:content>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters"></mime:content>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="setConfig">
+            <http:operation location="setConfig"></http:operation>
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters"></mime:content>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters"></mime:content>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="publisherSelector">
+            <http:operation location="publisherSelector"></http:operation>
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters"></mime:content>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters"></mime:content>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="Publisher">
+        <wsdl:port name="PublisherHttpsSoap11Endpoint" binding="ns:PublisherSoap11Binding">
+            <soap:address location="https://10.217.183.154:9443/services/Publisher.PublisherHttpsSoap11Endpoint/"></soap:address>
+        </wsdl:port>
+        <wsdl:port name="PublisherHttpsSoap12Endpoint" binding="ns:PublisherSoap12Binding">
+            <soap12:address location="https://10.217.183.154:9443/services/Publisher.PublisherHttpsSoap12Endpoint/"></soap12:address>
+        </wsdl:port>
+        <wsdl:port name="PublisherHttpsEndpoint" binding="ns:PublisherHttpBinding">
+            <http:address location="https://10.217.183.154:9443/services/Publisher.PublisherHttpsEndpoint/"></http:address>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
