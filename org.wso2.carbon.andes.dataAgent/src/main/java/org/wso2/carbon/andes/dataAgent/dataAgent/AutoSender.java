@@ -13,7 +13,10 @@ import org.wso2.carbon.databridge.agent.thrift.exception.AgentException;
 import org.wso2.carbon.databridge.commons.Event;
 import org.wso2.carbon.andes.dataAgent.publisher.Publisher;
 import org.wso2.carbon.andes.dataAgent.serverStats.serverStats;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -43,9 +46,9 @@ public class AutoSender {
     private int subscriptionCount=0;
 
 
-    public void dataAgent(String application) {
+    public void dataAgent(String application) throws IOException, SAXException, ParserConfigurationException {
 
-        Publisher publisherObject = new Publisher(application);
+        Publisher publisherObject = new Publisher();
 
 
 
@@ -67,10 +70,11 @@ public class AutoSender {
 
 
 
-        ip = publisherObject.getip();
-        port = publisherObject.getport();
-        username = publisherObject.getusername();
-        password = publisherObject.getpassword();
+        ip = publisherObject.getIP(application);
+        port = publisherObject.getPort(application);
+        username = publisherObject.getUsername(application);
+        password= publisherObject.getPassword(application);
+
 
 
 
@@ -108,8 +112,8 @@ public class AutoSender {
 
 
 
-        List<Subscrption> subscriptionList = subscriptionStore.getClusterSubscribersForTopic(message.getDestination());
-       subscriptionCount += subscriptionList.size();
+      //  List<Subscrption> subscriptionList = subscriptionStore.getClusterSubscribersForTopic(message.getDestination());
+      // subscriptionCount += subscriptionList.size();
 
 
 

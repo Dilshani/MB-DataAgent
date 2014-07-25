@@ -15,8 +15,11 @@ package org.wso2.carbon.andes.dataAgent.dataAgent;
         import org.wso2.carbon.databridge.commons.Event;
         import org.wso2.carbon.andes.dataAgent.publisher.Publisher;
         import org.wso2.andes.server.cassandra.CQLConnection;
-       // import org.apache.commons.configuration.Configuration;
+        import org.xml.sax.SAXException;
+        // import org.apache.commons.configuration.Configuration;
 
+        import javax.xml.parsers.ParserConfigurationException;
+        import java.io.IOException;
         import java.util.List;
 
 
@@ -53,7 +56,7 @@ public class DataAgent{
 
 
 
-    public void dataAgent(AndesMessageMetadata message, String application, int subscribers) throws AndesException {
+    public void dataAgent(AndesMessageMetadata message, String application, int subscribers) throws AndesException, IOException, SAXException, ParserConfigurationException {
 
         messageID = message.getMessageID();
         messageDestination = message.getDestination();
@@ -72,14 +75,14 @@ public class DataAgent{
 
 
 
-        Publisher publisherObject = new Publisher(application);
+        Publisher publisherObject = new Publisher();
 
 
 
-            ip = publisherObject.getip();
-            port = publisherObject.getport();
-            username = publisherObject.getusername();
-            password= publisherObject.getpassword();
+            ip = publisherObject.getIP(application);
+            port = publisherObject.getPort(application);
+            username = publisherObject.getUsername(application);
+            password= publisherObject.getPassword(application);
 
 
 
@@ -115,7 +118,7 @@ public class DataAgent{
     }
 
 
-    public void dataAgent(AndesAckData ack, String application) {
+    public void dataAgent(AndesAckData ack, String application) throws IOException, SAXException, ParserConfigurationException {
 
         ackMessageID = ack.messageID;
         queueName = ack.qName;
@@ -123,14 +126,14 @@ public class DataAgent{
 
 
 
-        Publisher publisherObject = new Publisher(application);
+        Publisher publisherObject = new Publisher();
 
 
 
-        ip = publisherObject.getip();
-        port = publisherObject.getport();
-        username = publisherObject.getusername();
-        password= publisherObject.getpassword();
+        ip = publisherObject.getIP(application);
+        port = publisherObject.getPort(application);
+        username = publisherObject.getUsername(application);
+        password= publisherObject.getPassword(application);
 
 
 
