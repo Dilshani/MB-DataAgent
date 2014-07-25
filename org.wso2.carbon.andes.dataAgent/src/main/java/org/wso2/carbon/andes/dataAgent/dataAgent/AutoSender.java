@@ -2,17 +2,15 @@ package org.wso2.carbon.andes.dataAgent.dataAgent;
 
 
 import org.apache.log4j.Logger;
-import org.wso2.andes.kernel.AndesAckData;
-import org.wso2.andes.kernel.AndesMessageMetadata;
+import org.wso2.andes.kernel.MessagingEngine;
 import org.wso2.andes.kernel.SubscriptionStore;
-import org.wso2.andes.kernel.Subscrption;
+import org.wso2.carbon.andes.dataAgent.publisher.Publisher;
+import org.wso2.carbon.andes.dataAgent.serverStats.serverStats;
 import org.wso2.carbon.databridge.agent.thrift.Agent;
 import org.wso2.carbon.databridge.agent.thrift.AsyncDataPublisher;
 import org.wso2.carbon.databridge.agent.thrift.conf.AgentConfiguration;
 import org.wso2.carbon.databridge.agent.thrift.exception.AgentException;
 import org.wso2.carbon.databridge.commons.Event;
-import org.wso2.carbon.andes.dataAgent.publisher.Publisher;
-import org.wso2.carbon.andes.dataAgent.serverStats.serverStats;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -45,8 +43,13 @@ public class AutoSender {
     private SubscriptionStore subscriptionStore;
     private int subscriptionCount=0;
 
+    private int noOfTopics;
+
+
 
     public void dataAgent(String application) throws IOException, SAXException, ParserConfigurationException {
+
+        getTopicList();
 
         Publisher publisherObject = new Publisher();
 
@@ -112,15 +115,28 @@ public class AutoSender {
 
 
 
-      //  List<Subscrption> subscriptionList = subscriptionStore.getClusterSubscribersForTopic(message.getDestination());
-      // subscriptionCount += subscriptionList.size();
+
 
 
 
 
     }
 
-    private void getTopicList(){
+    private List<String> getTopicList(){
+
+        MessagingEngine messaginEngine =MessagingEngine.getInstance();
+         subscriptionStore =   messaginEngine.getSubscriptionStore();
+         List<String> topics =  subscriptionStore.getTopics();
+        noOfTopics = topics.size();
+
+        for(String topic: topics){
+
+            System.out.println(topic);
+        }
+
+        return topics;
+
+
 
 
     }
