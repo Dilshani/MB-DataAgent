@@ -1,11 +1,9 @@
 package org.wso2.carbon.andes.dataAgent.ui;
 
-import org.wso2.carbon.andes.dataAgent.stub.PublisherIOExceptionException;
-import org.wso2.carbon.andes.dataAgent.stub.PublisherStub;
+import org.wso2.carbon.andes.dataAgent.stub.*;
 import org.apache.axis2.client.Options;
 import org.apache.axis2.client.ServiceClient;
 import org.apache.axis2.context.ConfigurationContext;
-import org.wso2.carbon.andes.dataAgent.stub.PublisherUnknownHostExceptionException;
 
 import java.rmi.RemoteException;
 
@@ -35,14 +33,13 @@ public class DataAgentClient {
         dataClient = this;
 
 
-
     }
 
 
     public boolean IPValidator(String IP, int port) {
         try {
             try {
-                return stub.getURLValidation(IP,port);
+                return stub.getURLValidation(IP, port);
             } catch (PublisherUnknownHostExceptionException e) {
                 e.printStackTrace();
             } catch (PublisherIOExceptionException e) {
@@ -66,7 +63,7 @@ public class DataAgentClient {
         try {
 
             response = stub.setConfig(enable, publisher_name, username,
-                    password, ip, port, message_stat, system_stat, message_stat);
+                    password, ip, port, message_stat, system_stat, MB_stat);
         } catch (Exception e) {
             result = e + "";
         }
@@ -75,11 +72,150 @@ public class DataAgentClient {
     }
 
 
+    public boolean getEnable(String publisher_name) {
+
+        boolean response = false;
+
+        try {
+            response = stub.getEnable(publisher_name);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (PublisherIOExceptionException e) {
+            e.printStackTrace();
+        } catch (PublisherSAXExceptionException e) {
+            e.printStackTrace();
+        } catch (PublisherParserConfigurationExceptionException e) {
+            e.printStackTrace();
+        }
+
+        return response;
+    }
+
+public  String getUsername(String publisher_name){
+String response="";
 
 
+    try {
+        response= stub.getUsername(publisher_name);
+    } catch (RemoteException e) {
+        e.printStackTrace();
+    } catch (PublisherIOExceptionException e) {
+        e.printStackTrace();
+    } catch (PublisherSAXExceptionException e) {
+        e.printStackTrace();
+    } catch (PublisherParserConfigurationExceptionException e) {
+        e.printStackTrace();
+    }
 
 
+    return response;
+}
+
+    public  String getPassword(String publisher_name){
+        String response="";
+
+        try {
+            response= stub.getPassword(publisher_name);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (PublisherIOExceptionException e) {
+            e.printStackTrace();
+        } catch (PublisherSAXExceptionException e) {
+            e.printStackTrace();
+        } catch (PublisherParserConfigurationExceptionException e) {
+            e.printStackTrace();
+        }
 
 
+        return response;
+    }
+
+
+    public  String getIP(String publisher_name){
+        String response="";
+        try {
+            response= stub.getIP(publisher_name);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (PublisherIOExceptionException e) {
+            e.printStackTrace();
+        } catch (PublisherSAXExceptionException e) {
+            e.printStackTrace();
+        } catch (PublisherParserConfigurationExceptionException e) {
+            e.printStackTrace();
+        }
+
+        return response;
+    }
+
+    public  String getPort(String publisher_name){
+        String response="";
+
+        try {
+            response= stub.getPort(publisher_name);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (PublisherIOExceptionException e) {
+            e.printStackTrace();
+        } catch (PublisherSAXExceptionException e) {
+            e.printStackTrace();
+        } catch (PublisherParserConfigurationExceptionException e) {
+            e.printStackTrace();
+        }
+
+
+        return response;
+    }
+
+    public  boolean getMBStatConfig(String publisher_name){
+        boolean response=false;
+        try {
+            response= stub.getMBStatConfig(publisher_name);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (PublisherIOExceptionException e) {
+            e.printStackTrace();
+        } catch (PublisherSAXExceptionException e) {
+            e.printStackTrace();
+        } catch (PublisherParserConfigurationExceptionException e) {
+            e.printStackTrace();
+        }
+
+        return response;
+    }
+
+    public  boolean getMessageStatConfig(String publisher_name){
+        boolean response=false;
+        try {
+            response= stub.getMessageStatConfig(publisher_name);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (PublisherIOExceptionException e) {
+            e.printStackTrace();
+        } catch (PublisherSAXExceptionException e) {
+            e.printStackTrace();
+        } catch (PublisherParserConfigurationExceptionException e) {
+            e.printStackTrace();
+        }
+
+        return response;
+    }
+
+    public  boolean getSystemStatConfig(String publisher_name){
+        boolean response=false;
+        try {
+            response= stub.getsystemStatConfig(publisher_name);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (PublisherIOExceptionException e) {
+            e.printStackTrace();
+        } catch (PublisherSAXExceptionException e) {
+            e.printStackTrace();
+        } catch (PublisherParserConfigurationExceptionException e) {
+            e.printStackTrace();
+        }
+
+        return response;
+    }
 }
 

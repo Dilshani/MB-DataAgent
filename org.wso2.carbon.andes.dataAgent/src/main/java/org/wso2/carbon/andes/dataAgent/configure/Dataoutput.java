@@ -1,6 +1,5 @@
 package org.wso2.carbon.andes.dataAgent.configure;
 
-
 /**
  * Created by dilshani on 7/17/14.
  */
@@ -21,10 +20,14 @@ import org.xml.sax.SAXException;
 
 public class Dataoutput {
 
-    private String username;
-    private String password;
-    private String ip;
-    private String port;
+    private boolean enable;
+    private boolean message;
+    private boolean system;
+    private boolean mb;
+    private String username="";
+    private String password="";
+    private String ip="";
+    private String port="";
     private String encryptPW;
 
     public Dataoutput(String publisher) throws ParserConfigurationException,
@@ -34,139 +37,222 @@ public class Dataoutput {
         String publishBAM = "BAM";
         String publishCEP = "CEP";
 
+
         // get XML file
-        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory
-                .newInstance();
+        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-        Document doc = docBuilder.parse(new File(filepath));
+        Document doc;
 
-        // normalize text representation
-        doc.getDocumentElement().normalize();
+        File file = new File(filepath);
 
-        // check the parameter to select BAM or CEP publisher
+        // check doc stat-config.xml exist or not
+        if (!file.exists()) {
 
-        // Parsed parameter given as BAM
-        if (publishBAM.equals(publisher)) {
+            System.err.println("stat-config.xml doesn't exists!!");
 
-			/*
-             * Reading data in XML can be proceed directly with parsed parameter
-			 * value. But in here, to ensure reliability it will be checking
-			 * attribute values in XML again.
-			 */
+        } else {
 
-            // Get attribute value
-            Node publishers = doc.getElementsByTagName("publisher").item(0);
-            NamedNodeMap attr = publishers.getAttributes();
-            Node nodeAttr = attr.getNamedItem("name");
-            String value = nodeAttr.getNodeValue().toString();
+            // Get doc if stat-config.xml exists
 
-            // Check attribute value against parsed value
-            if (publishBAM.equals(value)) {
+            doc = docBuilder.parse(filepath);
 
-                // getting values in BAM Publisher
+            // normalize text representation
+            doc.getDocumentElement().normalize();
 
-                NodeList datalist = doc.getElementsByTagName("publisher");
-                String uname = (String) ((Element) datalist.item(0))
-                        .getElementsByTagName("username").item(0)
-                        .getChildNodes().item(0).getNodeValue();
-                username = uname.trim();
-                String pw = (String) ((Element) datalist.item(0))
-                        .getElementsByTagName("password").item(0)
-                        .getChildNodes().item(0).getNodeValue();
+            // check the parameter to select BAM or CEP publisher
+
+            // Parsed parameter given as BAM
+            if (publishBAM.equals(publisher)) {
+
+
+                // Get attribute value
+                Node publishers = doc.getElementsByTagName("publisher").item(0);
+                NamedNodeMap attr = publishers.getAttributes();
+                Node nodeAttr = attr.getNamedItem("name");
+                String value = nodeAttr.getNodeValue().toString();
+                NodeList dataList = doc.getElementsByTagName("publisher");
+
+
+                // Getting values in BAM Publisher
+
+                String enableValue =
+                        (String) ((Element) dataList.item(0)).getElementsByTagName("enable")
+                                .item(0)
+                                .getTextContent();
+
+                if (enableValue == "") {
+                    enable = false;
+                } else {
+
+                    String enabled = enableValue.trim();
+                    enable = Boolean.parseBoolean(enabled);
+
+                }
+
+                String messageValue =
+                        (String) ((Element) dataList.item(0)).getElementsByTagName("message")
+                                .item(0)
+                                .getTextContent();
+
+                if (messageValue == "") {
+                    message = false;
+                } else {
+
+                    String msgvl = messageValue.trim();
+                    message = Boolean.parseBoolean(msgvl);
+
+                }
+
+                String systemValue =
+                        (String) ((Element) dataList.item(0)).getElementsByTagName("system")
+                                .item(0)
+                                .getTextContent();
+
+                if (systemValue == "") {
+                    system = false;
+                } else {
+
+                    String sysvl = systemValue.trim();
+                    system = Boolean.parseBoolean(sysvl);
+
+                }
+
+                String mbValue =
+                        (String) ((Element) dataList.item(0)).getElementsByTagName("mb")
+                                .item(0)
+                                .getTextContent();
+
+                if (mbValue == "") {
+                    mb = false;
+                } else {
+
+                    String mbvl = mbValue.trim();
+                    mb = Boolean.parseBoolean(mbvl);
+
+                }
+
+
+                String usrName =
+                        (String) ((Element) dataList.item(0)).getElementsByTagName("username")
+                                .item(0)
+                                .getTextContent();
+
+                username = usrName.trim();
+                String pw =
+                        (String) ((Element) dataList.item(0)).getElementsByTagName("password")
+                                .item(0).getTextContent();
                 encryptPW = pw.trim();
                 password = decrypt(encryptPW);
-                String ipAddress = (String) ((Element) datalist.item(0))
-                        .getElementsByTagName("ip").item(0).getChildNodes()
-                        .item(0).getNodeValue();
+
+                String ipAddress =
+                        (String) ((Element) dataList.item(0)).getElementsByTagName("ip")
+                                .item(0)
+                                .getTextContent();
+
                 ip = ipAddress.trim();
-                String portAddress = (String) ((Element) datalist.item(0))
-                        .getElementsByTagName("port").item(0).getChildNodes()
-                        .item(0).getNodeValue();
+
+                String portAddress =
+                        (String) ((Element) dataList.item(0)).getElementsByTagName("port")
+                                .item(0)
+                                .getTextContent();
                 port = portAddress.trim();
 
-            } else if (publishCEP.equals(value)) {
 
-                // Getting values in CEP Publisher
-
-                NodeList datalist = doc.getElementsByTagName("publisher");
-                String uname = (String) ((Element) datalist.item(1))
-                        .getElementsByTagName("username").item(0)
-                        .getChildNodes().item(0).getNodeValue();
-                username = uname.trim();
-                String pw = (String) ((Element) datalist.item(1))
-                        .getElementsByTagName("password").item(0)
-                        .getChildNodes().item(0).getNodeValue();
-                encryptPW = pw.trim();
-                password = decrypt(encryptPW);
-                String ipAddress = (String) ((Element) datalist.item(1))
-                        .getElementsByTagName("ip").item(0).getChildNodes()
-                        .item(0).getNodeValue();
-                ip = ipAddress.trim();
-                String portAddress = (String) ((Element) datalist.item(1))
-                        .getElementsByTagName("port").item(0).getChildNodes()
-                        .item(0).getNodeValue();
-                port = portAddress.trim();
-            } else {
-                System.out.println("Unknown value in XML!!!");
             }
-        }
-        // Parsed parameter given as CEP
-        else {
 
-            // Get attribute value
-            Node publishers = doc.getElementsByTagName("publisher").item(1);
-            NamedNodeMap attr = publishers.getAttributes();
-            Node nodeAttr = attr.getNamedItem("name");
-            String value = nodeAttr.getNodeValue().toString();
+            // Parsed parameter given as CEP
+            else if (publishCEP.equals(publisher)) {
 
-            // Check attribute value against parsed value
-            if (publishBAM.equals(value)) {
-
-                // getting values in BAM Publisher
-
-                NodeList datalist = doc.getElementsByTagName("publisher");
-                String uname = (String) ((Element) datalist.item(0))
-                        .getElementsByTagName("username").item(0)
-                        .getChildNodes().item(0).getNodeValue();
-                username = uname.trim();
-                String pw = (String) ((Element) datalist.item(0))
-                        .getElementsByTagName("password").item(0)
-                        .getChildNodes().item(0).getNodeValue();
-                encryptPW = pw.trim();
-                password = decrypt(encryptPW);
-                String ipAddress = (String) ((Element) datalist.item(0))
-                        .getElementsByTagName("ip").item(0).getChildNodes()
-                        .item(0).getNodeValue();
-                ip = ipAddress.trim();
-                String portAddress = (String) ((Element) datalist.item(0))
-                        .getElementsByTagName("port").item(0).getChildNodes()
-                        .item(0).getNodeValue();
-                port = portAddress.trim();
-
-            } else if (publishCEP.equals(value)) {
+                // Get attribute value
+                Node publishers = doc.getElementsByTagName("publisher").item(1);
+                NamedNodeMap attr = publishers.getAttributes();
+                Node nodeAttr = attr.getNamedItem("name");
+                String value = nodeAttr.getNodeValue().toString();
+                NodeList dataList = doc.getElementsByTagName("publisher");
 
                 // Getting values in CEP Publisher
 
-                NodeList datalist = doc.getElementsByTagName("publisher");
-                String uname = (String) ((Element) datalist.item(1))
-                        .getElementsByTagName("username").item(0)
-                        .getChildNodes().item(0).getNodeValue();
-                username = uname.trim();
-                String pw = (String) ((Element) datalist.item(1))
-                        .getElementsByTagName("password").item(0)
-                        .getChildNodes().item(0).getNodeValue();
+                String enableValue =
+                        (String) ((Element) dataList.item(1)).getElementsByTagName("enable")
+                                .item(0)
+                                .getTextContent();
+                if (enableValue == "") {
+                    enable = false;
+                } else {
+
+                    String enabled = enableValue.trim();
+                    enable = Boolean.parseBoolean(enabled);
+
+                }
+
+                String messageValue =
+                        (String) ((Element) dataList.item(1)).getElementsByTagName("message")
+                                .item(0)
+                                .getTextContent();
+
+                if (messageValue == "") {
+                    message = false;
+                } else {
+
+                    String msgvl = messageValue.trim();
+                    message = Boolean.parseBoolean(msgvl);
+
+                }
+
+                String systemValue =
+                        (String) ((Element) dataList.item(1)).getElementsByTagName("system")
+                                .item(0)
+                                .getTextContent();
+
+                if (systemValue == "") {
+                    system = false;
+                } else {
+
+                    String sysvl = systemValue.trim();
+                    system = Boolean.parseBoolean(sysvl);
+
+                }
+
+                String mbValue =
+                        (String) ((Element) dataList.item(1)).getElementsByTagName("mb")
+                                .item(0)
+                                .getTextContent();
+
+                if (mbValue == "") {
+                    mb = false;
+                } else {
+
+                    String mbvl = mbValue.trim();
+                    mb = Boolean.parseBoolean(mbvl);
+
+                }
+
+                String usrName =
+                        (String) ((Element) dataList.item(1)).getElementsByTagName("username")
+                                .item(0)
+                                .getTextContent();
+                username = (String) (usrName.trim());
+
+                String pw =
+                        (String) ((Element) dataList.item(1)).getElementsByTagName("password")
+                                .item(0).getTextContent();
                 encryptPW = pw.trim();
                 password = decrypt(encryptPW);
-                String ipAddress = (String) ((Element) datalist.item(1))
-                        .getElementsByTagName("ip").item(0).getChildNodes()
-                        .item(0).getNodeValue();
+
+                String ipAddress =
+                        (String) ((Element) dataList.item(1)).getElementsByTagName("ip")
+                                .item(0)
+                                .getTextContent();
                 ip = ipAddress.trim();
-                String portAddress = (String) ((Element) datalist.item(1))
-                        .getElementsByTagName("port").item(0).getChildNodes()
-                        .item(0).getNodeValue();
+
+                String portAddress =
+                        (String) ((Element) dataList.item(1)).getElementsByTagName("port")
+                                .item(0)
+                                .getTextContent();
                 port = portAddress.trim();
             } else {
-                System.out.println("Unknown value in XML!!!");
+
+                System.err.println("Unknown value in XML!!!");
             }
 
         }
@@ -193,8 +279,8 @@ public class Dataoutput {
 
     // Getter methods for parameters
 
-    public boolean getEnable() {
-        return true;
+    public boolean isEnable() {
+        return enable;
     }
 
     public String getUsername() {
@@ -214,14 +300,14 @@ public class Dataoutput {
     }
 
     public boolean getMessageStatConfig() {
-        return true;
+        return message;
     }
 
-    public boolean getsystemStatConfig() {
-        return true;
+    public boolean getSystemStatConfig() {
+        return system;
     }
 
     public boolean getMBStatConfig() {
-        return true;
+        return mb;
     }
 }

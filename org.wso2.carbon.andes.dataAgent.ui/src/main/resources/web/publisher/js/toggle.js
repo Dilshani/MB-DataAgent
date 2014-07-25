@@ -19,7 +19,6 @@ function toggleTable() {
 window.onload = toggleTable;
 
 
-
 function alertMessage(value) {
 
 
@@ -27,20 +26,26 @@ function alertMessage(value) {
 
 }
 
+function alertError(value) {
 
 
-function button(){
-    alertMessage("got it");
-    var url = "/carbon/publisher/dataAgentServlet";
-    var params = "param1=asdf&param2=1234";
-    var myCallback = {
-        success: function(o) {/* success handler code */},
-        failure: function(o) {/* failure handler code */}
-        /* ... */
-    };
-    var transaction = YAHOO.util.Connect.asyncRequest(
-        'POST', url, myCallback, params);
+    CARBON.showErrorDialog(value);
+
+}
 
 
+function DoValidation() {
+    var x = document.forms["details_form"]["password"].value;
+    var y = document.forms["details_form"]["username"].value;
+    var z = document.forms["details_form"]["ip_address"].value;
+    var c = document.forms["details_form"]["port_num"].value;
+
+    if (x == null || x == "" || c == null || c == "" || y == null || y == "" || z == null || z == "") {
+        alertError("Every fields are required");
+        return false;
+    }
+    else {
+        return true;
+    }
 }
 

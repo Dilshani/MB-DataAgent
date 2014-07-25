@@ -18,6 +18,21 @@
 <!--Yahoo includes for dom event handling-->
 <script src="../yui/build/yahoo-dom-event/yahoo-dom-event.js" type="text/javascript"></script>
 
+<script src='//dgdsbygo8mp3h.cloudfront.net/sites/default/files/blank.gif'
+        data-original="pathToBuild/yahoo/yahoo-min.js"
+        type="text/javascript"></script>
+<script src='//dgdsbygo8mp3h.cloudfront.net/sites/default/files/blank.gif'
+        data-original="pathToBuild/event/event-min.js"
+        type="text/javascript"></script>
+<script src='//dgdsbygo8mp3h.cloudfront.net/sites/default/files/blank.gif'
+        data-original="pathToBuild/connection/connection_core-min.js"
+        type="text/javascript"></script>
+
+
+<script src='//dgdsbygo8mp3h.cloudfront.net/sites/default/files/blank.gif'
+        data-original="pathToBuild/connection/connection-min.js"
+        type="text/javascript"></script>
+
 <!--Yahoo includes for animations-->
 <script src="../yui/build/animation/animation-min.js" type="text/javascript"></script>
 
@@ -37,71 +52,107 @@
 <link href="css/dsxmleditor.css" media="all" rel="stylesheet"/>
 <fmt:bundle basename="org.wso2.carbon.andes.dataAgent.ui.i18n.Resources">
 
-    <%
-        String serverURL = CarbonUIUtil.getServerURL(config.getServletContext(), session);
-        ConfigurationContext configContext =
-                (ConfigurationContext) config.getServletContext().getAttribute(CarbonConstants.CONFIGURATION_CONTEXT);
-        String cookie = (String) session.getAttribute(ServerConstants.ADMIN_SERVICE_COOKIE);
+<%
+    String serverURL = CarbonUIUtil.getServerURL(config.getServletContext(), session);
+    ConfigurationContext configContext =
+            (ConfigurationContext) config.getServletContext().getAttribute(CarbonConstants.CONFIGURATION_CONTEXT);
+    String cookie = (String) session.getAttribute(ServerConstants.ADMIN_SERVICE_COOKIE);
 
-        DataAgentClient client;
-        boolean status;
-        String ip_address="";
-        int port_num=0;
-        try {
-            client = new DataAgentClient(configContext, serverURL, cookie);
-            status = client.ipchecker("123.567.88",7865);
-        } catch (Exception e) {
-            CarbonUIMessage.sendCarbonUIMessage(e.getMessage(), CarbonUIMessage.ERROR, request, e);
-    %>
-    <script type="text/javascript">
-        location.href = "../admin/error.jsp";
-    </script>
+    DataAgentClient client;
+    boolean status;
+
+    String ip_address = "";
+    int port_num = 0;
+    try {
+        client = new DataAgentClient(configContext, serverURL, cookie);
+
+    } catch (Exception e) {
+        CarbonUIMessage.sendCarbonUIMessage(e.getMessage(), CarbonUIMessage.ERROR, request, e);
+%>
+<script type="text/javascript">
+    location.href = "../admin/error.jsp";
+</script>
 
 
-    <%
-            return;
+<%
+        return;
+    }
+
+%>
+
+<%
+    String publisher_name = "CEP";
+    String responsestr = "";
+    String enable_checked = "";
+    String get_username = "";
+    String get_password = "";
+    String get_IP = "";
+    String get_port = "";
+    String message_stat_check = "";
+    String system_stat_check = "";
+    String MB_stat_check = "";
+
+
+    if (client.getEnable("BAM")) {
+
+        enable_checked = "checked";
+        get_username = client.getUsername(publisher_name);
+        get_password = client.getPassword(publisher_name);
+        get_IP = client.getIP(publisher_name);
+        get_port = client.getPort(publisher_name);
+        if (client.getMBStatConfig(publisher_name)) {
+            MB_stat_check = "checked";
+
         }
 
-    %>
+        if (client.getMessageStatConfig(publisher_name)) {
+            message_stat_check = "checked";
 
-    <%
-        String responsestr="no";
-        boolean rr=false;
-
-
-
-        if(!(request.getAttribute("resp")==null)){
-
-            responsestr=(String)request.getAttribute("resp");
-
-    %>
-    <script type="text/javascript">
-        alertMessage("<%=responsestr%>");
-    </script>
-
-    <%
         }
-    %>
-    <div id="middle">
-        <div id="workArea">
-            <h2>
-                <fmt:message key="stat.bam" />
-            </h2>
+        if (client.getSystemStatConfig(publisher_name)) {
+            system_stat_check = "checked";
 
+        }
+
+
+    }
+
+    if (!(request.getAttribute("resp") == null)) {
+
+        responsestr = (String) request.getAttribute("resp");
+
+%>
+<script type="text/javascript">
+    alertMessage("<%=responsestr%>");
+
+</script>
+
+<%
+    }
+%>
+<div id="middle">
+    <div id="workArea">
+        <h2>
+            <fmt:message key="stat.bam"/>
+        </h2>
+
+        <form id="details_form" action="/carbon/publisher/dataAgentServlet" method="POST" onsubmit="return DoValidation();">
             <table class="styledLeft" style="width: 20%">
-                <form action="/carbon/publisher/dataAgentServlet" method="POST">
-                    <tbody>
-                    <tr>
-                        <td colspan="5">Enable Publisher</td>
-                        <td><input type="checkbox" id="enable_check" name="enable_check" value="true" onclick="toggleTable();"></td>
-                    </tr>
-                    </tbody>
+
+                <tbody>
+                <tr>
+                    <td colspan="5">Enable Publisher</td>
+                    <td><input type="checkbox" id="enable_check" name="enable_check" value="true"
+                               onclick="toggleTable();" <%=enable_checked%> ></td>
+                </tr>
+                </tbody>
             </table>
 
 
             <br><br>
+
             <div id="toggle">
-                <table class="styledLeft" style="width: 100%" id="tbl_auth" >
+                <table class="styledLeft" style="width: 100%" id="authentication_table">
                     <col width=20%>
                     <col width=30%>
                     <col width=50%>
@@ -112,20 +163,20 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td class="formRaw"><fmt:message key="username" /><span
+                        <td class="formRaw"><fmt:message key="username"/><span
                                 class="required">*</span></td>
-                        <td>&nbsp<input type="text" id="username" name="username"/> </td>
+                        <td>&nbsp<input type="text" id="username" name="username" value="<%=get_username%>"/></td>
                     </tr>
                     <tr>
-                        <td class="formRaw"><fmt:message key="password" /><span
+                        <td class="formRaw"><fmt:message key="password"/><span
                                 class="required">*</span></td>
-                        <td>&nbsp<input type="text" id="password" name="password"/></td>
+                        <td>&nbsp<input type="password" id="password" name="password" value="<%=get_password%>"/></td>
                     </tr>
                 </table>
 
                 <br><br>
 
-                <table class="styledLeft" style="width: 100%" id="tbl_trans">
+                <table class="styledLeft" style="width: 100%" id="transport_table">
                     <col width=20%>
                     <col width=30%>
                     <col width=50%>
@@ -137,34 +188,75 @@
                     <tbody>
                     <tr>
 
-                        <td class="formRaw"><fmt:message key="ip"  /><span
+                        <td class="formRaw"><fmt:message key="ip"/><span
                                 class="required">*</span></td>
-                        <td><input type="text" id="ip_address" name="ip_address"/></td>
+                        <td><input type="text" id="ip_address" name="ip_address" value="<%=get_IP%>"/></td>
                     </tr>
                     <tr>
-                        <td class="formRaw"><fmt:message key="port" /><span
+                        <td class="formRaw"><fmt:message key="port"/><span
                                 class="required">*</span></td>
-                        <td><input type="text" id="port_num" name="port_num"/>
-                            <input type="button" class="button" id="testButton" value="<fmt:message key="test"/>" /></td>
-
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="buttonRow"><input type="submit" class="button" id="saveButton"
-                                                                 value="<fmt:message key="save"/>"
-                                />
+                        <td><input type="text" id="port_num" name="port_num" value="<%=get_port%>"/>
+                            <input type="button" class="button" id="testBut" value="<fmt:message key="test"/>"/>
                         </td>
-                        <input type="hidden" name="publisher_name" value="CEP"/>
+
                     </tr>
-                    </form>
+
                 </table>
+                <br><br>
+                <table class="styledLeft" style="width: 50%" id="stat_table">
+                    <col width=10%>
+                    <col width=10%>
+                    <col width=10%>
 
+                    <thead>
+                    <tr>
+                        <th colspan="12">Statistic Configuration</th>
+                    </tr>
+
+
+                    </thead>
+                    <tr>
+                        <td colspan="3">Message</td>
+                        <td>
+                            <input type="checkbox" id="message_stat_check" name="message_stat_check"
+                                   value="true" <%=message_stat_check%>/>
+                        </td>
+                        <td colspan="3">System</td>
+                        <td>
+                            <input type="checkbox" id="system_stat_check" name="system_stat_check"
+                                   value="true" <%=system_stat_check%>/>
+                        </td>
+                        <td colspan="3">MB</td>
+                        <td>
+                            <input type="checkbox" id="MB_stat_check" name="MB_stat_check" value="true"
+                                   value="true" <%=MB_stat_check%>/>
+                        </td>
+
+                    </tr>
+
+                </table>
+                <br>
+                <table class="styledLeft" style="width: 50%" id="button_table">
+                    <tr>
+
+                        <td class="buttonRow"><input type="submit" class="button" id="saveButton"
+                                                     name="saveButton"
+                                                     value="<fmt:message key="save"/>"
+                                />
+                            <input type="submit" class="button" id="resetButton"
+                                   name="saveButton"
+                                   value="<fmt:message key="reset"/>"
+                                    />
+                        </td>
+                        <input type="hidden" name="publisher_name" value="<%=publisher_name%>"/>
+                    </tr>
+                </table>
             </div>
-        </div>
+        </form>
     </div>
+</div>
 
-    <script>
+<script type="text/javascript" src="js/sc.js"></script>
 
-
-    </script>
-
+<script type="text/javascript" src="js/toggle.js"></script>
 </fmt:bundle>

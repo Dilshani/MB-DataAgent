@@ -98,7 +98,7 @@ public class Publisher {
     public boolean getsystemStatConfig(String publisher)
             throws ParserConfigurationException, SAXException, IOException {
         publisherSelector(publisher);
-        return data_output.getsystemStatConfig();
+        return data_output.getSystemStatConfig();
     }
 
     // get message broker statistic configuration
@@ -112,7 +112,7 @@ public class Publisher {
     public boolean getEnable(String publisher)
             throws ParserConfigurationException, SAXException, IOException {
         publisherSelector(publisher);
-        return data_output.getEnable();
+        return data_output.isEnable();
     }
 
     // get URL validation result
