@@ -5,6 +5,8 @@ import org.apache.axis2.client.Options;
 import org.apache.axis2.client.ServiceClient;
 import org.apache.axis2.context.ConfigurationContext;
 
+import java.lang.reflect.InvocationTargetException;
+import java.nio.channels.ConnectionPendingException;
 import java.rmi.RemoteException;
 
 /**
@@ -37,19 +39,12 @@ public class DataAgentClient {
 
 
     public boolean IPValidator(String IP, int port) {
-        try {
+
             try {
                 return stub.getURLValidation(IP, port);
-            } catch (PublisherUnknownHostExceptionException e) {
-                e.printStackTrace();
-            } catch (PublisherIOExceptionException e) {
-                e.printStackTrace();
+            } catch (Exception e) {
+
             }
-
-        } catch (RemoteException e) {
-
-
-        }
         return false;
     }
 

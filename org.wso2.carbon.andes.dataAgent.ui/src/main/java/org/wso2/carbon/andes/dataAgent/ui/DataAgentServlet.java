@@ -64,8 +64,12 @@ public class DataAgentServlet extends HttpServlet {
 
                 req.setAttribute("resp", validateResponse);
 
-                req.getRequestDispatcher("/carbon/publisher/bam_publisher.jsp").forward(req, resp);
 
+                if(publisher_name.equals("BAM")) {
+                    req.getRequestDispatcher("/carbon/publisher/bam_publisher.jsp").forward(req, resp);
+                }else{
+                    req.getRequestDispatcher("/carbon/publisher/cep_publisher.jsp").forward(req, resp);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

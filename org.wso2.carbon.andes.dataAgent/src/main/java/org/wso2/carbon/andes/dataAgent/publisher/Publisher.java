@@ -9,6 +9,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.UnknownHostException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -117,7 +118,7 @@ public class Publisher {
 
     // get URL validation result
     public boolean getURLValidation(String IP, int port)
-            throws UnknownHostException, IOException {
+            throws UnknownHostException, IOException,InvocationTargetException {
 
         return url_validator.validateURL(IP, port);
     }

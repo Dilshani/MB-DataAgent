@@ -41,7 +41,7 @@ function DoValidation() {
     var c = document.forms["details_form"]["port_num"].value;
 
     if (x == null || x == "" || c == null || c == "" || y == null || y == "" || z == null || z == "") {
-        alertError("Every fields are required");
+        alertError("Please make sure that all properties are filled");
         return false;
     }
     else {
@@ -49,3 +49,31 @@ function DoValidation() {
     }
 }
 
+function validateURL() {
+
+    var xmlhttp;
+    var ip = document.getElementById("ip_address").value;
+    var port = document.getElementById("port_num").value;
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            if (xmlhttp.responseText) {
+
+                alertMessage(xmlhttp.responseText);
+
+            } else {
+
+                alertError(xmlhttp.responseText);
+
+            }
+        }
+    };
+    xmlhttp.open("GET", "/carbon/publisher/URLValidateServlet?ip=" + ip + "&port=" + port, true);
+    xmlhttp.send();
+
+}

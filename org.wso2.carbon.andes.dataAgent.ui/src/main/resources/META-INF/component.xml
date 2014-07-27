@@ -65,8 +65,14 @@
             <servlet-name>dataAgentServlet</servlet-name>
             <url-pattern>/carbon/publisher/dataAgentServlet</url-pattern>
             <display-name>dataAgentServlet</display-name>
-
             <servlet-class>org.wso2.carbon.andes.dataAgent.ui.DataAgentServlet</servlet-class>
+        </servlet>
+
+        <servlet id="urlValidator">
+            <servlet-name>URLValidateServlet</servlet-name>
+            <url-pattern>/carbon/publisher/URLValidateServlet</url-pattern>
+            <display-name>URLValidateServlet</display-name>
+            <servlet-class>org.wso2.carbon.andes.dataAgent.ui.URLValidateServlet</servlet-class>
         </servlet>
     </servlets>
 </component>

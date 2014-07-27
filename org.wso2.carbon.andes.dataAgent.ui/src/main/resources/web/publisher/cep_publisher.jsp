@@ -93,7 +93,7 @@
     String MB_stat_check = "";
 
 
-    if (client.getEnable("BAM")) {
+    if (client.getEnable("CEP")) {
 
         enable_checked = "checked";
         get_username = client.getUsername(publisher_name);
@@ -133,7 +133,7 @@
 <div id="middle">
     <div id="workArea">
         <h2>
-            <fmt:message key="stat.bam"/>
+            <fmt:message key="stat.cep"/>
         </h2>
 
         <form id="details_form" action="/carbon/publisher/dataAgentServlet" method="POST" onsubmit="return DoValidation();">

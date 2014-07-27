@@ -196,7 +196,7 @@
                         <td class="formRaw"><fmt:message key="port"/><span
                                 class="required">*</span></td>
                         <td><input type="text" id="port_num" name="port_num" value="<%=get_port%>"/>
-                            <input type="button" class="button" id="testBut" value="<fmt:message key="test"/>"/>
+                            <input type="button" class="button" id="testBut" value="<fmt:message key="test"/>" onclick="validateURL()"/>
                         </td>
 
                     </tr>
@@ -253,6 +253,7 @@
                 </table>
             </div>
         </form>
+        <div id="myDiv"></div>
     </div>
 </div>
 
