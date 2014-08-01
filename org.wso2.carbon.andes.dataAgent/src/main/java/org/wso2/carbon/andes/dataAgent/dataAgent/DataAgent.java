@@ -18,16 +18,20 @@ package org.wso2.carbon.andes.dataAgent.dataAgent;
         import org.xml.sax.SAXException;
         // import org.apache.commons.configuration.Configuration;
 
+        import javax.management.*;
         import javax.xml.parsers.ParserConfigurationException;
         import java.io.IOException;
         import java.util.List;
+        import org.wso2.andes.kernel.SubscriptionStore;
+
+
 
 
 public class DataAgent{
     private static Logger logger = Logger.getLogger(DataAgent.class);
-    public static final String MB_STATS_STREAM = "MB_stats_11";
-    public static final String VERSION_MESSAGE = "2.2.4";
-    public static final String VERSION_ACK = "2.2.5";
+    public static final String MB_STATS_STREAM = "stats_1";
+    public static final String VERSION_MESSAGE = "1.0.1";
+    public static final String VERSION_ACK = "1.0.2";
 
 
     //private static byte[] messageMetaData;
@@ -57,6 +61,9 @@ public class DataAgent{
 
 
     public void dataAgent(AndesMessageMetadata message, String application, int subscribers) throws AndesException, IOException, SAXException, ParserConfigurationException {
+
+
+
 
         messageID = message.getMessageID();
         messageDestination = message.getDestination();

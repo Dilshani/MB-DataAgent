@@ -2,14 +2,14 @@ Manifest-Version: 1.0
 Export-Package: org.wso2.carbon.andes.dataAgent.ui;uses:="org.wso2.car
  bon.andes.dataAgent.stub";version="4.2.0",org.wso2.carbon.andes.dataA
  gent.ui.i18n;version="4.2.0"
-Built-By: nipuna
+Built-By: sanjaya
 Tool: Bnd-1.43.0
 Bundle-Name: org.wso2.carbon.andes.dataAgent.ui
 Created-By: Apache Maven Bundle Plugin
 DynamicImport-Package: *
 Build-Jdk: 1.6.0_45
 Bundle-Version: 4.3.0.SNAPSHOT
-Bnd-LastModified: 1406198463847
+Bnd-LastModified: 1406810962362
 Bundle-ManifestVersion: 2
 Bundle-Description: This is a Carbon bundle that represents the Andes 
  module
