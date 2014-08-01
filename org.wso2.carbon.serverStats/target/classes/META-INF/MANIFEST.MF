@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Export-Package: org.wso2.carbon.serverStats.publisher;version="4.3.0.S
+ NAPSHOT",org.wso2.carbon.serverStats.serverStats;uses:="javax.managem
+ ent";version="4.3.0.SNAPSHOT",org.wso2.carbon.serverStats.mbeans;uses
+ :="javax.management.remote,javax.management.openmbean,javax.managemen
+ t,org.wso2.andes.management.common";version="4.3.0.SNAPSHOT"
+Built-By: sanjaya
+Tool: Bnd-1.43.0
+Bundle-Name: org.wso2.carbon.serverStats
+Created-By: Apache Maven Bundle Plugin
+Build-Jdk: 1.7.0_60
+Bundle-Version: 4.3.0.SNAPSHOT
+Bnd-LastModified: 1406806467580
+Bundle-ManifestVersion: 2
+Bundle-Description: Carbon serverStats
+Import-Package: javax.management,javax.management.openmbean,javax.mana
+ gement.remote,org.wso2.andes.management.common;version="[3.0,4)"
+Bundle-SymbolicName: org.wso2.carbon.serverStats
+
