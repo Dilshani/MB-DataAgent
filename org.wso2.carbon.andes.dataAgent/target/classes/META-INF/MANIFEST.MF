@@ -10,17 +10,30 @@ Export-Package: org.wso2.carbon.andes.dataAgent.publisher;uses:="javax
  .0.SNAPSHOT",org.wso2.carbon.andes.dataAgent.serverStats;version="4.3
  .0.SNAPSHOT",org.wso2.carbon.andes.dataAgent.dataAgent;uses:="org.wso
  2.carbon.andes.dataAgent.publisher,org.wso2.carbon.databridge.commons
+<<<<<<< HEAD
  ,org.apache.log4j,org.wso2.andes.kernel,org.wso2.carbon.databridge.ag
  ent.thrift,javax.xml.parsers,org.wso2.carbon.databridge.agent.thrift.
  conf,org.wso2.carbon.databridge.agent.thrift.exception,org.wso2.carbo
  n.andes.dataAgent.serverStats,org.xml.sax";version="4.3.0.SNAPSHOT"
 Built-By: nipuna
+=======
+ ,org.apache.log4j,org.wso2.andes.kernel,org.wso2.carbon.serverStats.m
+ beans,org.wso2.carbon.databridge.agent.thrift,org.wso2.carbon.databri
+ dge.agent.thrift.conf,org.wso2.carbon.databridge.agent.thrift.excepti
+ on,org.wso2.carbon.andes.dataAgent.serverStats,javax.xml.parsers,org.
+ xml.sax";version="4.3.0.SNAPSHOT"
+Built-By: sanjaya
+>>>>>>> 2ba409923126c7f0d83566ad516acb00d7e1ff66
 Tool: Bnd-1.43.0
 Bundle-Name: org.wso2.carbon.andes.dataAgent
 Created-By: Apache Maven Bundle Plugin
 Build-Jdk: 1.6.0_45
 Bundle-Version: 4.3.0.SNAPSHOT
+<<<<<<< HEAD
 Bnd-LastModified: 1406301973233
+=======
+Bnd-LastModified: 1406810795907
+>>>>>>> 2ba409923126c7f0d83566ad516acb00d7e1ff66
 Bundle-ManifestVersion: 2
 Bundle-Description: Carbonized Andes
 Import-Package: javax.crypto,javax.crypto.spec,javax.xml.parsers,javax
@@ -30,6 +43,7 @@ Import-Package: javax.crypto,javax.crypto.spec,javax.xml.parsers,javax
  tabridge.agent.thrift;version="[4.2,5)",org.wso2.carbon.databridge.ag
  ent.thrift.conf;version="[4.2,5)",org.wso2.carbon.databridge.agent.th
  rift.exception;version="[4.2,5)",org.wso2.carbon.databridge.commons;v
- ersion="[4.2,5)",org.xml.sax
+ ersion="[4.2,5)",org.wso2.carbon.serverStats.mbeans;version="[4.3,5)"
+ ,org.xml.sax
 Bundle-SymbolicName: org.wso2.carbon.andes.dataAgent
 
