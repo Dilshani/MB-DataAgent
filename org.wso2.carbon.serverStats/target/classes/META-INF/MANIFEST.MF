@@ -8,9 +8,9 @@ Built-By: sanjaya
 Tool: Bnd-1.43.0
 Bundle-Name: org.wso2.carbon.serverStats
 Created-By: Apache Maven Bundle Plugin
-Build-Jdk: 1.7.0_60
+Build-Jdk: 1.6.0_45
 Bundle-Version: 4.3.0.SNAPSHOT
-Bnd-LastModified: 1406806467580
+Bnd-LastModified: 1407089879489
 Bundle-ManifestVersion: 2
 Bundle-Description: Carbon serverStats
 Import-Package: javax.management,javax.management.openmbean,javax.mana

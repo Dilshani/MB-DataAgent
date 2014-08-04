@@ -19,10 +19,12 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.util.List;
 import org.wso2.carbon.serverStats.mbeans.MbeansStats;
+import org.wso2.carbon.serverStats.*;
 
 public class AutoSender {
     private static Logger logger = Logger.getLogger(DataAgent.class);
-    public static final String MB_STATS_STREAM = "server_stats_2";
+    public static final String MB_STATS_SYSTEM_STREAM = "systemStats_2";
+    public static final String MB_STATS_MB_STREAM = "MBStats_2";
     public static final String VERSION_MESSAGE = "1.0.0";
 
 
@@ -33,6 +35,7 @@ public class AutoSender {
 
     private String heapMemoryUsage;
     private String nonHeapMemoryUsage;
+    private String CPULoadAverage;
 
 
 
@@ -56,49 +59,91 @@ public class AutoSender {
 
     public void dataAgent(String application) throws Exception {
 
-        noOfTopics = getTopicList().size(); //get number of topic in a cluster
+
+
+
+
 
 
         Publisher publisherObject = new Publisher(); //create publisher object for get BAM or CEP configuration
-
-
-        //JMX............
-
-        MbeansStats mbeansStats = new MbeansStats("localhost",10000,"admin","admin");
-
-
-
-        System.out.println("heap mem usage: "+Long.parseLong(mbeansStats.getHeapMemoryUsage())/1024*1024);
-
-        System.out.println(mbeansStats.getNonHeapMemoryUsage());
-
-
-
-
-
-
-
-        //server stats
-        serverStats serverStatsObject = new serverStats();
-
-        serverStatsObject.setAvailableProcessors();
-        serverStatsObject.setFreeMemory();
-        serverStatsObject.setTotalMemory();;
-
-
-        availableProcessors =Integer.toString(serverStatsObject.getAvailableProcessors());
-        freeMemory = Long.toString(serverStatsObject.getFreeMemory());
-        totalMemory = Long.toString(serverStatsObject.getAvailableProcessors());
-
-        System.out.println("available processors: "+availableProcessors);
-        System.out.println("free memory: "+freeMemory);
-        System.out.println("total memory: "+totalMemory);
 
         //configurations for BAM or CEP
         ip = publisherObject.getIP(application);
         port = publisherObject.getPort(application);
         username = publisherObject.getUsername(application);
         password= publisherObject.getPassword(application);
+
+
+        //if publisher is enabled and Queue and Topic Stats enabled
+
+        if(publisherObject.getEnable(application) && publisherObject.getMBStatConfig(application)){
+
+            noOfTopics = getTopicList().size(); //get number of topic in a cluster
+            totalSubscribers = getTotalSubscriptions();
+
+            sendMbStats(application);
+
+
+        }
+
+        if(publisherObject.getEnable(application) && publisherObject.getsystemStatConfig(application)){
+
+
+            //JMX............
+
+            MbeansStats mbeansStats = new MbeansStats("localhost",10000,"admin","admin");
+
+            heapMemoryUsage = mbeansStats.getHeapMemoryUsage();
+            nonHeapMemoryUsage = mbeansStats.getNonHeapMemoryUsage();
+            CPULoadAverage = mbeansStats.getCPULoadAverage();
+
+
+            System.out.println(heapMemoryUsage);
+            System.out.println(nonHeapMemoryUsage);
+
+
+
+
+
+
+
+            //server stats
+            serverStats serverStatsObject = new serverStats();
+
+            serverStatsObject.setAvailableProcessors();
+            serverStatsObject.setFreeMemory();
+            serverStatsObject.setTotalMemory();;
+
+
+            availableProcessors =Integer.toString(serverStatsObject.getAvailableProcessors());
+            freeMemory = Long.toString(serverStatsObject.getFreeMemory());
+            totalMemory = Long.toString(serverStatsObject.getAvailableProcessors());
+
+            System.out.println("available processors: "+availableProcessors);
+            System.out.println("free memory: "+freeMemory);
+            System.out.println("total memory: "+totalMemory);
+
+
+
+            sendSystemStats(application);
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+    }
+
+    private void sendMbStats(String application){
+
 
         AgentConfiguration agentConfiguration = new AgentConfiguration();
         System.setProperty("javax.net.ssl.trustStore", "repository/resources/security/client-truststore.jks");
@@ -108,7 +153,7 @@ public class AutoSender {
         //Using Asynchronous data publisher
         AsyncDataPublisher asyncDataPublisherMessage = new AsyncDataPublisher("tcp://" + ip + ":" + port, username, password, agent);
         String messageStreamDefinition = "{" +
-                "  'name':'" + MB_STATS_STREAM + "'," +
+                "  'name':'" + MB_STATS_MB_STREAM + "'," +
                 "  'version':'" + VERSION_MESSAGE + "'," +
                 "  'nickName': 'MB stats'," +
                 "  'description': 'Server Stats'," +
@@ -117,18 +162,58 @@ public class AutoSender {
                 "  ]," +
                 "  'payloadData':[" +
 
-                "          {'name':'HeapMemoryUsage','type':'STRING'}," +
-                "          {'name':'nonHeapMemoryUsage','type':'STRING'}," +
-                "          {'name':'totalMemory','type':'STRING'}," +
+
                 "          {'name':'NoOfSubscribers','type':'INT'}," +
                 "          {'name':'NoOfTopics','type':'INT'}," +
                 " 			{'name':'timestamp','type':'LONG'}" +
                 "  ]" +
                 "}";
-        asyncDataPublisherMessage.addStreamDefinition(messageStreamDefinition, MB_STATS_STREAM, VERSION_MESSAGE);
-        publishEventsForMessage(asyncDataPublisherMessage, VERSION_MESSAGE);
+        asyncDataPublisherMessage.addStreamDefinition(messageStreamDefinition, MB_STATS_MB_STREAM, VERSION_MESSAGE);
+        publishEventsForMBstats(asyncDataPublisherMessage, VERSION_MESSAGE);
+
+/*  "          {'name':'HeapMemoryUsage','type':'STRING'}," +
+                "          {'name':'nonHeapMemoryUsage','type':'STRING'}," +
+                "          {'name':'totalMemory','type':'STRING'}," +*/
 
     }
+
+
+
+    private void sendSystemStats(String application){
+
+
+        AgentConfiguration agentConfiguration = new AgentConfiguration();
+        System.setProperty("javax.net.ssl.trustStore", "repository/resources/security/client-truststore.jks");
+        System.setProperty("javax.net.ssl.trustStorePassword", "wso2carbon");
+        Agent agent = new Agent(agentConfiguration);
+
+        //Using Asynchronous data publisher
+        AsyncDataPublisher asyncDataPublisherMessage = new AsyncDataPublisher("tcp://" + ip + ":" + port, username, password, agent);
+        String messageStreamDefinition = "{" +
+                "  'name':'" + MB_STATS_SYSTEM_STREAM + "'," +
+                "  'version':'" + VERSION_MESSAGE + "'," +
+                "  'nickName': 'MB stats'," +
+                "  'description': 'Server Stats'," +
+                "  'metaData':[" +
+                "          {'name':'publisherIP','type':'STRING'}" +
+                "  ]," +
+                "  'payloadData':[" +
+
+               " {'name':'HeapMemoryUsage','type':'STRING'}," +
+                "         {'name':'nonHeapMemoryUsage','type':'STRING'}," +
+                "          {'name':'CPULoadAverage','type':'STRING'}," +
+                " 			{'name':'timestamp','type':'LONG'}" +
+                "  ]" +
+                "}";
+        asyncDataPublisherMessage.addStreamDefinition(messageStreamDefinition, MB_STATS_SYSTEM_STREAM, VERSION_MESSAGE);
+        publishEventsForSystemStats(asyncDataPublisherMessage, VERSION_MESSAGE);
+
+/*  "          {'name':'HeapMemoryUsage','type':'STRING'}," +
+                "          {'name':'nonHeapMemoryUsage','type':'STRING'}," +
+                "          {'name':'totalMemory','type':'STRING'}," +*/
+
+    }
+
 
     private  int getTotalSubscriptions() throws AndesException {
 
@@ -180,17 +265,34 @@ return totalSubscribers;
     }
 
 
-    private  void publishEventsForMessage(AsyncDataPublisher dataPublisher, String version) {
+    private  void publishEventsForMBstats(AsyncDataPublisher dataPublisher, String version) {
 
 
         timeStamp = getTimeStamp();
 
 
-        Object[] payload = new Object[]{heapMemoryUsage,nonHeapMemoryUsage,totalMemory,totalSubscribers,noOfTopics,timeStamp};
+        Object[] payload = new Object[]{totalSubscribers,noOfTopics,timeStamp};
         Event event = eventObject(null, new Object[]{ip}, payload);
         try {
 
-            dataPublisher.publish(MB_STATS_STREAM, version, event);
+            dataPublisher.publish(MB_STATS_MB_STREAM, version, event);
+        } catch (AgentException e) {
+            logger.error("Failed to publish event", e);
+        }
+
+    }
+
+    private  void publishEventsForSystemStats(AsyncDataPublisher dataPublisher, String version) {
+
+
+        timeStamp = getTimeStamp();
+
+
+        Object[] payload = new Object[]{heapMemoryUsage,nonHeapMemoryUsage,CPULoadAverage,timeStamp};
+        Event event = eventObject(null, new Object[]{ip}, payload);
+        try {
+
+            dataPublisher.publish(MB_STATS_SYSTEM_STREAM, version, event);
         } catch (AgentException e) {
             logger.error("Failed to publish event", e);
         }
