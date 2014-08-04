@@ -85,6 +85,8 @@ public  MbeansStats(String host,int port, String username, String password) thro
 // What % CPU load this current JVM is taking, from 0.0-1.0
         System.out.println("system average::::::::::::::::::::::" +osBean.getSystemLoadAverage());
 
+        CPULoadAverage = Double.toString(osBean.getSystemLoadAverage());
+
 // What % load the overall system is at, from 0.0-1.0
        // System.out.println(osBean.getSystemCpuLoad());
 
@@ -113,5 +115,8 @@ public  MbeansStats(String host,int port, String username, String password) thro
 
         return nonHeapMemoryUsage;
     }
-	
+
+    public String getCPULoadAverage(){
+        return CPULoadAverage;
+    }
 }
