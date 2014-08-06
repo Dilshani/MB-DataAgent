@@ -21,11 +21,7 @@ Bundle-Name: org.wso2.carbon.andes.dataAgent
 Created-By: Apache Maven Bundle Plugin
 Build-Jdk: 1.6.0_45
 Bundle-Version: 4.3.0.SNAPSHOT
-<<<<<<< HEAD
-Bnd-LastModified: 1406875738463
-=======
-Bnd-LastModified: 1407089909528
->>>>>>> 9f56ab190a29e0a728754c3ad15c95c087e6cdb4
+Bnd-LastModified: 1407307879490
 Bundle-ManifestVersion: 2
 Bundle-Description: Carbonized Andes
 Import-Package: javax.crypto,javax.crypto.spec,javax.xml.parsers,javax

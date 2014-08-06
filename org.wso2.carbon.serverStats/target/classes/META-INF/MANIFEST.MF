@@ -10,11 +10,7 @@ Bundle-Name: org.wso2.carbon.serverStats
 Created-By: Apache Maven Bundle Plugin
 Build-Jdk: 1.6.0_45
 Bundle-Version: 4.3.0.SNAPSHOT
-<<<<<<< HEAD
-Bnd-LastModified: 1406875680168
-=======
-Bnd-LastModified: 1407089879489
->>>>>>> 9f56ab190a29e0a728754c3ad15c95c087e6cdb4
+Bnd-LastModified: 1407312859155
 Bundle-ManifestVersion: 2
 Bundle-Description: Carbon serverStats
 Import-Package: javax.management,javax.management.openmbean,javax.mana

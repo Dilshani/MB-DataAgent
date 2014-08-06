@@ -35,6 +35,7 @@ function alertError(value) {
 
 
 function DoValidation() {
+
     var x = document.forms["details_form"]["password"].value;
     var y = document.forms["details_form"]["username"].value;
     var z = document.forms["details_form"]["ip_address"].value;
@@ -45,6 +46,7 @@ function DoValidation() {
         return false;
     }
     else {
+
         return true;
     }
 }
@@ -63,9 +65,12 @@ function validateURL() {
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             if (xmlhttp.responseText) {
+                if ((xmlhttp.responseText) == "true") {
+                    alertMessage("URL validate Successful");
+                } else {
 
-                alertMessage(xmlhttp.responseText);
-
+                    alertError("URL validate Failed");
+                }
             } else {
 
                 alertError(xmlhttp.responseText);

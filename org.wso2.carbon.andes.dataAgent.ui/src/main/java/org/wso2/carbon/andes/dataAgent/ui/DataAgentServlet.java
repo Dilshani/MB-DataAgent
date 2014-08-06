@@ -62,7 +62,7 @@ public class DataAgentServlet extends HttpServlet {
 
                 }
 
-                req.setAttribute("resp", validateResponse);
+                req.setAttribute("servlet_resp", validateResponse);
 
 
                 if(publisher_name.equals("BAM")) {
