@@ -7,7 +7,7 @@ Created-By: Apache Maven Bundle Plugin
 DynamicImport-Package: *
 Build-Jdk: 1.6.0_45
 Bundle-Version: 4.3.0.SNAPSHOT
-Bnd-LastModified: 1406137385256
+Bnd-LastModified: 1407301833335
 Bundle-ManifestVersion: 2
 Bundle-Description: Carbonized Andes
 Bundle-SymbolicName: org.wso2.carbon.andes.dataAgent.stub
