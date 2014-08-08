@@ -17,14 +17,18 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import org.wso2.carbon.serverStats.mbeans.MbeansStats;
 import org.wso2.carbon.serverStats.*;
 
 public class AutoSender {
     private static Logger logger = Logger.getLogger(DataAgent.class);
-    public static final String MB_STATS_SYSTEM_STREAM = "systemStats_2";
-    public static final String MB_STATS_MB_STREAM = "MBStats_2";
+    public static final String MB_STATS_SYSTEM_STREAM = "SYSTEM_STATISTICS_MB";
+    public static final String MB_STATS_MB_STREAM = "MB_STATISTICS";
     public static final String VERSION_MESSAGE = "1.0.0";
 
 
@@ -57,15 +61,11 @@ public class AutoSender {
 
 
 
-    public void dataAgent(String application) throws Exception {
+    public void dataAgent(final String application) throws Exception {
 
 
 
-
-
-
-
-        Publisher publisherObject = new Publisher(); //create publisher object for get BAM or CEP configuration
+        final Publisher publisherObject = new Publisher(); //create publisher object for get BAM or CEP configuration
 
         //configurations for BAM or CEP
         ip = publisherObject.getIP(application);
@@ -73,68 +73,96 @@ public class AutoSender {
         username = publisherObject.getUsername(application);
         password= publisherObject.getPassword(application);
 
+        System.out.println("dataAgentCalled");
 
-        //if publisher is enabled and Queue and Topic Stats enabled
+        // creating timer task, timer
+        TimerTask tasknew = new TimerTask() {
+            @Override
+            public void run() {
 
-        if(publisherObject.getEnable(application) && publisherObject.getMBStatConfig(application)){
+                //if publisher is enabled and Queue and Topic Stats enabled
 
-            noOfTopics = getTopicList().size(); //get number of topic in a cluster
-            totalSubscribers = getTotalSubscriptions();
+                System.out.println("this is the auto sender run method");
 
-            sendMbStats(application);
+                try {
+                    if(publisherObject.getEnable(application) && publisherObject.getMBStatConfig(application)){
 
+                        noOfTopics = getTopicList().size(); //get number of topic in a cluster
+                        totalSubscribers = getTotalSubscriptions();
 
-        }
-
-        if(publisherObject.getEnable(application) && publisherObject.getsystemStatConfig(application)){
-
-
-            //JMX............
-
-            MbeansStats mbeansStats = new MbeansStats("localhost",10000,"admin","admin");
-
-            heapMemoryUsage = mbeansStats.getHeapMemoryUsage();
-            nonHeapMemoryUsage = mbeansStats.getNonHeapMemoryUsage();
-            CPULoadAverage = mbeansStats.getCPULoadAverage();
+                        sendMbStats(application);
 
 
-            System.out.println(heapMemoryUsage);
-            System.out.println(nonHeapMemoryUsage);
+                    }
+                } catch (ParserConfigurationException e) {
+                    e.printStackTrace();
+                } catch (SAXException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (AndesException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    if(publisherObject.getEnable(application) && publisherObject.getsystemStatConfig(application)){
 
 
+                        //JMX............
+
+                        MbeansStats mbeansStats = new MbeansStats("localhost",10000,"admin","admin");
+
+                        heapMemoryUsage = mbeansStats.getHeapMemoryUsage();
+                        nonHeapMemoryUsage = mbeansStats.getNonHeapMemoryUsage();
+                        CPULoadAverage = mbeansStats.getCPULoadAverage();
 
 
-
-
-
-            //server stats
-            serverStats serverStatsObject = new serverStats();
-
-            serverStatsObject.setAvailableProcessors();
-            serverStatsObject.setFreeMemory();
-            serverStatsObject.setTotalMemory();;
-
-
-            availableProcessors =Integer.toString(serverStatsObject.getAvailableProcessors());
-            freeMemory = Long.toString(serverStatsObject.getFreeMemory());
-            totalMemory = Long.toString(serverStatsObject.getAvailableProcessors());
-
-            System.out.println("available processors: "+availableProcessors);
-            System.out.println("free memory: "+freeMemory);
-            System.out.println("total memory: "+totalMemory);
-
-
-
-            sendSystemStats(application);
+                        System.out.println(heapMemoryUsage);
+                        System.out.println(nonHeapMemoryUsage);
 
 
 
 
-        }
+
+
+
+                        //server stats
+                        serverStats serverStatsObject = new serverStats();
+
+                        serverStatsObject.setAvailableProcessors();
+                        serverStatsObject.setFreeMemory();
+                        serverStatsObject.setTotalMemory();;
+
+
+                        availableProcessors =Integer.toString(serverStatsObject.getAvailableProcessors());
+                        freeMemory = Long.toString(serverStatsObject.getFreeMemory());
+                        totalMemory = Long.toString(serverStatsObject.getAvailableProcessors());
+
+                        System.out.println("available processors: "+availableProcessors);
+                        System.out.println("free memory: "+freeMemory);
+                        System.out.println("total memory: "+totalMemory);
+
+
+
+                        sendSystemStats(application);
 
 
 
 
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        };
+        Timer timer = new Timer();
+
+        // scheduling the task at fixed rate
+        timer.scheduleAtFixedRate(tasknew,new Date(),30000);
 
 
 
@@ -215,7 +243,7 @@ public class AutoSender {
     }
 
 
-    private  int getTotalSubscriptions() throws AndesException {
+    private  int getTotalSubscriptions() throws Exception {
 
         List<String> topics = getTopicList();
 
@@ -248,7 +276,7 @@ return totalSubscribers;
 
     }
 
-    private List<String> getTopicList(){
+    private List<String> getTopicList() throws Exception {
 
         MessagingEngine messaginEngine =MessagingEngine.getInstance();
          subscriptionStore =   messaginEngine.getSubscriptionStore();
