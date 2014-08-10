@@ -74,12 +74,6 @@ public class DataAgent{
         NoOfsubscribers = subscribers;
 
 
-        System.out.println("Topic::::::::::::::::::  " + isTopic);
-        System.out.println("subscribers:::::::::::: "+ subscribers);
-
-
-
-
 
 
         Publisher publisherObject = new Publisher();

@@ -1,0 +1,32 @@
+
+{
+  "streamId": "SYSTEM_STATISTICS_MB:1.0.0",
+  "name": "SYSTEM_STATISTICS_MB",
+  "version": "1.0.0",
+  "nickName": "MB stats",
+  "description": "Server Stats",
+  "metaData": [
+    {
+      "name": "publisherIP",
+      "type": "STRING"
+    }
+  ],
+  "payloadData": [
+    {
+      "name": "HeapMemoryUsage",
+      "type": "STRING"
+    },
+    {
+      "name": "nonHeapMemoryUsage",
+      "type": "STRING"
+    },
+    {
+      "name": "CPULoadAverage",
+      "type": "STRING"
+    },
+    {
+      "name": "timestamp",
+      "type": "LONG"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+analyzers.scripts=script1
+analyzers.scripts.script1.filename=mb_stats
+analyzers.scripts.script1.description=Mediation Statistics for per server,per month and per year analysis in Message broker
+analyzers.scripts.script1.cron=0 0/3 * * * ?

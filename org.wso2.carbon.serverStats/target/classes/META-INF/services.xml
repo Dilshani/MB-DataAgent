@@ -1,5 +1,5 @@
 <serviceGroup>
-    <service name="Publisher" scope="transportsession">
+    <service name="StatPublisher" scope="transportsession">
         <transports>
             <transport>https</transport>
         </transports>

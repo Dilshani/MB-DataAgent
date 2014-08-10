@@ -7,7 +7,6 @@ import org.wso2.andes.kernel.MessagingEngine;
 import org.wso2.andes.kernel.SubscriptionStore;
 import org.wso2.andes.kernel.Subscrption;
 import org.wso2.carbon.andes.dataAgent.publisher.Publisher;
-import org.wso2.carbon.andes.dataAgent.serverStats.serverStats;
 import org.wso2.carbon.databridge.agent.thrift.Agent;
 import org.wso2.carbon.databridge.agent.thrift.AsyncDataPublisher;
 import org.wso2.carbon.databridge.agent.thrift.conf.AgentConfiguration;
@@ -31,12 +30,7 @@ public class AutoSender {
     public static final String MB_STATS_MB_STREAM = "MB_STATISTICS";
     public static final String VERSION_MESSAGE = "1.0.0";
 
-
-
-    private String availableProcessors; 	/* Total number of processors or cores available to the JVM */
-    private String freeMemory;  /* Total amount of free memory available to the JVM */
-    private String totalMemory; /* Total memory currently available to the JVM */
-
+//server stats
     private String heapMemoryUsage;
     private String nonHeapMemoryUsage;
     private String CPULoadAverage;
@@ -55,7 +49,7 @@ public class AutoSender {
     private SubscriptionStore subscriptionStore;
 
 
-
+    //topic and queue
     private int noOfTopics;
     private int totalSubscribers;
 
@@ -73,7 +67,7 @@ public class AutoSender {
         username = publisherObject.getUsername(application);
         password= publisherObject.getPassword(application);
 
-        System.out.println("dataAgentCalled");
+
 
         // creating timer task, timer
         TimerTask tasknew = new TimerTask() {
@@ -82,7 +76,7 @@ public class AutoSender {
 
                 //if publisher is enabled and Queue and Topic Stats enabled
 
-                System.out.println("this is the auto sender run method");
+
 
                 try {
                     if(publisherObject.getEnable(application) && publisherObject.getMBStatConfig(application)){
@@ -95,15 +89,15 @@ public class AutoSender {
 
                     }
                 } catch (ParserConfigurationException e) {
-                    e.printStackTrace();
+                    logger.error("ParserConfigurationException caused",e);
                 } catch (SAXException e) {
-                    e.printStackTrace();
+                    logger.error("SAXException caused",e);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    logger.error("IOException caused",e);
                 } catch (AndesException e) {
-                    e.printStackTrace();
+                    logger.error("IOException caused",e);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.error("Exception caused",e);
                 }
 
                 try {
@@ -112,39 +106,12 @@ public class AutoSender {
 
                         //JMX............
 
+                        //get server stats
                         MbeansStats mbeansStats = new MbeansStats("localhost",10000,"admin","admin");
 
                         heapMemoryUsage = mbeansStats.getHeapMemoryUsage();
                         nonHeapMemoryUsage = mbeansStats.getNonHeapMemoryUsage();
                         CPULoadAverage = mbeansStats.getCPULoadAverage();
-
-
-                        System.out.println(heapMemoryUsage);
-                        System.out.println(nonHeapMemoryUsage);
-
-
-
-
-
-
-
-                        //server stats
-                        serverStats serverStatsObject = new serverStats();
-
-                        serverStatsObject.setAvailableProcessors();
-                        serverStatsObject.setFreeMemory();
-                        serverStatsObject.setTotalMemory();;
-
-
-                        availableProcessors =Integer.toString(serverStatsObject.getAvailableProcessors());
-                        freeMemory = Long.toString(serverStatsObject.getFreeMemory());
-                        totalMemory = Long.toString(serverStatsObject.getAvailableProcessors());
-
-                        System.out.println("available processors: "+availableProcessors);
-                        System.out.println("free memory: "+freeMemory);
-                        System.out.println("total memory: "+totalMemory);
-
-
 
                         sendSystemStats(application);
 
@@ -153,7 +120,7 @@ public class AutoSender {
 
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.error("Exception caused when getting the server stats",e);
                 }
 
 
@@ -199,9 +166,6 @@ public class AutoSender {
         asyncDataPublisherMessage.addStreamDefinition(messageStreamDefinition, MB_STATS_MB_STREAM, VERSION_MESSAGE);
         publishEventsForMBstats(asyncDataPublisherMessage, VERSION_MESSAGE);
 
-/*  "          {'name':'HeapMemoryUsage','type':'STRING'}," +
-                "          {'name':'nonHeapMemoryUsage','type':'STRING'}," +
-                "          {'name':'totalMemory','type':'STRING'}," +*/
 
     }
 
@@ -236,9 +200,6 @@ public class AutoSender {
         asyncDataPublisherMessage.addStreamDefinition(messageStreamDefinition, MB_STATS_SYSTEM_STREAM, VERSION_MESSAGE);
         publishEventsForSystemStats(asyncDataPublisherMessage, VERSION_MESSAGE);
 
-/*  "          {'name':'HeapMemoryUsage','type':'STRING'}," +
-                "          {'name':'nonHeapMemoryUsage','type':'STRING'}," +
-                "          {'name':'totalMemory','type':'STRING'}," +*/
 
     }
 
@@ -257,19 +218,10 @@ public class AutoSender {
            totalSubscribers += subscrptionsList.size();
 
 
-
-
-
-
-
-
         }
 
 
 return totalSubscribers;
-
-
-
 
 
 

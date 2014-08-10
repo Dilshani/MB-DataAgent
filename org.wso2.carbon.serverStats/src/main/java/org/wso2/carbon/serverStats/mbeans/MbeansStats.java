@@ -26,29 +26,20 @@ public  MbeansStats(String host,int port, String username, String password) thro
 
 
    jmxc =  JMXConnnectionFactory.getJMXConnection(100000, host, port, username,password);
-	
-	//JMXConnector jmxc = JMXConnectorFactory.connect(url, environment);
-	//MBeanServerConnection conn =   
-	
-	connection =jmxc.getMBeanServerConnection();
+   connection =jmxc.getMBeanServerConnection();
 
-    setHeapMemoryUsageAndNonHeapMemUsage();
+   setHeapMemoryUsageAndNonHeapMemUsage();
    setCPUUsage();
 
 
-
-
 }
-
-
-
-
 
     public void setHeapMemoryUsageAndNonHeapMemUsage() throws MalformedObjectNameException, IOException, AttributeNotFoundException, MBeanException, ReflectionException, InstanceNotFoundException {
 
 
         Set<ObjectInstance> set = connection.queryMBeans(new ObjectName("java.lang:type=Memory"), null);
         ObjectInstance oi = set.iterator().next();
+
         // replace "HeapMemoryUsage" with "NonHeapMemoryUsage" to get non-heap mem
         Object attrValue = connection.getAttribute(oi.getObjectName(), "HeapMemoryUsage");
     /*    if( !( attrValue instanceof CompositeData ) ) {
@@ -56,7 +47,7 @@ public  MbeansStats(String host,int port, String username, String password) thro
                     ", exitting -- must be CompositeData." );
             return;
         }*/
-        System.out.println("testing mbeans ..............................................");
+
 
 
         // replace "used" with "max" to get max
@@ -71,36 +62,14 @@ public  MbeansStats(String host,int port, String username, String password) thro
     public void setCPUUsage() throws MalformedObjectNameException, IOException, AttributeNotFoundException, MBeanException, ReflectionException, InstanceNotFoundException {
 
 
-     /*   Set<ObjectInstance> set = connection.queryMBeans(new ObjectName("java.lang:type=OperatingSystem"), null);
-        ObjectInstance oi = set.iterator().next();
-
-
-        Object attrValue = connection.getAttribute(oi.getObjectName(), "SystemLoadAverage");
-
-        System.out.println("CPU LOAD::::::::::::"+attrValue.toString());
-        */
-
 
         OperatingSystemMXBean osBean = ManagementFactory.getOperatingSystemMXBean();
-// What % CPU load this current JVM is taking, from 0.0-1.0
-        System.out.println("system average::::::::::::::::::::::" +osBean.getSystemLoadAverage());
 
+
+        // What % CPU load
+        // Returns the system load average for the last minute.
+        //available since java 1.6
         CPULoadAverage = Double.toString(osBean.getSystemLoadAverage());
-
-// What % load the overall system is at, from 0.0-1.0
-       // System.out.println(osBean.getSystemCpuLoad());
-
-
-
-/*
-        ObjectName name = new ObjectName("oracle.jrockit.management:type=Runtime");
-        Double jvmCpuLoad =(Double)connection.getAttribute(name, "VMGeneratedCPULoad");
-
-        System.out.println("Cpu load::::::::::::::::::::::::::: " + jvmCpuLoad);
-*/
-
-
-
 
 
     }
@@ -114,7 +83,7 @@ public  MbeansStats(String host,int port, String username, String password) thro
     public String getNonHeapMemoryUsage(){
 
         return nonHeapMemoryUsage;
-    }
+ }
 
     public String getCPULoadAverage(){
         return CPULoadAverage;
