@@ -1,16 +1,12 @@
-DROP TABLE IF EXISTS MBServerStat;
-
 CREATE EXTERNAL TABLE IF NOT EXISTS MBServerStat
     (messageID STRING,Time_stamp BIGINT, publisherIP STRING,Description STRING, payload_HeapMemoryUsage INT, payload_nonHeapMemoryUsage BIGINT,payload_CPULoadAverage DOUBLE)
     STORED BY 'org.apache.hadoop.hive.cassandra.CassandraStorageHandler'
     WITH SERDEPROPERTIES (
     "wso2.carbon.datasource.name" = "WSO2BAM_CASSANDRA_DATASOURCE",
-    "cassandra.cf.name" = "SYSTEM_STATISTICS_MB" ,
+    "cassandra.cf.name" = "systemStats_2" ,
     "cassandra.columns.mapping" =
     ":key, Timestamp, meta_publisherIP,Description,payload_HeapMemoryUsage,payload_nonHeapMemoryUsage,payload_CPULoadAverage" );
 
-
-DROP TABLE IF EXISTS MBServerStatPerMinute;
 CREATE EXTERNAL TABLE IF NOT EXISTS MBServerStatPerMinute
      (publisherIP STRING,Description STRING,avg_HeapMemory INT,avg_nonHeapMemory INT,avg_CPUusage DOUBLE,year SMALLINT,month SMALLINT,day SMALLINT,hour SMALLINT,minute SMALLINT,time STRING)
       STORED BY 'org.wso2.carbon.hadoop.hive.jdbc.storage.JDBCStorageHandler' TBLPROPERTIES (
@@ -31,8 +27,6 @@ STORED BY 'org.wso2.carbon.hadoop.hive.jdbc.storage.JDBCStorageHandler' TBLPROPE
 'wso2.carbon.datasource.name'='WSO2BAM_DATASOURCE',
 'mapred.jdbc.input.table.name' = 'SERVER_STATS_SUMMARY_PER_MINUTE' );
 
-
-DROP TABLE IF EXISTS MBServerStatPerHour;
 CREATE EXTERNAL TABLE IF NOT EXISTS MBServerStatPerHour
      (publisherIP STRING,Description STRING,avg_HeapMemory INT,avg_nonHeapMemory INT,avg_CPUusage DOUBLE,year SMALLINT,month SMALLINT,day SMALLINT,hour SMALLINT, time STRING)
       STORED BY 'org.wso2.carbon.hadoop.hive.jdbc.storage.JDBCStorageHandler' TBLPROPERTIES (
@@ -52,7 +46,6 @@ STORED BY 'org.wso2.carbon.hadoop.hive.jdbc.storage.JDBCStorageHandler' TBLPROPE
 'wso2.carbon.datasource.name'='WSO2BAM_DATASOURCE',
 'mapred.jdbc.input.table.name' = 'SERVER_STATS_SUMMARY_PER_HOUR' );
 
-DROP TABLE IF EXISTS MBServerStatPerDay;
 CREATE EXTERNAL TABLE IF NOT EXISTS MBServerStatPerDay (publisherIP STRING,Description STRING,avg_HeapMemory INT,avg_nonHeapMemory INT,avg_CPUusage DOUBLE,year SMALLINT,month SMALLINT,day SMALLINT,time STRING) 
 STORED BY 'org.wso2.carbon.hadoop.hive.jdbc.storage.JDBCStorageHandler' TBLPROPERTIES ( 
 'wso2.carbon.datasource.name'='WSO2BAM_DATASOURCE',
@@ -66,13 +59,11 @@ select publisherIP,Description,avg(avg_HeapMemory) as avg_HeapMemory,avg(avg_non
 from MBServerStatPerHourDataFetcher
 group by publisherIP,Description,year, month,day,substr(time,0,10);
 
-DROP TABLE IF EXISTS MBServerStatPerDayDataFetcher;
 CREATE EXTERNAL TABLE IF NOT EXISTS MBServerStatPerDayDataFetcher (publisherIP STRING,Description STRING,avg_HeapMemory INT,avg_nonHeapMemory INT,avg_CPUusage DOUBLE,year SMALLINT,month SMALLINT, time STRING) 
 STORED BY 'org.wso2.carbon.hadoop.hive.jdbc.storage.JDBCStorageHandler' TBLPROPERTIES ( 
 'wso2.carbon.datasource.name'='WSO2BAM_DATASOURCE',
 'mapred.jdbc.input.table.name' = 'SERVER_STATS_SUMMARY_PER_DAY' );
 
-DROP TABLE IF EXISTS MBServerStatPerMonth;
 CREATE EXTERNAL TABLE IF NOT EXISTS MBServerStatPerMonth (publisherIP STRING,Description STRING,avg_HeapMemory INT,avg_nonHeapMemory INT,avg_CPUusage DOUBLE,year SMALLINT,month SMALLINT, time STRING) 
 STORED BY 'org.wso2.carbon.hadoop.hive.jdbc.storage.JDBCStorageHandler' TBLPROPERTIES ( 
 'wso2.carbon.datasource.name'='WSO2BAM_DATASOURCE',
@@ -86,4 +77,3 @@ year, month ,substr(time,0,7) as time
 from MBServerStatPerDayDataFetcher
 group by publisherIP,Description,year, month ,substr(time,0,7);
 
-                                    

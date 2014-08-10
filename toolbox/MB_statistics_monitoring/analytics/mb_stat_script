@@ -1,17 +1,11 @@
-DROP TABLE IF EXISTS MBStat;
-
 CREATE EXTERNAL TABLE IF NOT EXISTS MBStat
     (messageID STRING,Time_stamp BIGINT, publisherIP STRING,payload_NoOfSubscribers INT, payload_NoOfTopics INT)
     STORED BY 'org.apache.hadoop.hive.cassandra.CassandraStorageHandler'
     WITH SERDEPROPERTIES (
     "wso2.carbon.datasource.name" = "WSO2BAM_CASSANDRA_DATASOURCE",
-    "cassandra.cf.name" = "MB_STATISTICS" ,
+    "cassandra.cf.name" = "MBStats_2" ,
     "cassandra.columns.mapping" =
     ":key, Timestamp, meta_publisherIP, payload_NoOfSubscribers, payload_NoOfTopics" );
-
-select * from MBStat;
-
-DROP TABLE IF EXISTS MBStatPerMinute; 
   
 CREATE EXTERNAL TABLE IF NOT EXISTS MBStatPerMinute
      (publisherIP STRING,payload_NoOfSubscribers INT, payload_NoOfTopics INT,year SMALLINT,month SMALLINT,day SMALLINT,hour SMALLINT,minute SMALLINT,time STRING)
@@ -34,8 +28,6 @@ CREATE EXTERNAL TABLE IF NOT EXISTS MBStatPerMinuteDataFetcher (publisherIP STRI
 STORED BY 'org.wso2.carbon.hadoop.hive.jdbc.storage.JDBCStorageHandler' TBLPROPERTIES ( 
 'wso2.carbon.datasource.name'='WSO2BAM_DATASOURCE',
 'mapred.jdbc.input.table.name' = 'MB_STATS_SUMMARY_PER_MINUTE' );
-
-DROP TABLE IF EXISTS MBStatPerHour; 
   
 CREATE EXTERNAL TABLE IF NOT EXISTS MBStatPerHour
      (publisherIP STRING,payload_NoOfSubscribers INT, payload_NoOfTopics INT,year SMALLINT,month SMALLINT,day SMALLINT,hour SMALLINT,time STRING)
@@ -57,8 +49,6 @@ CREATE EXTERNAL TABLE IF NOT EXISTS MBStatPerHourDataFetcher (publisherIP STRING
 STORED BY 'org.wso2.carbon.hadoop.hive.jdbc.storage.JDBCStorageHandler' TBLPROPERTIES ( 
 'wso2.carbon.datasource.name'='WSO2BAM_DATASOURCE',
 'mapred.jdbc.input.table.name' = 'MB_STATS_SUMMARY_PER_HOUR' );
-
-DROP TABLE IF EXISTS MBStatPerDay; 
   
 CREATE EXTERNAL TABLE IF NOT EXISTS MBStatPerDay
      (publisherIP STRING,payload_NoOfSubscribers INT, payload_NoOfTopics INT,year SMALLINT,month SMALLINT,day SMALLINT,time STRING)
@@ -81,8 +71,6 @@ STORED BY 'org.wso2.carbon.hadoop.hive.jdbc.storage.JDBCStorageHandler' TBLPROPE
 'wso2.carbon.datasource.name'='WSO2BAM_DATASOURCE',
 'mapred.jdbc.input.table.name' = 'MB_STATS_SUMMARY_PER_DAY' );
 
-DROP TABLE IF EXISTS MBStatPerMonth; 
-  
 CREATE EXTERNAL TABLE IF NOT EXISTS MBStatPerMonth
      (publisherIP STRING,payload_NoOfSubscribers INT, payload_NoOfTopics INT,year SMALLINT,month SMALLINT,time STRING)
       STORED BY 'org.wso2.carbon.hadoop.hive.jdbc.storage.JDBCStorageHandler' TBLPROPERTIES (
@@ -99,4 +87,3 @@ from MBStatPerMinuteDataFetcher
 group by publisherIP,payload_NoOfSubscribers,payload_NoOfTopics,
 year, month,substr(time,0,7);
 
-                                    
