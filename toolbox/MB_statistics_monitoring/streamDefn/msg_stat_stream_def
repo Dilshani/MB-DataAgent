@@ -1,0 +1,41 @@
+
+{
+  "streamId": "MESSAGE_STATISTICS:1.0.0",
+  "name": "MESSAGE_STATISTICS",
+  "version": "1.0.0",
+  "nickName": "MB stats",
+  "description": "A message received",
+  "metaData": [
+    {
+      "name": "publisherIP",
+      "type": "STRING"
+    }
+  ],
+  "payloadData": [
+    {
+      "name": "Message_id",
+      "type": "LONG"
+    },
+    {
+      "name": "Destination",
+      "type": "STRING"
+    },
+    {
+      "name": "MessageContentLength",
+      "type": "INT"
+    },
+    {
+      "name": "expirationTime",
+      "type": "LONG"
+    },
+    {
+      "name": "NoOfSubscriptions",
+      "type": "STRING"
+    },
+    {
+      "name": "timestamp",
+      "type": "LONG"
+    }
+  ]
+}
+

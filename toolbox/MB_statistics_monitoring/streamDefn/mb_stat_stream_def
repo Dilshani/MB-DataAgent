@@ -1,0 +1,28 @@
+{
+  "streamId": "MB_STATISTICS:1.0.0",
+  "name": "MB_STATISTICS",
+  "version": "1.0.0",
+  "nickName": "MB stats",
+  "description": "Server Stats",
+  "metaData": [
+    {
+      "name": "publisherIP",
+      "type": "STRING"
+    }
+  ],
+  "payloadData": [
+    {
+      "name": "NoOfSubscribers",
+      "type": "INT"
+    },
+    {
+      "name": "NoOfTopics",
+      "type": "INT"
+    },
+    {
+      "name": "timestamp",
+      "type": "LONG"
+    }
+  ]
+}
+

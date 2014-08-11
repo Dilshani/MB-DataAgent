@@ -29,8 +29,8 @@ package org.wso2.carbon.andes.dataAgent.dataAgent;
 
 public class DataAgent{
     private static Logger logger = Logger.getLogger(DataAgent.class);
-    public static final String MB_STATS_STREAM = "stats_1";
-    public static final String VERSION_MESSAGE = "1.0.1";
+    public static final String MB_STATS_STREAM = "MESSAGE_STATISTICS";
+    public static final String VERSION_MESSAGE = "1.0.0";
     public static final String VERSION_ACK = "1.0.2";
 
 
@@ -72,12 +72,6 @@ public class DataAgent{
         expirationTime = message.getExpirationTime();
         isTopic = message.isTopic();
         NoOfsubscribers = subscribers;
-
-
-        System.out.println("Topic::::::::::::::::::  " + isTopic);
-        System.out.println("subscribers:::::::::::: "+ subscribers);
-
-
 
 
 

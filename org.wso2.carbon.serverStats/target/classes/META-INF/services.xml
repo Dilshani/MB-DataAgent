@@ -1,5 +1,9 @@
 <serviceGroup>
+<<<<<<< HEAD
     <service name="system_Stat_Publisher" scope="transportsession">
+=======
+    <service name="StatPublisher" scope="transportsession">
+>>>>>>> 2b88e01fbc3e2603119134c2f091c7faa2bde1eb
         <transports>
             <transport>https</transport>
         </transports>
