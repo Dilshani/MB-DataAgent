@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Export-Package: org.wso2.carbon.stat.publisher;uses:="org.wso2.carbon.
+ stat.publisher.data,org.wso2.carbon.stat.publisher.DTO,org.wso2.carbo
+ n.stat.publisher.URL";version="4.2.0",org.wso2.carbon.stat.publisher.
+ data;version="4.2.0",org.wso2.carbon.stat.publisher.DTO;uses:="org.ws
+ o2.carbon.stat.publisher.data";version="4.2.0",org.wso2.carbon.stat.p
+ ublisher.URL;version="4.2.0"
+Built-By: nipuna
+Build-Jdk: 1.6.0_45
+Bundle-Version: 4.2.0
+Tool: Bnd-1.43.0
+Bundle-Name: org.wso2.carbon.stat.publisher
+Bnd-LastModified: 1408262655670
+Created-By: Apache Maven Bundle Plugin
+Bundle-ManifestVersion: 2
+Bundle-Description: Student Manager Components
+Bundle-SymbolicName: org.wso2.carbon.stat.publisher
+

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/components/org.wso2.carbon.student.mgt/org.wso2.carbon.student.mgt.iml" filepath="$PROJECT_DIR$/components/org.wso2.carbon.student.mgt/org.wso2.carbon.student.mgt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/components/org.wso2.carbon.student.mgt.ui/org.wso2.carbon.student.mgt.ui.iml" filepath="$PROJECT_DIR$/components/org.wso2.carbon.student.mgt.ui/org.wso2.carbon.student.mgt.ui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/student-manager.iml" filepath="$PROJECT_DIR$/student-manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/components/student-manager-components.iml" filepath="$PROJECT_DIR$/components/student-manager-components.iml" />
+      <module fileurl="file://$PROJECT_DIR$/repository/wso2carbon-student-mgt-repository.iml" filepath="$PROJECT_DIR$/repository/wso2carbon-student-mgt-repository.iml" />
+    </modules>
+  </component>
+</project>
+
