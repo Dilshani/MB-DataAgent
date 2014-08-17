@@ -24,10 +24,10 @@ public class Dataoutput {
     private boolean message;
     private boolean system;
     private boolean mb;
-    private String username="";
-    private String password="";
-    private String ip="";
-    private String port="";
+    private String username = "";
+    private String password = "";
+    private String ip = "";
+    private String port = "";
     private String encryptPW;
 
     public Dataoutput(String publisher) throws ParserConfigurationException,

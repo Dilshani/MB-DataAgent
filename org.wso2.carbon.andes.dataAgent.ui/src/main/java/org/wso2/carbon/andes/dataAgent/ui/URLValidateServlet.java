@@ -5,10 +5,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-/**
- * Created by nipuna on 7/25/14.
- */
 public class URLValidateServlet extends HttpServlet {
 
 
