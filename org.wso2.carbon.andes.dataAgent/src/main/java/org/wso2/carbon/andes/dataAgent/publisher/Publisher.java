@@ -118,7 +118,7 @@ public class Publisher {
 
     // get URL validation result
     public boolean getURLValidation(String IP, int port)
-            throws UnknownHostException, IOException,InvocationTargetException {
+            throws UnknownHostException, IOException, InvocationTargetException {
 
         return url_validator.validateURL(IP, port);
     }

@@ -1,101 +1,185 @@
 package org.wso2.carbon.andes.dataAgent.dataAgent;
 
-/**
- * Created by sanjaya on 7/14/14.
- */
+import org.apache.log4j.Logger;
+import org.wso2.andes.kernel.*;
+import org.wso2.carbon.databridge.agent.thrift.Agent;
+import org.wso2.carbon.databridge.agent.thrift.AsyncDataPublisher;
+import org.wso2.carbon.databridge.agent.thrift.conf.AgentConfiguration;
+import org.wso2.carbon.databridge.agent.thrift.exception.AgentException;
+import org.wso2.carbon.databridge.commons.Event;
+import org.wso2.carbon.serverStats.mbeans.MbeansStats;
 
+import java.util.List;
 
-        import org.apache.log4j.Logger;
-        import org.wso2.andes.configuration.Configuration;
-        import org.wso2.andes.kernel.*;
-        import org.wso2.carbon.databridge.agent.thrift.Agent;
-        import org.wso2.carbon.databridge.agent.thrift.AsyncDataPublisher;
-        import org.wso2.carbon.databridge.agent.thrift.conf.AgentConfiguration;
-        import org.wso2.carbon.databridge.agent.thrift.exception.AgentException;
-        import org.wso2.carbon.databridge.commons.Event;
-        import org.wso2.carbon.andes.dataAgent.publisher.Publisher;
-        import org.wso2.andes.server.cassandra.CQLConnection;
-        import org.xml.sax.SAXException;
-        // import org.apache.commons.configuration.Configuration;
+public class DataAgent {
 
-        import javax.management.*;
-        import javax.xml.parsers.ParserConfigurationException;
-        import java.io.IOException;
-        import java.util.List;
-        import org.wso2.andes.kernel.SubscriptionStore;
-
-
-
-
-public class DataAgent{
     private static Logger logger = Logger.getLogger(DataAgent.class);
-    public static final String MB_STATS_STREAM = "MESSAGE_STATISTICS";
-    public static final String VERSION_MESSAGE = "1.0.0";
-    public static final String VERSION_ACK = "1.0.2";
+
+    private DataAgent instance = null;
+    private Agent agent;
+    long timeStamp;
+    AsyncDataPublisher asyncDataPublisherSystemStats = null;
+    AsyncDataPublisher asyncDataPublisherMBStatistics = null;
+    AsyncDataPublisher asyncDataPublisherMessageStatistics = null;
+    AsyncDataPublisher asyncDataPublisherACKStatistics = null;
 
 
-    //private static byte[] messageMetaData;
-    private    long messageID;
-    private  String messageDestination;
-    private   int messageContentLength;
-    private    long expirationTime;
-    private   boolean isTopic;
-    private int NoOfsubscribers;
-    //private  static String messageReceivedTime;
-
-    //for ack
-    private  long ackMessageID;
-    private    String queueName;
-
-    //common
-    private   String ip;
-    private   String port;
-    private   String username;
-    private   String password;
-
-    private  long timeStamp;
+    public final String VERSION_MESSAGE = "1.0.0";
+    public final String VERSION_ACK = "1.0.2";
 
 
+    //subscriptions
+    private SubscriptionStore subscriptionStore;
 
 
+    //topic and queue
+    private int noOfTopics;
+    private int totalSubscribers;
 
 
-    public void dataAgent(AndesMessageMetadata message, String application, int subscribers) throws AndesException, IOException, SAXException, ParserConfigurationException {
-
-
-
-
-        messageID = message.getMessageID();
-        messageDestination = message.getDestination();
-      //  messageMetaData = message.getMetadata();
-        messageContentLength = message.getMessageContentLength();
-        expirationTime = message.getExpirationTime();
-        isTopic = message.isTopic();
-        NoOfsubscribers = subscribers;
-
-
-
-
-        Publisher publisherObject = new Publisher();
-
-
-
-            ip = publisherObject.getIP(application);
-            port = publisherObject.getPort(application);
-            username = publisherObject.getUsername(application);
-            password= publisherObject.getPassword(application);
-
-
+    private DataAgent() { //private constructor
 
         AgentConfiguration agentConfiguration = new AgentConfiguration();
         System.setProperty("javax.net.ssl.trustStore", "repository/resources/security/client-truststore.jks");
         System.setProperty("javax.net.ssl.trustStorePassword", "wso2carbon");
-        Agent agent = new Agent(agentConfiguration);
+        agent = new Agent(agentConfiguration);
+    }
+
+    public DataAgent getObjectDataAgent() {
+
+        if (instance == null) {
+            instance = new DataAgent();
+        }
+        return instance;
+    }
+
+    public void sendSystemStats(String URL, String[] credentials) {
+
+        //get server stats
+        try {
+
+            //get JMX configuration
+
+            String JMSConfiguration[] = getJMXConfiguration();
+
+            MbeansStats mbeansStats = new MbeansStats(JMSConfiguration[0], Integer.parseInt(JMSConfiguration[1]), JMSConfiguration[2], JMSConfiguration[3]);
+
+            String heapMemoryUsage = mbeansStats.getHeapMemoryUsage();
+            String nonHeapMemoryUsage = mbeansStats.getNonHeapMemoryUsage();
+            String CPULoadAverage = mbeansStats.getCPULoadAverage();
+
+
+            //Using Asynchronous data publisher
+            if (asyncDataPublisherSystemStats == null) { //create the publisher object only once
+                asyncDataPublisherSystemStats = new AsyncDataPublisher("tcp://" + URL, credentials[0], credentials[1], agent);
+            }
+            String VERSION_SYSTEM_STATISTICS = "1.0.0";
+            String messageStreamDefinition = "{" +
+                    "  'name':'" + "SYSTEM_STATISTICS_MB" + "'," +
+                    "  'version':'" + VERSION_SYSTEM_STATISTICS + "'," +
+                    "  'nickName': 'MB stats'," +
+                    "  'description': 'Server Stats'," +
+                    "  'metaData':[" +
+                    "          {'name':'publisherIP','type':'STRING'}" +
+                    "  ]," +
+                    "  'payloadData':[" +
+
+                    " {'name':'HeapMemoryUsage','type':'STRING'}," +
+                    "         {'name':'nonHeapMemoryUsage','type':'STRING'}," +
+                    "          {'name':'CPULoadAverage','type':'STRING'}," +
+                    " 			{'name':'timestamp','type':'LONG'}" +
+                    "  ]" +
+                    "}";
+
+
+            asyncDataPublisherSystemStats.addStreamDefinition(messageStreamDefinition, "SYSTEM_STATISTICS_MB", VERSION_SYSTEM_STATISTICS);
+
+
+            timeStamp = getTimeStamp();
+
+
+            Object[] payload = new Object[]{heapMemoryUsage, nonHeapMemoryUsage, CPULoadAverage, timeStamp};
+            Event event = eventObject(null, new Object[]{URL}, payload);
+            asyncDataPublisherSystemStats.publish("SYSTEM_STATISTICS_MB", VERSION_SYSTEM_STATISTICS, event);
+
+            logger.info("System statistics sent at " + timeStamp);
+
+
+        } catch (Exception e) {
+            logger.error("Failed to send server stats", e);
+        }
+
+
+    }
+
+    public void sendMBStatistics(String URL, String[] credentials) {
+
 
         //Using Asynchronous data publisher
-        AsyncDataPublisher asyncDataPublisherMessage = new AsyncDataPublisher("tcp://"+ip+":"+port, username, password, agent);
+        if (asyncDataPublisherMBStatistics == null) { //create the publisher object only once
+            asyncDataPublisherMBStatistics = new AsyncDataPublisher("tcp://" + URL, credentials[0], credentials[1], agent);
+        }
+
+        String VERSION_MB_STATISTICS = "1.0.0";
         String messageStreamDefinition = "{" +
-                "  'name':'" + MB_STATS_STREAM + "'," +
+                "  'name':'" + "MB_STATISTICS" + "'," +
+                "  'version':'" + VERSION_MB_STATISTICS + "'," +
+                "  'nickName': 'MB stats'," +
+                "  'description': 'Server Stats'," +
+                "  'metaData':[" +
+                "          {'name':'publisherIP','type':'STRING'}" +
+                "  ]," +
+                "  'payloadData':[" +
+
+
+                "          {'name':'NoOfSubscribers','type':'INT'}," +
+                "          {'name':'NoOfTopics','type':'INT'}," +
+                " 			{'name':'timestamp','type':'LONG'}" +
+                "  ]" +
+                "}";
+        asyncDataPublisherMBStatistics.addStreamDefinition(messageStreamDefinition, "MB_STATISTICS", VERSION_MB_STATISTICS);
+
+
+        timeStamp = getTimeStamp();
+
+        try {
+            noOfTopics = getTopicList().size(); //get number of topic in a cluster
+            totalSubscribers = getTotalSubscriptions();
+
+            Object[] payload = new Object[]{totalSubscribers, noOfTopics, timeStamp};
+            Event event = eventObject(null, new Object[]{URL}, payload);
+
+
+            asyncDataPublisherMBStatistics.publish("MB_STATISTICS", VERSION_MB_STATISTICS, event);
+
+
+        } catch (AgentException e) {
+            logger.error("Failed to publish event", e);
+        } catch (Exception e) {
+            logger.error("Failed to send MB statistics", e);
+        }
+
+
+    }
+
+    private void sendMessageStatistics(String URL, String[] credentials,AndesMessageMetadata message, String application, int subscribers){
+
+
+        long messageID = message.getMessageID();
+        String messageDestination = message.getDestination();
+        //  messageMetaData = message.getMetadata();
+        int messageContentLength = message.getMessageContentLength();
+        long expirationTime = message.getExpirationTime();
+
+        int noOfsubscribers = subscribers;
+
+
+        //Using Asynchronous data publisher
+        if (asyncDataPublisherMessageStatistics == null) { //create the publisher object only once
+            asyncDataPublisherMessageStatistics = new AsyncDataPublisher("tcp://" + URL, credentials[0], credentials[1], agent);
+        }
+        String messageStreamDefinition = "{" +
+                "  'name':'" + "MESSAGE_STATISTICS" + "'," +
                 "  'version':'" + VERSION_MESSAGE + "'," +
                 "  'nickName': 'MB stats'," +
                 "  'description': 'A message received'," +
@@ -113,40 +197,38 @@ public class DataAgent{
                 " 			{'name':'timestamp','type':'LONG'}" +
                 "  ]" +
                 "}";
-        asyncDataPublisherMessage.addStreamDefinition(messageStreamDefinition, MB_STATS_STREAM, VERSION_MESSAGE);
-        publishEventsForMessage(asyncDataPublisherMessage, VERSION_MESSAGE);
+        asyncDataPublisherMessageStatistics.addStreamDefinition(messageStreamDefinition, "MESSAGE_STATISTICS", VERSION_MESSAGE);
+        timeStamp = getTimeStamp();
+
+
+        Object[] payload = new Object[]{messageID, messageDestination, messageContentLength, expirationTime, Integer.toString(noOfsubscribers), timeStamp};
+        Event event = eventObject(null, new Object[]{URL}, payload);
+        try {
+
+            asyncDataPublisherMessageStatistics.publish("MESSAGE_STATISTICS", VERSION_MESSAGE, event);
+        } catch (AgentException e) {
+            logger.error("Failed to publish event for send message statistics", e);
+        }
+
+
+
+
 
     }
 
 
-    public void dataAgent(AndesAckData ack, String application) throws IOException, SAXException, ParserConfigurationException {
+    public void sendACKStatistics(String URL, String[] credentials,AndesAckData ack, String application){
 
-        ackMessageID = ack.messageID;
-        queueName = ack.qName;
-
-
-
-
-        Publisher publisherObject = new Publisher();
-
-
-
-        ip = publisherObject.getIP(application);
-        port = publisherObject.getPort(application);
-        username = publisherObject.getUsername(application);
-        password= publisherObject.getPassword(application);
-
-
-
-        AgentConfiguration agentConfiguration = new AgentConfiguration();
-        System.setProperty("javax.net.ssl.trustStore", "repository/resources/security/client-truststore.jks");
-        System.setProperty("javax.net.ssl.trustStorePassword", "wso2carbon");
-        Agent agent = new Agent(agentConfiguration);
+        long ackMessageID = ack.messageID;
+        String queueName = ack.qName;
 
         //Using Asynchronous data publisher
-        AsyncDataPublisher asyncDataPublisher = new AsyncDataPublisher("tcp://"+ip+":"+port, username, password, agent);
+        if (asyncDataPublisherACKStatistics == null) { //create the publisher object only once
+            asyncDataPublisherACKStatistics = new AsyncDataPublisher("tcp://" + URL, credentials[0], credentials[1], agent);
+        }
+
         String ackStreamDefinition = "{" +
-                "  'name':'" + MB_STATS_STREAM + "'," +
+                "  'name':'" + "" + "MESSAGE_STATISTICS'," +
                 "  'version':'" + VERSION_ACK + "'," +
                 "  'nickName': 'MB stats'," +
                 "  'description': 'A ack received'," +
@@ -160,54 +242,75 @@ public class DataAgent{
                 " 			{'name':'queueName','type':'STRING'}" +
 
 
-
                 "  ]" +
                 "}";
-        asyncDataPublisher.addStreamDefinition(ackStreamDefinition, MB_STATS_STREAM, VERSION_ACK);
-        publishEventsForACK(asyncDataPublisher , VERSION_ACK);
-
-    }
-
-    private  void publishEventsForMessage(AsyncDataPublisher dataPublisher , String version) {
+        asyncDataPublisherACKStatistics.addStreamDefinition(ackStreamDefinition, "MESSAGE_STATISTICS", VERSION_ACK);
 
 
-       timeStamp = getTimeStamp();
-
-
-
-
-        Object[] payload = new Object[]{messageID, messageDestination, messageContentLength, expirationTime, Integer.toString(NoOfsubscribers), timeStamp};
-        Event event = eventObject(null, new Object[]{ip}, payload);
-        try {
-
-            dataPublisher.publish(MB_STATS_STREAM, version, event);
-        } catch (AgentException e) {
-            logger.error("Failed to publish event", e);
-        }
-
-    }
-
-
-    private  void publishEventsForACK(AsyncDataPublisher dataPublisher , String version) {
-
-
-        timeStamp =getTimeStamp();
-
-
+        timeStamp = getTimeStamp();
 
 
         Object[] payload = new Object[]{ackMessageID, queueName, timeStamp};
-        Event event = eventObject(null, new Object[]{ip}, payload);
+        Event event = eventObject(null, new Object[]{URL}, payload);
         try {
 
-            dataPublisher.publish(MB_STATS_STREAM, version, event);
+            asyncDataPublisherACKStatistics.publish("MESSAGE_STATISTICS", VERSION_ACK, event);
         } catch (AgentException e) {
             logger.error("Failed to publish event", e);
         }
 
+
     }
 
-    private  Event eventObject(Object[] correlationData, Object[] metaData, Object[] payLoadData) {
+    private int getTotalSubscriptions() throws Exception {
+
+        totalSubscribers = 0;
+
+        List<String> topics = getTopicList();
+
+        MessagingEngine messaginEngine = MessagingEngine.getInstance();
+        subscriptionStore = messaginEngine.getSubscriptionStore();
+
+        for (String topic : topics) {
+
+
+            List<Subscrption> subscrptionsList = subscriptionStore.getActiveClusterSubscribersForDestination(topic, true);
+            totalSubscribers += subscrptionsList.size();
+
+
+        }
+
+
+        return totalSubscribers;
+
+
+    }
+
+
+    private List<String> getTopicList() throws Exception {
+
+        MessagingEngine messaginEngine = MessagingEngine.getInstance();
+        subscriptionStore = messaginEngine.getSubscriptionStore();
+        List<String> topics = subscriptionStore.getTopics();
+        noOfTopics = topics.size();
+
+
+        return topics;
+
+
+    }
+
+    //this method will return JMXConfiguration as an array. array contains ip,port,username,password
+    private String[] getJMXConfiguration() {
+
+
+        String JMSConfig[] = {"localhost", "10000", "admin", "admin"};
+
+        return JMSConfig;
+
+    }
+
+    private Event eventObject(Object[] correlationData, Object[] metaData, Object[] payLoadData) {
         Event event = new Event();
         event.setCorrelationData(correlationData);
         event.setMetaData(metaData);
@@ -215,12 +318,12 @@ public class DataAgent{
         return event;
     }
 
-    private  long getTimeStamp(){
+    //get current time stamp
+    private long getTimeStamp() {
 
-
-        long timeStamp = System.currentTimeMillis() / 1000L;
-
-        return timeStamp;
+        return System.currentTimeMillis() / 1000L;
 
     }
+
+
 }

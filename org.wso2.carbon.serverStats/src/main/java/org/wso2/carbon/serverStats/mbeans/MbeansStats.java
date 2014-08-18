@@ -15,24 +15,24 @@ import java.util.Set;
 
 public class MbeansStats {
 
-	private String heapMemoryUsage = null;
+    private String heapMemoryUsage = null;
     private String nonHeapMemoryUsage = null;
     private String CPULoadAverage;
-    private JMXConnector jmxc;
+    private JMXConnector jmxConnector;
     private MBeanServerConnection connection;
 
-	
-public  MbeansStats(String host,int port, String username, String password) throws Exception {
+
+    public MbeansStats(String host, int port, String username, String password) throws Exception {
 
 
-   jmxc =  JMXConnnectionFactory.getJMXConnection(100000, host, port, username,password);
-   connection =jmxc.getMBeanServerConnection();
+        jmxConnector = JMXConnnectionFactory.getJMXConnection(100000, host, port, username, password);
+        connection = jmxConnector.getMBeanServerConnection();
 
-   setHeapMemoryUsageAndNonHeapMemUsage();
-   setCPUUsage();
+        setHeapMemoryUsageAndNonHeapMemUsage();
+        setCPUUsage();
 
 
-}
+    }
 
     public void setHeapMemoryUsageAndNonHeapMemUsage() throws MalformedObjectNameException, IOException, AttributeNotFoundException, MBeanException, ReflectionException, InstanceNotFoundException {
 
@@ -42,25 +42,18 @@ public  MbeansStats(String host,int port, String username, String password) thro
 
         // replace "HeapMemoryUsage" with "NonHeapMemoryUsage" to get non-heap mem
         Object attrValue = connection.getAttribute(oi.getObjectName(), "HeapMemoryUsage");
-    /*    if( !( attrValue instanceof CompositeData ) ) {
-            System.out.println( "attribute value is instanceof [" + attrValue.getClass().getName() +
-                    ", exitting -- must be CompositeData." );
-            return;
-        }*/
-
 
 
         // replace "used" with "max" to get max
-        heapMemoryUsage = ((CompositeData)attrValue).get("used").toString();
+        heapMemoryUsage = ((CompositeData) attrValue).get("used").toString();
 
         Object attrValue_nonHeapMem = connection.getAttribute(oi.getObjectName(), "NonHeapMemoryUsage");
-        nonHeapMemoryUsage = ((CompositeData)attrValue_nonHeapMem).get("used").toString();
+        nonHeapMemoryUsage = ((CompositeData) attrValue_nonHeapMem).get("used").toString();
 
 
     }
 
     public void setCPUUsage() throws MalformedObjectNameException, IOException, AttributeNotFoundException, MBeanException, ReflectionException, InstanceNotFoundException {
-
 
 
         OperatingSystemMXBean osBean = ManagementFactory.getOperatingSystemMXBean();
@@ -74,18 +67,18 @@ public  MbeansStats(String host,int port, String username, String password) thro
 
     }
 
-    public String getHeapMemoryUsage(){
+    public String getHeapMemoryUsage() {
 
         return heapMemoryUsage;
 
     }
 
-    public String getNonHeapMemoryUsage(){
+    public String getNonHeapMemoryUsage() {
 
         return nonHeapMemoryUsage;
- }
+    }
 
-    public String getCPULoadAverage(){
+    public String getCPULoadAverage() {
         return CPULoadAverage;
     }
 }

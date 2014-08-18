@@ -12,6 +12,7 @@ import org.wso2.carbon.databridge.agent.thrift.AsyncDataPublisher;
 import org.wso2.carbon.databridge.agent.thrift.conf.AgentConfiguration;
 import org.wso2.carbon.databridge.agent.thrift.exception.AgentException;
 import org.wso2.carbon.databridge.commons.Event;
+import org.wso2.carbon.serverStats.mbeans.MbeansStats;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -21,29 +22,25 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.wso2.carbon.serverStats.mbeans.MbeansStats;
-import org.wso2.carbon.serverStats.*;
-
 public class AutoSender {
-    private static Logger logger = Logger.getLogger(DataAgent.class);
+    private static Logger logger = Logger.getLogger(DataAgent_old.class);
     public static final String MB_STATS_SYSTEM_STREAM = "SYSTEM_STATISTICS_MB";
     public static final String MB_STATS_MB_STREAM = "MB_STATISTICS";
     public static final String VERSION_MESSAGE = "1.0.0";
 
-//server stats
+    //server stats
     private String heapMemoryUsage;
     private String nonHeapMemoryUsage;
     private String CPULoadAverage;
 
 
-
     //common
-    private  String ip;
-    private  String port;
-    private  String username;
-    private  String password;
+    private String ip;
+    private String port;
+    private String username;
+    private String password;
 
-    private  long timeStamp;
+    private long timeStamp;
 
     //subscriptions
     private SubscriptionStore subscriptionStore;
@@ -54,9 +51,7 @@ public class AutoSender {
     private int totalSubscribers;
 
 
-
     public void dataAgent(final String application) throws Exception {
-
 
 
         final Publisher publisherObject = new Publisher(); //create publisher object for get BAM or CEP configuration
@@ -65,8 +60,7 @@ public class AutoSender {
         ip = publisherObject.getIP(application);
         port = publisherObject.getPort(application);
         username = publisherObject.getUsername(application);
-        password= publisherObject.getPassword(application);
-
+        password = publisherObject.getPassword(application);
 
 
         // creating timer task, timer
@@ -77,50 +71,51 @@ public class AutoSender {
                 //if publisher is enabled and Queue and Topic Stats enabled
 
 
-
                 try {
-                    if(publisherObject.getEnable(application) && publisherObject.getMBStatConfig(application)){
+
+                    if (publisherObject.getEnable(application) && publisherObject.getMBStatConfig(application)) {
 
                         noOfTopics = getTopicList().size(); //get number of topic in a cluster
                         totalSubscribers = getTotalSubscriptions();
 
-                        sendMbStats(application);
+                        sendMbStats();
 
 
                     }
                 } catch (ParserConfigurationException e) {
-                    logger.error("ParserConfigurationException caused",e);
+                    logger.error("ParserConfigurationException caused", e);
                 } catch (SAXException e) {
-                    logger.error("SAXException caused",e);
+                    logger.error("SAXException caused", e);
                 } catch (IOException e) {
-                    logger.error("IOException caused",e);
+                    logger.error("IOException caused", e);
                 } catch (AndesException e) {
-                    logger.error("IOException caused",e);
+                    logger.error("IOException caused", e);
                 } catch (Exception e) {
-                    logger.error("Exception caused",e);
+                    logger.error("Exception caused", e);
                 }
 
                 try {
-                    if(publisherObject.getEnable(application) && publisherObject.getsystemStatConfig(application)){
+                    if (publisherObject.getEnable(application) && publisherObject.getsystemStatConfig(application)) {
 
 
                         //JMX............
 
                         //get server stats
-                        MbeansStats mbeansStats = new MbeansStats("localhost",10000,"admin","admin");
+                        MbeansStats mbeansStats = new MbeansStats("localhost", 10000, "admin", "admin");
+
+                        //todo read it from jmx configuration file located in repository/conf/etc
+                        //
 
                         heapMemoryUsage = mbeansStats.getHeapMemoryUsage();
                         nonHeapMemoryUsage = mbeansStats.getNonHeapMemoryUsage();
                         CPULoadAverage = mbeansStats.getCPULoadAverage();
 
-                        sendSystemStats(application);
-
-
+                        sendSystemStats();
 
 
                     }
                 } catch (Exception e) {
-                    logger.error("Exception caused when getting the server stats",e);
+                    logger.error("Exception caused when getting the server stats", e);
                 }
 
 
@@ -129,15 +124,12 @@ public class AutoSender {
         Timer timer = new Timer();
 
         // scheduling the task at fixed rate
-        timer.scheduleAtFixedRate(tasknew,new Date(),30000);
-
-
-
+        timer.scheduleAtFixedRate(tasknew, new Date(), 30000);
 
 
     }
 
-    private void sendMbStats(String application){
+    private void sendMbStats() {
 
 
         AgentConfiguration agentConfiguration = new AgentConfiguration();
@@ -170,8 +162,7 @@ public class AutoSender {
     }
 
 
-
-    private void sendSystemStats(String application){
+    private void sendSystemStats() {
 
 
         AgentConfiguration agentConfiguration = new AgentConfiguration();
@@ -191,7 +182,7 @@ public class AutoSender {
                 "  ]," +
                 "  'payloadData':[" +
 
-               " {'name':'HeapMemoryUsage','type':'STRING'}," +
+                " {'name':'HeapMemoryUsage','type':'STRING'}," +
                 "         {'name':'nonHeapMemoryUsage','type':'STRING'}," +
                 "          {'name':'CPULoadAverage','type':'STRING'}," +
                 " 			{'name':'timestamp','type':'LONG'}" +
@@ -204,54 +195,51 @@ public class AutoSender {
     }
 
 
-    private  int getTotalSubscriptions() throws Exception {
+    private int getTotalSubscriptions() throws Exception {
+
+        totalSubscribers = 0;
 
         List<String> topics = getTopicList();
 
-        MessagingEngine messaginEngine =MessagingEngine.getInstance();
-        subscriptionStore =   messaginEngine.getSubscriptionStore();
+        MessagingEngine messaginEngine = MessagingEngine.getInstance();
+        subscriptionStore = messaginEngine.getSubscriptionStore();
 
-        for (String topic: topics){
+        for (String topic : topics) {
 
 
-          List<Subscrption> subscrptionsList =  subscriptionStore.getActiveClusterSubscribersForDestination(topic, true);
-           totalSubscribers += subscrptionsList.size();
+            List<Subscrption> subscrptionsList = subscriptionStore.getActiveClusterSubscribersForDestination(topic, true);
+            totalSubscribers += subscrptionsList.size();
 
 
         }
 
 
-return totalSubscribers;
-
-
+        return totalSubscribers;
 
 
     }
 
     private List<String> getTopicList() throws Exception {
 
-        MessagingEngine messaginEngine =MessagingEngine.getInstance();
-         subscriptionStore =   messaginEngine.getSubscriptionStore();
-         List<String> topics =  subscriptionStore.getTopics();
+        MessagingEngine messaginEngine = MessagingEngine.getInstance();
+        subscriptionStore = messaginEngine.getSubscriptionStore();
+        List<String> topics = subscriptionStore.getTopics();
         noOfTopics = topics.size();
-
 
 
         return topics;
 
 
-
-
     }
 
 
-    private  void publishEventsForMBstats(AsyncDataPublisher dataPublisher, String version) {
+    private void publishEventsForMBstats(AsyncDataPublisher dataPublisher, String version) {
 
 
         timeStamp = getTimeStamp();
 
 
-        Object[] payload = new Object[]{totalSubscribers,noOfTopics,timeStamp};
+        Object[] payload = new Object[]{totalSubscribers, noOfTopics, timeStamp};
         Event event = eventObject(null, new Object[]{ip}, payload);
         try {
 
@@ -262,13 +250,13 @@ return totalSubscribers;
 
     }
 
-    private  void publishEventsForSystemStats(AsyncDataPublisher dataPublisher, String version) {
+    private void publishEventsForSystemStats(AsyncDataPublisher dataPublisher, String version) {
 
 
         timeStamp = getTimeStamp();
 
 
-        Object[] payload = new Object[]{heapMemoryUsage,nonHeapMemoryUsage,CPULoadAverage,timeStamp};
+        Object[] payload = new Object[]{heapMemoryUsage, nonHeapMemoryUsage, CPULoadAverage, timeStamp};
         Event event = eventObject(null, new Object[]{ip}, payload);
         try {
 
@@ -280,7 +268,7 @@ return totalSubscribers;
     }
 
 
-    private  Event eventObject(Object[] correlationData, Object[] metaData, Object[] payLoadData) {
+    private Event eventObject(Object[] correlationData, Object[] metaData, Object[] payLoadData) {
         Event event = new Event();
         event.setCorrelationData(correlationData);
         event.setMetaData(metaData);
@@ -288,7 +276,7 @@ return totalSubscribers;
         return event;
     }
 
-    private  long getTimeStamp() {
+    private long getTimeStamp() {
 
 
         long timeStamp = System.currentTimeMillis() / 1000L;
