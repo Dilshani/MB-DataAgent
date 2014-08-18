@@ -11,7 +11,7 @@
     <file type="Osmorc" url="file://$PROJECT_DIR$/org.wso2.carbon.stat.publisher.stub" />
     <file type="Osmorc" url="file://$PROJECT_DIR$/org.wso2.carbon.stat.publisher.ui" />
   </component>
-  <component name="IdProvider" IDEtalkID="4B643B36B1C2C639ED2726ADF84E9EC6" />
+  <component name="IdProvider" IDEtalkID="525A7994745D7569129A644249CB520F" />
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
@@ -132,6 +132,22 @@
   </component>
   <component name="SvnBranchConfigurationManager">
     <option name="mySupportsUserInfoFilter" value="true" />
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.6</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
 

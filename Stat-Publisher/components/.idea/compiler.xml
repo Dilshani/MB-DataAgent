@@ -31,7 +31,6 @@
       <module name="org.wso2.carbon.stat.publisher" target="1.6" />
       <module name="org.wso2.carbon.stat.publisher.stub" target="1.6" />
       <module name="org.wso2.carbon.stat.publisher.ui" target="1.6" />
-      <module name="stat-publisher-components" target="1.6" />
     </bytecodeTargetLevel>
   </component>
 </project>

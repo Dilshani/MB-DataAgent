@@ -2,13 +2,15 @@ package org.wso2.carbon.stat.publisher.data;
 
 public class StatConfiguration {
 
-    //National Identity Card Number
-    //http://en.wikipedia.org/wiki/National_identification_number#Sri_Lanka
+    //enable stat publisher
+    private boolean enableStatPublisher;
+
+    //credential details
     private String username;
     private String password;
     private String URL;
-    private boolean enableStatPublisher;
 
+    //enable Stat publisher features (message,system and message broker)
     private boolean message_statEnable;
     private boolean system_statEnable;
     private boolean MB_statEnable;
