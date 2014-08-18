@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Export-Package: org.wso2.carbon.stat.publisher;uses:="org.wso2.carbon.
+ stat.publisher.data,org.wso2.carbon.stat.publisher.DTO,org.wso2.carbo
+ n.stat.publisher.URL";version="4.2.0",org.wso2.carbon.stat.publisher.
+ data;version="4.2.0",org.wso2.carbon.stat.publisher.DTO;uses:="org.ap
+ ache.commons.logging,org.wso2.carbon.stat.publisher.data,org.wso2.car
+ bon.registry.api,org.wso2.carbon.context";version="4.2.0",org.wso2.ca
+ rbon.stat.publisher.URL;version="4.2.0"
+Built-By: dilshani
+Tool: Bnd-1.43.0
+Bundle-Name: org.wso2.carbon.stat.publisher
+Created-By: Apache Maven Bundle Plugin
+Bundle-Version: 4.2.0
+Build-Jdk: 1.7.0_55
+Bnd-LastModified: 1408355173660
+Bundle-ManifestVersion: 2
+Bundle-Description: Student Manager Components
+Import-Package: org.apache.commons.logging;version="[1.1,2)",org.wso2.
+ carbon.context;version="[4.2,5)",org.wso2.carbon.registry.api;version
+ ="[1.0,2)"
+Bundle-SymbolicName: org.wso2.carbon.stat.publisher
+
