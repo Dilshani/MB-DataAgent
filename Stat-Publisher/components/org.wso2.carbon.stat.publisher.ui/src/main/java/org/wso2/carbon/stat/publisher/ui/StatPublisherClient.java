@@ -3,7 +3,7 @@ package org.wso2.carbon.stat.publisher.ui;
 import org.apache.axis2.client.Options;
 import org.apache.axis2.client.ServiceClient;
 import org.apache.axis2.context.ConfigurationContext;
-import org.wso2.carbon.stat.publisher.data.xsd.StatConfiguration;
+import org.wso2.carbon.stat.publisher.internal.data.xsd.StatConfiguration;
 
 import java.rmi.RemoteException;
 

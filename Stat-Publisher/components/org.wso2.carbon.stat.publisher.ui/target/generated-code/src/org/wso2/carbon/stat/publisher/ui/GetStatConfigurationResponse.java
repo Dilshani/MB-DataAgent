@@ -30,7 +30,7 @@
                         */
 
                         
-                                    protected org.wso2.carbon.stat.publisher.data.xsd.StatConfiguration local_return ;
+                                    protected org.wso2.carbon.stat.publisher.internal.data.xsd.StatConfiguration local_return ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
@@ -46,9 +46,9 @@
 
                            /**
                            * Auto generated getter method
-                           * @return org.wso2.carbon.stat.publisher.data.xsd.StatConfiguration
+                           * @return org.wso2.carbon.stat.publisher.internal.data.xsd.StatConfiguration
                            */
-                           public  org.wso2.carbon.stat.publisher.data.xsd.StatConfiguration get_return(){
+                           public  org.wso2.carbon.stat.publisher.internal.data.xsd.StatConfiguration get_return(){
                                return local_return;
                            }
 
@@ -58,7 +58,7 @@
                                * Auto generated setter method
                                * @param param _return
                                */
-                               public void set_return(org.wso2.carbon.stat.publisher.data.xsd.StatConfiguration param){
+                               public void set_return(org.wso2.carbon.stat.publisher.internal.data.xsd.StatConfiguration param){
                             local_returnTracker = true;
                                    
                                             this.local_return=param;
@@ -378,7 +378,7 @@
                             if (!"getStatConfigurationResponse".equals(type)){
                                 //find namespace for the prefix
                                 java.lang.String nsUri = reader.getNamespaceContext().getNamespaceURI(nsPrefix);
-                                return (GetStatConfigurationResponse)org.wso2.carbon.stat.publisher.data.xsd.ExtensionMapper.getTypeObject(
+                                return (GetStatConfigurationResponse)org.wso2.carbon.stat.publisher.ui.ExtensionMapper.getTypeObject(
                                      nsUri,type,reader);
                               }
                         
@@ -414,7 +414,7 @@
                                           
                                       }else{
                                     
-                                                object.set_return(org.wso2.carbon.stat.publisher.data.xsd.StatConfiguration.Factory.parse(reader));
+                                                object.set_return(org.wso2.carbon.stat.publisher.internal.data.xsd.StatConfiguration.Factory.parse(reader));
                                               
                                         reader.next();
                                     }

@@ -1,8 +1,8 @@
 package org.wso2.carbon.stat.publisher;
 
-import org.wso2.carbon.stat.publisher.DTO.StatConfigurationDTO;
-import org.wso2.carbon.stat.publisher.URL.URLOperations;
-import org.wso2.carbon.stat.publisher.data.StatConfiguration;
+import org.wso2.carbon.stat.publisher.internal.DTO.StatConfigurationDTO;
+import org.wso2.carbon.stat.publisher.internal.URL.URLOperations;
+import org.wso2.carbon.stat.publisher.internal.data.StatConfiguration;
 
 public class StatPublisherService {
 

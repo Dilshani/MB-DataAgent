@@ -1,6 +1,6 @@
 package org.wso2.carbon.stat.publisher.ui;
 
-import org.wso2.carbon.stat.publisher.data.xsd.StatConfiguration;
+import org.wso2.carbon.stat.publisher.internal.data.xsd.StatConfiguration;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

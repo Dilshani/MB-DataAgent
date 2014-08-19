@@ -76,7 +76,7 @@
                                     <classpath refid="wsdl2java.classpath"/>
                                     <arg line="-uri src/main/resources/statPublisherService.wsdl -u -uw -o target/generated-code -p org.wso2.carbon.stat.publisher.ui
                                                                         -ns2p http://org.apache.axis2/xsd=org.wso2.carbon.stat.publisher.ui.types.axis2,http://publisher.stat.carbon.wso2.org=org.wso2.carbon.stat.publisher.ui,
-                                                                        http://data.publisher.stat.carbon.wso2.org/xsd=org.wso2.carbon.stat.publisher.ui.types.data"/>
+                                                                        http://data.internal.publisher.stat.carbon.wso2.org/xsd=org.wso2.carbon.stat.publisher.ui.types.data"/>
                                 </java>
                             </tasks>
                         </configuration>

@@ -163,7 +163,7 @@
 
                     
 
-                            public  org.wso2.carbon.stat.publisher.data.xsd.StatConfiguration getStatConfiguration(
+                            public  org.wso2.carbon.stat.publisher.internal.data.xsd.StatConfiguration getStatConfiguration(
 
                             )
                         
@@ -428,7 +428,7 @@
 
                             public  boolean setStatConfiguration(
 
-                            org.wso2.carbon.stat.publisher.data.xsd.StatConfiguration statConfigurationData17)
+                            org.wso2.carbon.stat.publisher.internal.data.xsd.StatConfiguration statConfigurationData17)
                         
 
                     throws java.rmi.RemoteException
@@ -545,7 +545,7 @@
                 */
                 public  void startsetStatConfiguration(
 
-                 org.wso2.carbon.stat.publisher.data.xsd.StatConfiguration statConfigurationData17,
+                 org.wso2.carbon.stat.publisher.internal.data.xsd.StatConfiguration statConfigurationData17,
 
                   final org.wso2.carbon.stat.publisher.ui.StatPublisherServiceCallbackHandler callback)
 
@@ -1092,7 +1092,7 @@
                              
 
                                 
-                                private org.wso2.carbon.stat.publisher.data.xsd.StatConfiguration getGetStatConfigurationResponse_return(
+                                private org.wso2.carbon.stat.publisher.internal.data.xsd.StatConfiguration getGetStatConfigurationResponse_return(
                                 org.wso2.carbon.stat.publisher.ui.GetStatConfigurationResponse wrappedType){
                                 
                                         return wrappedType.get_return();
@@ -1101,7 +1101,7 @@
                              
                                     
                                 private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory,
-                                    org.wso2.carbon.stat.publisher.data.xsd.StatConfiguration param1,
+                                    org.wso2.carbon.stat.publisher.internal.data.xsd.StatConfiguration param1,
                                     org.wso2.carbon.stat.publisher.ui.SetStatConfiguration dummyWrappedType,
                                  boolean optimizeContent) throws org.apache.axis2.AxisFault{
 

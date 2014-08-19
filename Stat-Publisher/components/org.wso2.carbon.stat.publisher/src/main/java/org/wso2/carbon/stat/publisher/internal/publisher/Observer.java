@@ -1,4 +1,6 @@
-package org.wso2.carbon.stat.publisher.publisher;
+package org.wso2.carbon.stat.publisher.internal.publisher;
+
+import org.wso2.carbon.stat.publisher.internal.DTO.StatConfigurationDTO;
 
 import java.util.Date;
 import java.util.Timer;
@@ -10,10 +12,12 @@ import java.util.TimerTask;
 public class Observer {
 
 
-    private long timeInterval = 5000; //time interval for scheduled task
+    StatConfigurationDTO statConfigurationDTOObject;
 
-    public Observer(){
+    private long timeInterval = 10000; //time interval for scheduled task
 
+    public Observer() {
+        statConfigurationDTOObject = new StatConfigurationDTO();
 //todo: initialize variables here
 
 
@@ -26,8 +30,15 @@ public class Observer {
         TimerTask taskPublishStat = new TimerTask() {
             @Override
             public void run() {
+if(statConfigurationDTOObject.ReadRegistry().isEnableStatPublisher()){
 
+    System.out.print("enable");
 
+}else {
+
+    System.out.print("disable");
+
+}
 
 
             }

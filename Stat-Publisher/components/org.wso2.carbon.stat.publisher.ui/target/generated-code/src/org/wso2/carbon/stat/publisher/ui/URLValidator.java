@@ -383,7 +383,7 @@
                             if (!"URLValidator".equals(type)){
                                 //find namespace for the prefix
                                 java.lang.String nsUri = reader.getNamespaceContext().getNamespaceURI(nsPrefix);
-                                return (URLValidator)org.wso2.carbon.stat.publisher.data.xsd.ExtensionMapper.getTypeObject(
+                                return (URLValidator)org.wso2.carbon.stat.publisher.ui.ExtensionMapper.getTypeObject(
                                      nsUri,type,reader);
                               }
                         

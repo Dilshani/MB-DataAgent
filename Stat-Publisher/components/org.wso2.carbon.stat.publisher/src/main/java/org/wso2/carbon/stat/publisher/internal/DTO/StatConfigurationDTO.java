@@ -1,7 +1,6 @@
-package org.wso2.carbon.stat.publisher.DTO;
+package org.wso2.carbon.stat.publisher.internal.DTO;
 
-import org.wso2.carbon.stat.publisher.data.StatConfiguration;
-import org.wso2.carbon.stat.publisher.publisher.Observer;
+import org.wso2.carbon.stat.publisher.internal.data.StatConfiguration;
 
 /**
  * Created by nipuna on 8/15/14.
@@ -12,7 +11,7 @@ public class StatConfigurationDTO {
     //write stat configurations to registry
     public boolean WriteRegistry(StatConfiguration statConfigurationObject) {
 
-
+       // TODO://if isEnableStatPublisher is false and getPassword ,getUsername and getURL == null That should be update only Stat publisher field
         System.out.println(statConfigurationObject.isEnableStatPublisher());
         System.out.println(statConfigurationObject.getUsername());
         System.out.println(statConfigurationObject.getPassword());
@@ -30,16 +29,15 @@ public class StatConfigurationDTO {
 
         StatConfiguration statConfigurationReadObject = new StatConfiguration();
 
-        statConfigurationReadObject.setEnableStatPublisher(true);
-        statConfigurationReadObject.setUsername("admin2");
+        statConfigurationReadObject.setEnableStatPublisher(false);
+        statConfigurationReadObject.setUsername("admin250");
         statConfigurationReadObject.setPassword("admin");
 
         statConfigurationReadObject.setMB_statEnable(true);
-        statConfigurationReadObject.setMessage_statEnable(true);
+        statConfigurationReadObject.setMessage_statEnable(false);
         statConfigurationReadObject.setURL("127.0.0.1:9443;127.0.0.1:9443");
         statConfigurationReadObject.setSystem_statEnable(true);
-        Observer ob=new Observer();
-        ob.initializeTimerTask();
+
         return statConfigurationReadObject;
 
     }

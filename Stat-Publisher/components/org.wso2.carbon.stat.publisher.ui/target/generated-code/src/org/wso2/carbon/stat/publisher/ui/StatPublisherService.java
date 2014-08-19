@@ -24,7 +24,7 @@
          */
 
          
-                     public org.wso2.carbon.stat.publisher.data.xsd.StatConfiguration getStatConfiguration(
+                     public org.wso2.carbon.stat.publisher.internal.data.xsd.StatConfiguration getStatConfiguration(
 
                         )
                         throws java.rmi.RemoteException
@@ -57,7 +57,7 @@
          
                      public boolean setStatConfiguration(
 
-                        org.wso2.carbon.stat.publisher.data.xsd.StatConfiguration statConfigurationData6)
+                        org.wso2.carbon.stat.publisher.internal.data.xsd.StatConfiguration statConfigurationData6)
                         throws java.rmi.RemoteException
              ;
 
@@ -70,7 +70,7 @@
           */
         public void startsetStatConfiguration(
 
-            org.wso2.carbon.stat.publisher.data.xsd.StatConfiguration statConfigurationData6,
+            org.wso2.carbon.stat.publisher.internal.data.xsd.StatConfiguration statConfigurationData6,
 
             final org.wso2.carbon.stat.publisher.ui.StatPublisherServiceCallbackHandler callback)
 

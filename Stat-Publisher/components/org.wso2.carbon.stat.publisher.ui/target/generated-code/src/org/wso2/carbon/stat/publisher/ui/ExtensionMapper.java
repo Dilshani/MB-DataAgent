@@ -7,7 +7,7 @@
  */
 
         
-            package org.wso2.carbon.stat.publisher.data.xsd;
+            package org.wso2.carbon.stat.publisher.ui;
         
             /**
             *  ExtensionMapper class
@@ -22,10 +22,10 @@
 
               
                   if (
-                  "http://data.publisher.stat.carbon.wso2.org/xsd".equals(namespaceURI) &&
+                  "http://data.internal.publisher.stat.carbon.wso2.org/xsd".equals(namespaceURI) &&
                   "StatConfiguration".equals(typeName)){
                    
-                            return  org.wso2.carbon.stat.publisher.data.xsd.StatConfiguration.Factory.parse(reader);
+                            return  org.wso2.carbon.stat.publisher.internal.data.xsd.StatConfiguration.Factory.parse(reader);
                         
 
                   }

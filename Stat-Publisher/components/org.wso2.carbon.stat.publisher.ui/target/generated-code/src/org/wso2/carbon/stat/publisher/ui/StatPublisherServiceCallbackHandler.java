@@ -49,7 +49,7 @@
             * override this method for handling normal response from getStatConfiguration operation
             */
            public void receiveResultgetStatConfiguration(
-                    org.wso2.carbon.stat.publisher.data.xsd.StatConfiguration result
+                    org.wso2.carbon.stat.publisher.internal.data.xsd.StatConfiguration result
                         ) {
            }
 

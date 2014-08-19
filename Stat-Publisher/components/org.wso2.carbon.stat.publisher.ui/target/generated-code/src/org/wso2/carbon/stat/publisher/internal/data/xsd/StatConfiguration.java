@@ -7,7 +7,7 @@
  */
 
             
-                package org.wso2.carbon.stat.publisher.data.xsd;
+                package org.wso2.carbon.stat.publisher.internal.data.xsd;
             
 
             /**
@@ -19,7 +19,7 @@
         implements org.apache.axis2.databinding.ADBBean{
         /* This type was generated from the piece of schema that had
                 name = StatConfiguration
-                Namespace URI = http://data.publisher.stat.carbon.wso2.org/xsd
+                Namespace URI = http://data.internal.publisher.stat.carbon.wso2.org/xsd
                 Namespace Prefix = ns1
                 */
             
@@ -375,7 +375,7 @@
                   if (serializeType){
                
 
-                   java.lang.String namespacePrefix = registerPrefix(xmlWriter,"http://data.publisher.stat.carbon.wso2.org/xsd");
+                   java.lang.String namespacePrefix = registerPrefix(xmlWriter,"http://data.internal.publisher.stat.carbon.wso2.org/xsd");
                    if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)){
                        writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
                            namespacePrefix+":StatConfiguration",
@@ -389,7 +389,7 @@
                
                    }
                 if (localMB_statEnableTracker){
-                                    namespace = "http://data.publisher.stat.carbon.wso2.org/xsd";
+                                    namespace = "http://data.internal.publisher.stat.carbon.wso2.org/xsd";
                                     writeStartElement(null, namespace, "MB_statEnable", xmlWriter);
                              
                                                if (false) {
@@ -402,7 +402,7 @@
                                     
                                    xmlWriter.writeEndElement();
                              } if (localURLTracker){
-                                    namespace = "http://data.publisher.stat.carbon.wso2.org/xsd";
+                                    namespace = "http://data.internal.publisher.stat.carbon.wso2.org/xsd";
                                     writeStartElement(null, namespace, "URL", xmlWriter);
                              
 
@@ -420,7 +420,7 @@
                                     
                                    xmlWriter.writeEndElement();
                              } if (localEnableStatPublisherTracker){
-                                    namespace = "http://data.publisher.stat.carbon.wso2.org/xsd";
+                                    namespace = "http://data.internal.publisher.stat.carbon.wso2.org/xsd";
                                     writeStartElement(null, namespace, "enableStatPublisher", xmlWriter);
                              
                                                if (false) {
@@ -433,7 +433,7 @@
                                     
                                    xmlWriter.writeEndElement();
                              } if (localMessage_statEnableTracker){
-                                    namespace = "http://data.publisher.stat.carbon.wso2.org/xsd";
+                                    namespace = "http://data.internal.publisher.stat.carbon.wso2.org/xsd";
                                     writeStartElement(null, namespace, "message_statEnable", xmlWriter);
                              
                                                if (false) {
@@ -446,7 +446,7 @@
                                     
                                    xmlWriter.writeEndElement();
                              } if (localPasswordTracker){
-                                    namespace = "http://data.publisher.stat.carbon.wso2.org/xsd";
+                                    namespace = "http://data.internal.publisher.stat.carbon.wso2.org/xsd";
                                     writeStartElement(null, namespace, "password", xmlWriter);
                              
 
@@ -464,7 +464,7 @@
                                     
                                    xmlWriter.writeEndElement();
                              } if (localSystem_statEnableTracker){
-                                    namespace = "http://data.publisher.stat.carbon.wso2.org/xsd";
+                                    namespace = "http://data.internal.publisher.stat.carbon.wso2.org/xsd";
                                     writeStartElement(null, namespace, "system_statEnable", xmlWriter);
                              
                                                if (false) {
@@ -477,7 +477,7 @@
                                     
                                    xmlWriter.writeEndElement();
                              } if (localUsernameTracker){
-                                    namespace = "http://data.publisher.stat.carbon.wso2.org/xsd";
+                                    namespace = "http://data.internal.publisher.stat.carbon.wso2.org/xsd";
                                     writeStartElement(null, namespace, "username", xmlWriter);
                              
 
@@ -501,7 +501,7 @@
         }
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
-            if(namespace.equals("http://data.publisher.stat.carbon.wso2.org/xsd")){
+            if(namespace.equals("http://data.internal.publisher.stat.carbon.wso2.org/xsd")){
                 return "ns1";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
@@ -675,43 +675,43 @@
                  java.util.ArrayList attribList = new java.util.ArrayList();
 
                  if (localMB_statEnableTracker){
-                                      elementList.add(new javax.xml.namespace.QName("http://data.publisher.stat.carbon.wso2.org/xsd",
+                                      elementList.add(new javax.xml.namespace.QName("http://data.internal.publisher.stat.carbon.wso2.org/xsd",
                                                                       "MB_statEnable"));
                                  
                                 elementList.add(
                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localMB_statEnable));
                             } if (localURLTracker){
-                                      elementList.add(new javax.xml.namespace.QName("http://data.publisher.stat.carbon.wso2.org/xsd",
+                                      elementList.add(new javax.xml.namespace.QName("http://data.internal.publisher.stat.carbon.wso2.org/xsd",
                                                                       "URL"));
                                  
                                          elementList.add(localURL==null?null:
                                          org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localURL));
                                     } if (localEnableStatPublisherTracker){
-                                      elementList.add(new javax.xml.namespace.QName("http://data.publisher.stat.carbon.wso2.org/xsd",
+                                      elementList.add(new javax.xml.namespace.QName("http://data.internal.publisher.stat.carbon.wso2.org/xsd",
                                                                       "enableStatPublisher"));
                                  
                                 elementList.add(
                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localEnableStatPublisher));
                             } if (localMessage_statEnableTracker){
-                                      elementList.add(new javax.xml.namespace.QName("http://data.publisher.stat.carbon.wso2.org/xsd",
+                                      elementList.add(new javax.xml.namespace.QName("http://data.internal.publisher.stat.carbon.wso2.org/xsd",
                                                                       "message_statEnable"));
                                  
                                 elementList.add(
                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localMessage_statEnable));
                             } if (localPasswordTracker){
-                                      elementList.add(new javax.xml.namespace.QName("http://data.publisher.stat.carbon.wso2.org/xsd",
+                                      elementList.add(new javax.xml.namespace.QName("http://data.internal.publisher.stat.carbon.wso2.org/xsd",
                                                                       "password"));
                                  
                                          elementList.add(localPassword==null?null:
                                          org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPassword));
                                     } if (localSystem_statEnableTracker){
-                                      elementList.add(new javax.xml.namespace.QName("http://data.publisher.stat.carbon.wso2.org/xsd",
+                                      elementList.add(new javax.xml.namespace.QName("http://data.internal.publisher.stat.carbon.wso2.org/xsd",
                                                                       "system_statEnable"));
                                  
                                 elementList.add(
                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localSystem_statEnable));
                             } if (localUsernameTracker){
-                                      elementList.add(new javax.xml.namespace.QName("http://data.publisher.stat.carbon.wso2.org/xsd",
+                                      elementList.add(new javax.xml.namespace.QName("http://data.internal.publisher.stat.carbon.wso2.org/xsd",
                                                                       "username"));
                                  
                                          elementList.add(localUsername==null?null:
@@ -770,7 +770,7 @@
                             if (!"StatConfiguration".equals(type)){
                                 //find namespace for the prefix
                                 java.lang.String nsUri = reader.getNamespaceContext().getNamespaceURI(nsPrefix);
-                                return (StatConfiguration)org.wso2.carbon.stat.publisher.data.xsd.ExtensionMapper.getTypeObject(
+                                return (StatConfiguration)org.wso2.carbon.stat.publisher.ui.ExtensionMapper.getTypeObject(
                                      nsUri,type,reader);
                               }
                         
@@ -795,7 +795,7 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://data.publisher.stat.carbon.wso2.org/xsd","MB_statEnable").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://data.internal.publisher.stat.carbon.wso2.org/xsd","MB_statEnable").equals(reader.getName())){
                                 
                                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
                                     if ("true".equals(nillableValue) || "1".equals(nillableValue)){
@@ -819,7 +819,7 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://data.publisher.stat.carbon.wso2.org/xsd","URL").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://data.internal.publisher.stat.carbon.wso2.org/xsd","URL").equals(reader.getName())){
                                 
                                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
                                        if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
@@ -847,7 +847,7 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://data.publisher.stat.carbon.wso2.org/xsd","enableStatPublisher").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://data.internal.publisher.stat.carbon.wso2.org/xsd","enableStatPublisher").equals(reader.getName())){
                                 
                                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
                                     if ("true".equals(nillableValue) || "1".equals(nillableValue)){
@@ -871,7 +871,7 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://data.publisher.stat.carbon.wso2.org/xsd","message_statEnable").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://data.internal.publisher.stat.carbon.wso2.org/xsd","message_statEnable").equals(reader.getName())){
                                 
                                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
                                     if ("true".equals(nillableValue) || "1".equals(nillableValue)){
@@ -895,7 +895,7 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://data.publisher.stat.carbon.wso2.org/xsd","password").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://data.internal.publisher.stat.carbon.wso2.org/xsd","password").equals(reader.getName())){
                                 
                                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
                                        if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
@@ -923,7 +923,7 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://data.publisher.stat.carbon.wso2.org/xsd","system_statEnable").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://data.internal.publisher.stat.carbon.wso2.org/xsd","system_statEnable").equals(reader.getName())){
                                 
                                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
                                     if ("true".equals(nillableValue) || "1".equals(nillableValue)){
@@ -947,7 +947,7 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://data.publisher.stat.carbon.wso2.org/xsd","username").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://data.internal.publisher.stat.carbon.wso2.org/xsd","username").equals(reader.getName())){
                                 
                                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
                                        if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){

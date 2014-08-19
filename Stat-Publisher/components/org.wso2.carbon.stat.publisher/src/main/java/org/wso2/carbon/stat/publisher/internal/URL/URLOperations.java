@@ -1,4 +1,4 @@
-package org.wso2.carbon.stat.publisher.URL;
+package org.wso2.carbon.stat.publisher.internal.URL;
 
 import java.net.Socket;
 

@@ -1,4 +1,4 @@
-package org.wso2.carbon.stat.publisher.data;
+package org.wso2.carbon.stat.publisher.internal.data;
 
 public class StatConfiguration {
 

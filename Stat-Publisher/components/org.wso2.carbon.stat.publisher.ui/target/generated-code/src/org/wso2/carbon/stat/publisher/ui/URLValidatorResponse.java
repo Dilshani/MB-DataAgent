@@ -381,7 +381,7 @@
                             if (!"URLValidatorResponse".equals(type)){
                                 //find namespace for the prefix
                                 java.lang.String nsUri = reader.getNamespaceContext().getNamespaceURI(nsPrefix);
-                                return (URLValidatorResponse)org.wso2.carbon.stat.publisher.data.xsd.ExtensionMapper.getTypeObject(
+                                return (URLValidatorResponse)org.wso2.carbon.stat.publisher.ui.ExtensionMapper.getTypeObject(
                                      nsUri,type,reader);
                               }
                         
