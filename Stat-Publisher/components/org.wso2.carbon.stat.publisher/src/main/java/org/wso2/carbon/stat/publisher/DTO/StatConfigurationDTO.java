@@ -13,7 +13,7 @@ public class StatConfigurationDTO {
     public boolean WriteRegistry(StatConfiguration statConfigurationObject) {
 
 
-        System.out.println(statConfigurationObject.isEnableStatPublisher()+"yep2");
+        System.out.println(statConfigurationObject.isEnableStatPublisher());
         System.out.println(statConfigurationObject.getUsername());
         System.out.println(statConfigurationObject.getPassword());
         System.out.println(statConfigurationObject.getURL());

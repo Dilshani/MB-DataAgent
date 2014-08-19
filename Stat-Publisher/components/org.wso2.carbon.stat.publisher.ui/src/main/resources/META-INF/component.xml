@@ -28,7 +28,7 @@
             <order>50</order>
             <style-class>monitor</style-class>
             <icon>../stat-publisher/images/stat.png</icon>
-            <require-permission>/permission/protected/manage</require-permission>
+            <require-permission>/permission/admin/manage</require-permission>
         </menu>
     </menus>
 

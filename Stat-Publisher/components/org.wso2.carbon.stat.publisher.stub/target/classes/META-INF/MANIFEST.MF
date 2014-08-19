@@ -16,7 +16,7 @@ Bundle-Name: org.wso2.carbon.stat.publisher.stub
 Created-By: Apache Maven Bundle Plugin
 Build-Jdk: 1.6.0_45
 Bundle-Version: 4.2.0
-Bnd-LastModified: 1408357064634
+Bnd-LastModified: 1408426260502
 Bundle-ManifestVersion: 2
 Bundle-Description: Student Manager Components
 Import-Package: javax.xml.namespace,javax.xml.stream;version="[1.0,2)"

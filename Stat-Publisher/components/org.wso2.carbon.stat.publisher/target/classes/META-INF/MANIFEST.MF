@@ -11,7 +11,7 @@ Build-Jdk: 1.6.0_45
 Bundle-Version: 4.2.0
 Tool: Bnd-1.43.0
 Bundle-Name: org.wso2.carbon.stat.publisher
-Bnd-LastModified: 1408357057668
+Bnd-LastModified: 1408426244134
 Created-By: Apache Maven Bundle Plugin
 Bundle-ManifestVersion: 2
 Bundle-Description: Student Manager Components
