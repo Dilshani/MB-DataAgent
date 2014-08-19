@@ -30,7 +30,7 @@ public class StatConfigurationDTO {
         StatConfiguration statConfigurationReadObject = new StatConfiguration();
 
         statConfigurationReadObject.setEnableStatPublisher(false);
-        statConfigurationReadObject.setUsername("admin250");
+        statConfigurationReadObject.setUsername("adminstat");
         statConfigurationReadObject.setPassword("admin");
 
         statConfigurationReadObject.setMB_statEnable(true);
