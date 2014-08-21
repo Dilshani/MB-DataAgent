@@ -18,7 +18,7 @@ Bundle-Name: WSO2 Carbon - Stat Publisher UI Components
 Created-By: Apache Maven Bundle Plugin
 Build-Jdk: 1.6.0_45
 Bundle-Version: 4.2.0
-Bnd-LastModified: 1408603553820
+Bnd-LastModified: 1408606091776
 Bundle-ManifestVersion: 2
 Bundle-Description: Stat Publisher UI Components
 Import-Package: javax.servlet;resolution:=optional,javax.servlet.http;

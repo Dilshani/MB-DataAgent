@@ -1,18 +1,7 @@
 package org.wso2.carbon.stat.publisher.internal.publisher;
 
-import org.apache.log4j.Logger;
-import org.wso2.carbon.databridge.agent.thrift.Agent;
-import org.wso2.carbon.databridge.agent.thrift.AsyncDataPublisher;
-import org.wso2.carbon.databridge.agent.thrift.conf.AgentConfiguration;
-import org.wso2.carbon.databridge.agent.thrift.exception.AgentException;
-import org.wso2.carbon.databridge.commons.Event;
-import org.wso2.carbon.serverStats.mbeans.MbeansStats;
-import org.wso2.carbon.utils.CarbonUtils;
-
-import java.util.List;
-
 public class DataAgent {
-
+/*
     private static Logger logger = Logger.getLogger(DataAgent.class);
 
     private static DataAgent instance = null;
@@ -324,5 +313,5 @@ public class DataAgent {
 
     }
 
-
+*/
 }
