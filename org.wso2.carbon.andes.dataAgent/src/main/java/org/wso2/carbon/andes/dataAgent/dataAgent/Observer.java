@@ -10,7 +10,7 @@ public class Observer {
 
     private long timeInterval = 30000; //time interval for scheduled task
 
-    public Observer(){
+    public Observer() {
 
 //todo: initialize variables here
     }
