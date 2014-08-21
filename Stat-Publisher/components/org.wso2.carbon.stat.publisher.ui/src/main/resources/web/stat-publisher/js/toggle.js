@@ -65,10 +65,10 @@ function validateURL() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             if (xmlhttp.responseText) {
                 if ((xmlhttp.responseText) == "true") {
-                    alertMessage("URL validate Successful");
+                    alertMessage("util validate Successful");
                 } else {
 
-                    alertError("URL validate Failed");
+                    alertError("util validate Failed");
                 }
             } else {
 

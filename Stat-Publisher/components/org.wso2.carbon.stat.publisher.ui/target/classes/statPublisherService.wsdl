@@ -53,6 +53,7 @@
                     <xs:element minOccurs="0" name="message_statEnable" type="xs:boolean"></xs:element>
                     <xs:element minOccurs="0" name="password" nillable="true" type="xs:string"></xs:element>
                     <xs:element minOccurs="0" name="system_statEnable" type="xs:boolean"></xs:element>
+                    <xs:element minOccurs="0" name="tenantID" type="xs:int"></xs:element>
                     <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"></xs:element>
                 </xs:sequence>
             </xs:complexType>
@@ -182,13 +183,13 @@
     </wsdl:binding>
     <wsdl:service name="StatPublisherService">
         <wsdl:port name="StatPublisherServiceHttpsSoap11Endpoint" binding="ns:StatPublisherServiceSoap11Binding">
-            <soap:address location="https://10.100.4.101:9443/services/StatPublisherService.StatPublisherServiceHttpsSoap11Endpoint/"></soap:address>
+            <soap:address location="https://10.219.57.153:9443/services/StatPublisherService.StatPublisherServiceHttpsSoap11Endpoint/"></soap:address>
         </wsdl:port>
         <wsdl:port name="StatPublisherServiceHttpsSoap12Endpoint" binding="ns:StatPublisherServiceSoap12Binding">
-            <soap12:address location="https://10.100.4.101:9443/services/StatPublisherService.StatPublisherServiceHttpsSoap12Endpoint/"></soap12:address>
+            <soap12:address location="https://10.219.57.153:9443/services/StatPublisherService.StatPublisherServiceHttpsSoap12Endpoint/"></soap12:address>
         </wsdl:port>
         <wsdl:port name="StatPublisherServiceHttpsEndpoint" binding="ns:StatPublisherServiceHttpBinding">
-            <http:address location="https://10.100.4.101:9443/services/StatPublisherService.StatPublisherServiceHttpsEndpoint/"></http:address>
+            <http:address location="https://10.219.57.153:9443/services/StatPublisherService.StatPublisherServiceHttpsEndpoint/"></http:address>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>

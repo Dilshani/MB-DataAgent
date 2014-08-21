@@ -130,7 +130,7 @@
      */
     public StatPublisherServiceStub(org.apache.axis2.context.ConfigurationContext configurationContext) throws org.apache.axis2.AxisFault {
         
-                    this(configurationContext,"https://10.100.4.101:9443/services/StatPublisherService.StatPublisherServiceHttpsSoap12Endpoint/" );
+                    this(configurationContext,"https://10.219.57.153:9443/services/StatPublisherService.StatPublisherServiceHttpsSoap12Endpoint/" );
                 
     }
 
@@ -139,7 +139,7 @@
      */
     public StatPublisherServiceStub() throws org.apache.axis2.AxisFault {
         
-                    this("https://10.100.4.101:9443/services/StatPublisherService.StatPublisherServiceHttpsSoap12Endpoint/" );
+                    this("https://10.219.57.153:9443/services/StatPublisherService.StatPublisherServiceHttpsSoap12Endpoint/" );
                 
     }
 
@@ -977,7 +977,7 @@
         }
         return false;
     }
-     //https://10.100.4.101:9443/services/StatPublisherService.StatPublisherServiceHttpsSoap12Endpoint/
+     //https://10.219.57.153:9443/services/StatPublisherService.StatPublisherServiceHttpsSoap12Endpoint/
             private  org.apache.axiom.om.OMElement  toOM(org.wso2.carbon.stat.publisher.ui.GetStatConfiguration param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
