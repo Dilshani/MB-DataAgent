@@ -1,24 +1,35 @@
 Manifest-Version: 1.0
 Export-Package: org.wso2.carbon.stat.publisher.internal.publisher;uses
- :="org.wso2.carbon.stat.publisher.internal.DTO,org.wso2.carbon.stat.p
- ublisher.internal.data";version="4.2.0",org.wso2.carbon.stat.publishe
- r.internal.DTO;uses:="org.wso2.carbon.stat.publisher.internal.publish
- er,org.wso2.carbon.stat.publisher.internal.data,org.wso2.carbon.conte
- xt";version="4.2.0",org.wso2.carbon.stat.publisher;uses:="org.wso2.ca
- rbon.stat.publisher.internal.DTO,org.wso2.carbon.stat.publisher.inter
- nal.data,org.wso2.carbon.stat.publisher.internal.util,org.wso2.carbon
- .context";version="4.2.0",org.wso2.carbon.stat.publisher.internal.dat
- a;version="4.2.0",org.wso2.carbon.stat.publisher.internal.util;versio
- n="4.2.0"
-Built-By: nipuna
+ :="org.wso2.carbon.databridge.commons,org.apache.log4j,org.wso2.andes
+ .kernel,org.wso2.carbon.serverStats.mbeans,org.wso2.carbon.databridge
+ .agent.thrift.conf,org.wso2.carbon.databridge.agent.thrift,org.wso2.c
+ arbon.utils,org.wso2.carbon.databridge.agent.thrift.exception,org.wso
+ 2.carbon.stat.publisher.internal.DTO,org.wso2.carbon.stat.publisher.i
+ nternal.data";version="4.3.0.SNAPSHOT",org.wso2.carbon.stat.publisher
+ .internal.DTO;uses:="org.wso2.carbon.stat.publisher.internal.publishe
+ r,org.wso2.carbon.stat.publisher.internal.data,org.wso2.carbon.contex
+ t";version="4.3.0.SNAPSHOT",org.wso2.carbon.stat.publisher;uses:="org
+ .wso2.carbon.stat.publisher.internal.DTO,org.wso2.carbon.stat.publish
+ er.internal.data,org.wso2.carbon.stat.publisher.internal.util,org.wso
+ 2.carbon.context";version="4.3.0.SNAPSHOT",org.wso2.carbon.stat.publi
+ sher.internal.data;version="4.3.0.SNAPSHOT",org.wso2.carbon.stat.publ
+ isher.internal.util;version="4.3.0.SNAPSHOT"
+Built-By: sanjaya
 Tool: Bnd-1.43.0
 Bundle-Name: org.wso2.carbon.stat.publisher
 Created-By: Apache Maven Bundle Plugin
 Build-Jdk: 1.6.0_45
-Bundle-Version: 4.2.0
-Bnd-LastModified: 1408606080578
+Bundle-Version: 4.3.0.SNAPSHOT
+Bnd-LastModified: 1409329734862
 Bundle-ManifestVersion: 2
-Bundle-Description: Student Manager Components
-Import-Package: org.wso2.carbon.context;version="[4.3,5)"
+Bundle-Description: This is a Carbon bundle that represents the Andes 
+ module
+Import-Package: org.apache.log4j;version="[4.3,5)",org.wso2.andes.kern
+ el;version="[3.0,4)",org.wso2.carbon.context;version="[4.3,5)",org.ws
+ o2.carbon.databridge.agent.thrift;version="[4.2,5)",org.wso2.carbon.d
+ atabridge.agent.thrift.conf;version="[4.2,5)",org.wso2.carbon.databri
+ dge.agent.thrift.exception;version="[4.2,5)",org.wso2.carbon.databrid
+ ge.commons;version="[4.2,5)",org.wso2.carbon.serverStats.mbeans;versi
+ on="[4.3,5)",org.wso2.carbon.utils;version="[4.3,5)"
 Bundle-SymbolicName: org.wso2.carbon.stat.publisher
 

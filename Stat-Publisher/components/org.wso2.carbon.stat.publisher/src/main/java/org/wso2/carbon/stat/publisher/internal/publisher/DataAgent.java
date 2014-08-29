@@ -5,7 +5,9 @@ import org.wso2.andes.kernel.*;
 import org.wso2.carbon.databridge.agent.thrift.Agent;
 import org.wso2.carbon.databridge.agent.thrift.AsyncDataPublisher;
 import org.wso2.carbon.databridge.agent.thrift.conf.AgentConfiguration;
+import org.wso2.carbon.databridge.agent.thrift.exception.AgentException;
 import org.wso2.carbon.databridge.commons.Event;
+import org.wso2.carbon.serverStats.mbeans.MbeansStats;
 import org.wso2.carbon.utils.CarbonUtils;
 
 import java.util.List;
@@ -48,7 +50,7 @@ public class DataAgent {
 
     public static DataAgent getObjectDataAgent() {
 
-        if (instance == null) {
+        if (instance == null) { //singleton
             instance = new DataAgent();
         }
         return instance;
@@ -87,8 +89,8 @@ public class DataAgent {
 
                     " {'name':'HeapMemoryUsage','type':'STRING'}," +
                     "         {'name':'nonHeapMemoryUsage','type':'STRING'}," +
-                    "          {'name':'CPULoadAverage','type':'STRING'}," +
-                    " 			{'name':'timestamp','type':'LONG'}" +
+                    "         {'name':'CPULoadAverage','type':'STRING'}," +
+                    " 		  {'name':'timestamp','type':'LONG'}" +
                     "  ]" +
                     "}";
 
