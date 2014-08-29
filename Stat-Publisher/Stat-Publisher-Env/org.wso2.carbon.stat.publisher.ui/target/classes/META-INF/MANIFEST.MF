@@ -1,0 +1,43 @@
+Manifest-Version: 1.0
+Export-Package: org.wso2.carbon.stat.publisher.ui.i18n;version="4.3.0.
+ SNAPSHOT",org.wso2.carbon.stat.publisher.internal.data.xsd;uses:="jav
+ ax.xml.stream,org.apache.axis2.databinding.utils,org.apache.axis2.dat
+ abinding,org.wso2.carbon.stat.publisher.ui,javax.xml.namespace,org.ap
+ ache.axis2.databinding.utils.reader,org.apache.axiom.om";version="4.3
+ .0.SNAPSHOT",org.wso2.carbon.stat.publisher.ui;uses:="javax.xml.strea
+ m,org.apache.axis2.databinding,org.wso2.carbon.stat.publisher.interna
+ l.data.xsd,javax.xml.namespace,org.apache.axis2.databinding.utils,org
+ .apache.axis2.databinding.utils.reader,org.apache.axiom.om,javax.serv
+ let,javax.servlet.http,org.apache.axis2.client,org.apache.axis2.conte
+ xt,org.apache.axis2,org.apache.axis2.transport,org.apache.axis2.descr
+ iption,org.apache.axiom.soap,org.apache.axis2.util,org.apache.axis2.c
+ lient.async,org.apache.axis2.addressing,org.apache.axis2.engine";vers
+ ion="4.3.0.SNAPSHOT"
+Built-By: nipuna
+Tool: Bnd-1.43.0
+Bundle-Name: WSO2 Carbon - Component -Stat Publisher - UI
+Created-By: Apache Maven Bundle Plugin
+Build-Jdk: 1.6.0_45
+Bundle-Version: 4.3.0.SNAPSHOT
+Bnd-LastModified: 1408629676611
+Bundle-ManifestVersion: 2
+Bundle-Description: Stat Publisher UI Components
+Import-Package: javax.servlet;resolution:=optional,javax.servlet.http;
+ resolution:=optional,javax.xml.namespace;resolution:=optional,javax.x
+ ml.stream;resolution:=optional;version="[1.0,2)",org.apache.axiom.om;
+ resolution:=optional,org.apache.axiom.soap;resolution:=optional,org.a
+ pache.axis2;resolution:=optional;version="[1.6,2)",org.apache.axis2.a
+ ddressing;resolution:=optional;version="[1.6,2)",org.apache.axis2.cli
+ ent;resolution:=optional;version="[1.6,2)",org.apache.axis2.client.as
+ ync;resolution:=optional;version="[1.6,2)",org.apache.axis2.context;r
+ esolution:=optional;version="[1.6,2)",org.apache.axis2.databinding;re
+ solution:=optional;version="[1.6,2)",org.apache.axis2.databinding.uti
+ ls;resolution:=optional;version="[1.6,2)",org.apache.axis2.databindin
+ g.utils.reader;resolution:=optional;version="[1.6,2)",org.apache.axis
+ 2.description;resolution:=optional;version="[1.6,2)",org.apache.axis2
+ .engine;resolution:=optional;version="[1.6,2)",org.apache.axis2.trans
+ port;resolution:=optional;version="[1.6,2)",org.apache.axis2.util;res
+ olution:=optional;version="[1.6,2)"
+Bundle-SymbolicName: org.wso2.carbon.stat.publisher.ui
+Carbon-Component: UIBundle
+

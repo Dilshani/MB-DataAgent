@@ -1,22 +1,23 @@
 Manifest-Version: 1.0
-Export-Package: org.wso2.carbon.stat.publisher.data.xsd;uses:="javax.x
- ml.stream,org.apache.axis2.databinding,org.apache.axis2.databinding.u
- tils,javax.xml.namespace,org.apache.axis2.databinding.utils.reader,or
- g.apache.axiom.om";version="4.2.0",org.wso2.carbon.stat.publisher.ui;
- uses:="javax.xml.stream,org.wso2.carbon.stat.publisher.data.xsd,org.a
- pache.axis2.databinding,javax.xml.namespace,org.apache.axis2.databind
- ing.utils,org.apache.axis2.databinding.utils.reader,org.apache.axiom.
- om,org.apache.axis2,org.apache.axis2.transport,org.apache.axis2.clien
- t,org.apache.axis2.context,org.apache.axis2.description,org.apache.ax
- iom.soap,org.apache.axis2.util,org.apache.axis2.client.async,org.apac
- he.axis2.addressing,org.apache.axis2.engine";version="4.2.0"
+Export-Package: org.wso2.carbon.stat.publisher.internal.data.xsd;uses:
+ ="javax.xml.stream,org.apache.axis2.databinding.utils,org.apache.axis
+ 2.databinding,org.wso2.carbon.stat.publisher.ui,javax.xml.namespace,o
+ rg.apache.axis2.databinding.utils.reader,org.apache.axiom.om";version
+ ="4.2.0",org.wso2.carbon.stat.publisher.ui;uses:="javax.xml.stream,or
+ g.apache.axis2.databinding,org.wso2.carbon.stat.publisher.internal.da
+ ta.xsd,javax.xml.namespace,org.apache.axis2.databinding.utils,org.apa
+ che.axis2.databinding.utils.reader,org.apache.axiom.om,org.apache.axi
+ s2,org.apache.axis2.transport,org.apache.axis2.client,org.apache.axis
+ 2.context,org.apache.axis2.description,org.apache.axiom.soap,org.apac
+ he.axis2.util,org.apache.axis2.client.async,org.apache.axis2.addressi
+ ng,org.apache.axis2.engine";version="4.2.0"
 Built-By: nipuna
 Tool: Bnd-1.43.0
 Bundle-Name: org.wso2.carbon.stat.publisher.stub
 Created-By: Apache Maven Bundle Plugin
 Build-Jdk: 1.6.0_45
 Bundle-Version: 4.2.0
-Bnd-LastModified: 1408468872520
+Bnd-LastModified: 1408606086533
 Bundle-ManifestVersion: 2
 Bundle-Description: Student Manager Components
 Import-Package: javax.xml.namespace,javax.xml.stream;version="[1.0,2)"

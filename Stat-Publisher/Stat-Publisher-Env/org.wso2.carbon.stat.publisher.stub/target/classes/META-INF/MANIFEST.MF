@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Export-Package: org.wso2.carbon.stat.publisher.stub;uses:="org.wso2.ca
+ rbon.stat.publisher.internal.data.xsd";version="4.3.0.SNAPSHOT",org.w
+ so2.carbon.stat.publisher.internal.data.xsd;uses:="org.wso2.carbon.st
+ at.publisher.stub";version="4.3.0.SNAPSHOT"
+Built-By: nipuna
+Tool: Bnd-1.43.0
+Bundle-Name: org.wso2.carbon.stat.publisher.stub
+Created-By: Apache Maven Bundle Plugin
+DynamicImport-Package: *
+Build-Jdk: 1.6.0_45
+Bundle-Version: 4.3.0.SNAPSHOT
+Bnd-LastModified: 1408629537209
+Bundle-ManifestVersion: 2
+Bundle-Description: Business Messaging Parent pom hold the properties,
+  plugins which are required to build carbon component, carbon feature
+  and product
+Bundle-SymbolicName: org.wso2.carbon.stat.publisher.stub
+

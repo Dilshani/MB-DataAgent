@@ -5,9 +5,7 @@ import org.wso2.andes.kernel.*;
 import org.wso2.carbon.databridge.agent.thrift.Agent;
 import org.wso2.carbon.databridge.agent.thrift.AsyncDataPublisher;
 import org.wso2.carbon.databridge.agent.thrift.conf.AgentConfiguration;
-import org.wso2.carbon.databridge.agent.thrift.exception.AgentException;
 import org.wso2.carbon.databridge.commons.Event;
-import org.wso2.carbon.serverStats.mbeans.MbeansStats;
 import org.wso2.carbon.utils.CarbonUtils;
 
 import java.util.List;

@@ -1,0 +1,39 @@
+Manifest-Version: 1.0
+Export-Package: org.wso2.carbon.stat.publisher.internal.publisher;uses
+ :="org.wso2.carbon.databridge.commons,org.apache.log4j,org.wso2.andes
+ .kernel,org.wso2.carbon.serverStats.mbeans,org.wso2.carbon.databridge
+ .agent.thrift.conf,org.wso2.carbon.databridge.agent.thrift,org.wso2.c
+ arbon.utils,org.wso2.carbon.databridge.agent.thrift.exception,org.wso
+ 2.carbon.stat.publisher.internal.DTO,org.wso2.carbon.stat.publisher.i
+ nternal.data";version="4.3.0.SNAPSHOT",org.wso2.carbon.stat.publisher
+ .internal.DTO;uses:="org.wso2.carbon.stat.publisher.internal.publishe
+ r,org.wso2.carbon.stat.publisher.internal.data,org.wso2.carbon.contex
+ t";version="4.3.0.SNAPSHOT",org.wso2.carbon.stat.publisher;uses:="org
+ .wso2.carbon.stat.publisher.internal.DTO,org.wso2.carbon.stat.publish
+ er.internal.data,org.wso2.carbon.stat.publisher.internal.util,org.wso
+ 2.carbon.context";version="4.3.0.SNAPSHOT",org.wso2.carbon.stat.publi
+ sher.internal.data;version="4.3.0.SNAPSHOT",org.wso2.carbon.stat.publ
+ isher.internal.util;version="4.3.0.SNAPSHOT"
+Built-By: nipuna
+Tool: Bnd-1.43.0
+Bundle-Name: org.wso2.carbon.stat.publisher
+Created-By: Apache Maven Bundle Plugin
+DynamicImport-Package: *
+Build-Jdk: 1.6.0_45
+Bundle-Version: 4.3.0.SNAPSHOT
+Bnd-LastModified: 1408628827151
+Bundle-ManifestVersion: 2
+Bundle-Description: This is a Carbon bundle that represents the Andes 
+ module
+Import-Package: org.apache.log4j;resolution:=optional;version="[4.3,5)
+ ",org.wso2.andes.kernel;resolution:=optional;version="[3.0,4)",org.ws
+ o2.carbon.context;resolution:=optional;version="[4.3,5)",org.wso2.car
+ bon.databridge.agent.thrift;resolution:=optional;version="[4.2,5)",or
+ g.wso2.carbon.databridge.agent.thrift.conf;resolution:=optional;versi
+ on="[4.2,5)",org.wso2.carbon.databridge.agent.thrift.exception;resolu
+ tion:=optional;version="[4.2,5)",org.wso2.carbon.databridge.commons;r
+ esolution:=optional;version="[4.2,5)",org.wso2.carbon.serverStats.mbe
+ ans;resolution:=optional;version="[4.3,5)",org.wso2.carbon.utils;reso
+ lution:=optional;version="[4.3,5)"
+Bundle-SymbolicName: org.wso2.carbon.stat.publisher
+

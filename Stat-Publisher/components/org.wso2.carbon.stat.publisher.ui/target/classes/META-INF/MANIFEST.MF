@@ -1,28 +1,24 @@
 Manifest-Version: 1.0
-Export-Package: org.wso2.carbon.stat.publisher.data.xsd;uses:="javax.x
- ml.stream,org.apache.axis2.databinding,org.apache.axis2.databinding.u
- tils,javax.xml.namespace,org.apache.axis2.databinding.utils.reader,or
- g.apache.axiom.om";version="4.2.0",org.wso2.carbon.stat.publisher.ui.
- i18n;version="4.2.0",org.wso2.carbon.stat.publisher.internal.data.xsd
- ;uses:="javax.xml.stream,org.apache.axis2.databinding.utils,org.apach
- e.axis2.databinding,javax.xml.namespace,org.wso2.carbon.stat.publishe
- r.ui,org.apache.axis2.databinding.utils.reader,org.apache.axiom.om";v
- ersion="4.2.0",org.wso2.carbon.stat.publisher.ui;uses:="javax.xml.str
- eam,org.apache.axis2.databinding,org.wso2.carbon.stat.publisher.inter
- nal.data.xsd,javax.xml.namespace,org.apache.axis2.databinding.utils,o
- rg.apache.axis2.databinding.utils.reader,org.apache.axiom.om,javax.se
- rvlet,javax.servlet.http,org.apache.axis2.client,org.apache.axis2.con
- text,org.apache.axis2,org.apache.axis2.transport,org.apache.axis2.des
- cription,org.apache.axiom.soap,org.apache.axis2.util,org.apache.axis2
- .client.async,org.apache.axis2.addressing,org.apache.axis2.engine";ve
- rsion="4.2.0"
+Export-Package: org.wso2.carbon.stat.publisher.ui.i18n;version="4.2.0"
+ ,org.wso2.carbon.stat.publisher.internal.data.xsd;uses:="javax.xml.st
+ ream,org.apache.axis2.databinding.utils,org.apache.axis2.databinding,
+ org.wso2.carbon.stat.publisher.ui,javax.xml.namespace,org.apache.axis
+ 2.databinding.utils.reader,org.apache.axiom.om";version="4.2.0",org.w
+ so2.carbon.stat.publisher.ui;uses:="javax.xml.stream,org.apache.axis2
+ .databinding,org.wso2.carbon.stat.publisher.internal.data.xsd,javax.x
+ ml.namespace,org.apache.axis2.databinding.utils,org.apache.axis2.data
+ binding.utils.reader,org.apache.axiom.om,javax.servlet,javax.servlet.
+ http,org.apache.axis2.client,org.apache.axis2.context,org.apache.axis
+ 2,org.apache.axis2.transport,org.apache.axis2.description,org.apache.
+ axiom.soap,org.apache.axis2.util,org.apache.axis2.client.async,org.ap
+ ache.axis2.addressing,org.apache.axis2.engine";version="4.2.0"
 Built-By: nipuna
 Tool: Bnd-1.43.0
 Bundle-Name: WSO2 Carbon - Stat Publisher UI Components
 Created-By: Apache Maven Bundle Plugin
 Build-Jdk: 1.6.0_45
 Bundle-Version: 4.2.0
-Bnd-LastModified: 1408468877249
+Bnd-LastModified: 1408606091776
 Bundle-ManifestVersion: 2
 Bundle-Description: Stat Publisher UI Components
 Import-Package: javax.servlet;resolution:=optional,javax.servlet.http;
