@@ -1,6 +1,7 @@
 package org.wso2.carbon.stat.publisher.internal.publisher;
 
 import org.apache.log4j.Logger;
+import org.wso2.andes.kernel.*;
 import org.wso2.carbon.databridge.agent.thrift.Agent;
 import org.wso2.carbon.databridge.agent.thrift.AsyncDataPublisher;
 import org.wso2.carbon.databridge.agent.thrift.conf.AgentConfiguration;
@@ -162,7 +163,7 @@ public class DataAgent {
 
     }
 
-    private void sendMessageStatistics(String URL, String[] credentials, AndesMessageMetadata message, String application, int subscribers) {
+    private void sendMessageStatistics(String URL, String[] credentials, AndesMessageMetadata message, int subscribers) {
 
 
         long messageID = message.getMessageID();
@@ -214,7 +215,7 @@ public class DataAgent {
     }
 
 
-    public void sendACKStatistics(String URL, String[] credentials, AndesAckData ack, String application) {
+    public void sendACKStatistics(String URL, String[] credentials, AndesAckData ack) {
 
         long ackMessageID = ack.messageID;
         String queueName = ack.qName;
