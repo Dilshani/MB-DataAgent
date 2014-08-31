@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$USER_HOME$/WSO2-repo/GitHub/carbon-business-messaging/components/andes/org.wso2.carbon.stat.publisher/org.wso2.carbon.stat.publisher.iml" filepath="$USER_HOME$/WSO2-repo/GitHub/carbon-business-messaging/components/andes/org.wso2.carbon.stat.publisher/org.wso2.carbon.stat.publisher.iml" />
+      <module fileurl="file://$USER_HOME$/WSO2-repo/GitHub/carbon-business-messaging/service-stubs/org.wso2.carbon.stat.publisher.stub/org.wso2.carbon.stat.publisher.stub.iml" filepath="$USER_HOME$/WSO2-repo/GitHub/carbon-business-messaging/service-stubs/org.wso2.carbon.stat.publisher.stub/org.wso2.carbon.stat.publisher.stub.iml" />
+      <module fileurl="file://$USER_HOME$/WSO2-repo/GitHub/carbon-business-messaging/components/andes/org.wso2.carbon.stat.publisher.ui/org.wso2.carbon.stat.publisher.ui.iml" filepath="$USER_HOME$/WSO2-repo/GitHub/carbon-business-messaging/components/andes/org.wso2.carbon.stat.publisher.ui/org.wso2.carbon.stat.publisher.ui.iml" />
+    </modules>
+  </component>
+</project>
+

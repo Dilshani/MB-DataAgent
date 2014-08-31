@@ -82,7 +82,7 @@
 
 <%
     String publisher_name = "BAM";
-    String responsestr = "";
+    String response_message = "";
     String enable_checked = "";
     String get_username = "";
     String get_password = "";
@@ -93,41 +93,45 @@
     String MB_stat_check = "";
 
 
-    if (client.getEnable("BAM")) {
+    if (client.getEnable(publisher_name)) {
 
-        enable_checked = "checked";
-        get_username = client.getUsername(publisher_name);
-        get_password = client.getPassword(publisher_name);
-        get_IP = client.getIP(publisher_name);
-        get_port = client.getPort(publisher_name);
-        if (client.getMBStatConfig(publisher_name)) {
-            MB_stat_check = "checked";
 
-        }
+            enable_checked = "checked";
+            get_username = client.getUsername(publisher_name);
+            get_password = client.getPassword(publisher_name);
+            get_IP = client.getIP(publisher_name);
+            get_port = client.getPort(publisher_name);
 
-        if (client.getMessageStatConfig(publisher_name)) {
-            message_stat_check = "checked";
+            if (client.getMBStatConfig(publisher_name)) {
+                MB_stat_check = "checked";
 
-        }
-        if (client.getSystemStatConfig(publisher_name)) {
-            system_stat_check = "checked";
+            }
 
-        }
+            if (client.getMessageStatConfig(publisher_name)) {
+                message_stat_check = "checked";
+
+            }
+            if (client.getSystemStatConfig(publisher_name)) {
+                system_stat_check = "checked";
+
+            }
 
 
     }
 
-    if (!(request.getAttribute("resp") == null)) {
+    if (!(request.getAttribute("servlet_resp") == null)) {
 
-        responsestr = (String) request.getAttribute("resp");
+        response_message = (String) request.getAttribute("servlet_resp");
 
 %>
 <script type="text/javascript">
-    alertMessage("<%=responsestr%>");
+    alertMessage("<%=response_message%>");
 
 </script>
 
 <%
+
+        response.sendRedirect("/carbon/publisher/bam_publisher.jsp");
     }
 %>
 <div id="middle">
@@ -136,7 +140,7 @@
             <fmt:message key="stat.bam"/>
         </h2>
 
-        <form id="details_form" action="/carbon/publisher/dataAgentServlet" method="POST" onsubmit="return DoValidation();">
+        <form id="details_form" action="/carbon/publisher/dataAgentServlet" method="POST" onsubmit="return DoValidation()">
             <table class="styledLeft" style="width: 20%">
 
                 <tbody>
@@ -196,7 +200,7 @@
                         <td class="formRaw"><fmt:message key="port"/><span
                                 class="required">*</span></td>
                         <td><input type="text" id="port_num" name="port_num" value="<%=get_port%>"/>
-                            <input type="button" class="button" id="testBut" value="<fmt:message key="test"/>"/>
+                            <input type="button" class="button" id="testBut" value="<fmt:message key="test"/>" onclick="validateURL()"/>
                         </td>
 
                     </tr>
@@ -236,6 +240,7 @@
 
                 </table>
                 <br>
+
                 <table class="styledLeft" style="width: 50%" id="button_table">
                     <tr>
 
@@ -251,12 +256,13 @@
                         <input type="hidden" name="publisher_name" value="<%=publisher_name%>"/>
                     </tr>
                 </table>
-            </div>
+
         </form>
+    </div>
     </div>
 </div>
 
-<script type="text/javascript" src="js/sc.js"></script>
+
 
 <script type="text/javascript" src="js/toggle.js"></script>
 </fmt:bundle>

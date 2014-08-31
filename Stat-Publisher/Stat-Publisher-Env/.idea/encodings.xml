@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
+    <file url="file://$USER_HOME$/WSO2-repo/GitHub/carbon-business-messaging/components/andes/org.wso2.carbon.stat.publisher" charset="UTF-8" />
+    <file url="file://$USER_HOME$/WSO2-repo/GitHub/carbon-business-messaging/components/andes/org.wso2.carbon.stat.publisher.ui" charset="UTF-8" />
+    <file url="file://$USER_HOME$/WSO2-repo/GitHub/carbon-business-messaging/service-stubs/org.wso2.carbon.stat.publisher.stub" charset="UTF-8" />
+  </component>
+</project>
+

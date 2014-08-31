@@ -1,0 +1,27 @@
+{
+  "streamId": "MESSAGE_STATISTICS:1.0.2",
+  "name": "MESSAGE_STATISTICS",
+  "version": "1.0.2",
+  "nickName": "MB stats",
+  "description": "A ack received",
+  "metaData": [
+    {
+      "name": "publisherIP",
+      "type": "STRING"
+    }
+  ],
+  "payloadData": [
+    {
+      "name": "Message_id",
+      "type": "LONG"
+    },
+    {
+      "name": "timestamp",
+      "type": "LONG"
+    },
+    {
+      "name": "queueName",
+      "type": "STRING"
+    }
+  ]
+}
